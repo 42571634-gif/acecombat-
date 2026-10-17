@@ -1,13 +1,13 @@
-import { missions } from './missions.js?v=0.6.0';
-import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.6.0';
-import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.6.0';
-import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.6.0';
-import { draw } from './draw.js?v=0.6.0';
-import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.6.0';
-import { ENEMY_TYPES } from './enemy-types.js?v=0.6.0';
-import { isActiveTarget } from './waves.js?v=0.6.0';
-import { missileHitChance,coreOpen } from './operations.js?v=0.6.0';
-import { toggleAutoFire } from './bullet-hell.js?v=0.6.0';
+import { missions } from './missions.js?v=0.7.0';
+import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.7.0';
+import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.7.0';
+import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.7.0';
+import { draw } from './draw.js?v=0.7.0';
+import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.7.0';
+import { ENEMY_TYPES } from './enemy-types.js?v=0.7.0';
+import { isActiveTarget } from './waves.js?v=0.7.0';
+import { missileHitChance,coreOpen } from './operations.js?v=0.7.0';
+import { toggleAutoFire } from './bullet-hell.js?v=0.7.0';
 
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export function createApp({document,window,storage,campaignId='jp52',battleMode='bullethell',now=()=>performance.now(),repeat=setInterval,stopRepeat=clearInterval,delay=setTimeout,stopDelay=clearTimeout,requestFrame=window.requestAnimationFrame?.bind(window),cancelFrame=window.cancelAnimationFrame?.bind(window)}){
@@ -68,7 +68,7 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
   }
   function sourceMarkup(node){
     const source=node.source;if(!source?.url)return '';
-    return `<p class="source-note">Conversación original de esta adaptación · Basada en una transcripción comunitaria. <a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">Consultar capítulo original ↗</a></p>`;
+    return `<p class="source-note">Texto adaptado en español. <a href="${escapeHtml(source.url)}" target="_blank" rel="noopener noreferrer">Fuente de esta misión ↗</a></p>`;
   }
   function render(){
     cleanup();const node=currentNode(campaignState);updateSide();

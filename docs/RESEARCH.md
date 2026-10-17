@@ -1,5 +1,9 @@
 # Investigación de la campaña japonesa
 
+## Revisión de claridad v0.7
+
+Se reescribió el texto de las 52 misiones y se contrastaron de nuevo escenas clave en las transcripciones japonesas. Fuentes, correcciones y las dos citas breves traducidas se detallan en [TEXT_REVIEW.md](TEXT_REVIEW.md). El resto de las réplicas es redacción propia; no se presenta como traducción literal. Las afirmaciones siguientes sobre v0.4 describen aquella entrega.
+
 ## Dirección de personajes v0.4
 
 Se contrastaron los perfiles oficiales de Namco: [UPEO](https://www.bandainamcoent.co.jp/cs/list/acecombat3/page03.html), [Clarkson/Park](https://www.bandainamcoent.co.jp/cs/list/acecombat3/page04.html) y [Dision/Keith/Cynthia](https://www.bandainamcoent.co.jp/cs/list/acecombat3/page05.html). Las escenas 04, 09, 28, 36, 43, 44, 47, 48, 49, 50 y 52 se consultaron como puntos de continuidad en el archivo japonés. La noticia sobre Fiona en la rama de Cynthia está documentada en 44; no se introduce en el arco alternativo. Las páginas individuales de wiki.gg no pudieron abrirse directamente y no se usan como fundamento principal de personalidad.

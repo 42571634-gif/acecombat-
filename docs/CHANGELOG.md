@@ -1,3 +1,11 @@
+# v0.7 — español claro y continuidad
+
+- Reescritas las 52 escenas y sus informes, introducción, cierres y radio de combate con nombres, acciones y motivos explícitos.
+- Ampliadas las escenas 09, 43 y 47 sin imponer una longitud fija. Total: 477 intervenciones habladas.
+- Corregidas interferencias y papel de Rena en 09, ruptura de Cynthia en 44 y salida final de Fiona en 52. Separados los acontecimientos previos del golpe posterior en 43.
+- Dos citas breves traducidas, con atribución y alcance documentados en TEXT_REVIEW.md; enlaces de fuente por misión.
+- Conservados combate, objetivos, rutas y esquema de guardado. 59 pruebas aprobadas.
+
 # v0.6 — operaciones según su objetivo
 
 - Terreno en avance y retorno de blancos supervivientes conservando daño e identidad, sin duplicar bajas.

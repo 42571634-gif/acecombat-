@@ -1,9 +1,9 @@
-import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.6.0';
-import { prepareWaves,checkNextWave,advanceWaves,isActiveTarget } from './waves.js?v=0.6.0';
-import { moveEnemy } from './enemy-types.js?v=0.6.0';
-import { prepareOperation,advanceOperation,missileHitChance,coreOpen } from './operations.js?v=0.6.0';
-export { missileHitChance } from './operations.js?v=0.6.0';
-export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.6.0';
+import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.7.0';
+import { prepareWaves,checkNextWave,advanceWaves,isActiveTarget } from './waves.js?v=0.7.0';
+import { moveEnemy } from './enemy-types.js?v=0.7.0';
+import { prepareOperation,advanceOperation,missileHitChance,coreOpen } from './operations.js?v=0.7.0';
+export { missileHitChance } from './operations.js?v=0.7.0';
+export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.7.0';
 function seeded(seed) {
   let value=seed>>>0;
   return ()=>{value=(1664525*value+1013904223)>>>0;return value/4294967296;};

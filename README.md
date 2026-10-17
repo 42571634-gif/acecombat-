@@ -1,4 +1,6 @@
-# Electrosphere 2040 · 52 misiones · v0.6
+# Electrosphere 2040 · 52 misiones · v0.7
+
+La v0.7 reescribe los diálogos y los informes en español más directo. Explica los términos antes de usarlos, concreta quién participa y amplía las escenas que necesitan contexto. Incluye 477 intervenciones, narraciones intercaladas, referencias por misión y dos citas breves traducidas. [Criterios, contraste y alcance de la revisión](docs/TEXT_REVIEW.md). El combate y los guardados se conservan.
 
 La v0.6 adapta el combate al objetivo de cada capítulo: escenario en avance, blancos aéreos/terrestres/navales diferenciados, pasadas de contactos supervivientes, misiles con probabilidad de fallo, escoltas con integridad propia y jefes con defensas exteriores, sistemas internos y núcleos de apertura intermitente. Las 52 misiones conservan sus objetivos y bifurcaciones; [diseño por misión](docs/MISSION_DESIGN.md).
 
@@ -51,7 +53,7 @@ Las claves son electrosphere.campaign, electrosphere.simulator y electrosphere.p
 
 ## Fuentes y alcance
 
-Se consultaron transcripciones japonesas por misión y se contrastaron puntos concretos con transcripciones en inglés atribuidas a Project Nemo. Cada expediente enlaza su referencia. **Todas las conversaciones que se muestran son texto original de esta adaptación**, no traducciones literales. Los metadatos community-transcript expresan evidencia comunitaria, no una validación oficial.
+Se consultaron transcripciones japonesas por misión y se contrastaron puntos concretos con transcripciones en inglés atribuidas a Project Nemo. Cada expediente enlaza su referencia. Las conversaciones tienen redacción propia, salvo dos citas breves traducidas y documentadas en TEXT_REVIEW.md. No se presentan como una traducción completa del guion. Los metadatos community-transcript expresan evidencia comunitaria, no una validación oficial.
 
 Los tiempos, cantidades, radar y condiciones operativas se simplifican. Por ejemplo, ciertos eventos que en el original aparecen después de una fase o un umbral temporal están disponibles aquí como objetivos secundarios desde el inicio. Ver [investigación y equivalencias](docs/RESEARCH.md).
 

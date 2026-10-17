@@ -8,7 +8,7 @@ import { environment } from './helpers/dom.mjs';
 test('La narración distingue cambios de escenario y ocupa su lugar entre réplicas',()=>{
   const scene=missions.m09.dialogue;
   assert.equal(scene[0].kind,'narration');assert.match(scene[0].text,/Clarkson y Fiona viajan en el transporte/);
-  assert.equal(scene[5].kind,'narration');assert.equal(scene[6].character,'fiona');
+  assert.equal(scene[5].kind,'narration');assert.equal(scene[6].character,'control');
   assert.match(missions.m09.reportDialogue[0].text,/sigue en vuelo.*Park/);
   assert.match(missions.m41.dialogue[0].text,/fuera de la atmósfera/);
   const input=[{text:'Una réplica'}];assert.deepEqual(situateScene(2,input),input);

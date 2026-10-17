@@ -1,8 +1,8 @@
-import { story } from './story.js?v=0.6.0';
-import { missions } from './missions.js?v=0.6.0';
-import * as legacy from './legacy/engine.js?v=0.6.0';
-import { story as legacyStory } from './legacy/story.js?v=0.6.0';
-import { missions as legacyMissions } from './legacy/missions.js?v=0.6.0';
+import { story } from './story.js?v=0.7.0';
+import { missions } from './missions.js?v=0.7.0';
+import * as legacy from './legacy/engine.js?v=0.7.0';
+import { story as legacyStory } from './legacy/story.js?v=0.7.0';
+import { missions as legacyMissions } from './legacy/missions.js?v=0.7.0';
 
 export const SAVE_VERSION = 2;
 export const FACTIONS = ['UPEO','GR','NEUCOM','OUROBOROS'];

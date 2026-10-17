@@ -61,5 +61,13 @@ Implementado en v0.2: 52 misiones jugables en el grafo, cinco finales y fuentes 
 - [x] Defensas exteriores/interiores y núcleos con compuerta en todos los jefes.
 - [x] Blancos específicos y matriz del diseño de las 52 misiones.
 
+## Ampliación v0.7 completada
+
+- [x] Español directo en escenas, informes, introducción, finales y radio.
+- [x] Explicación de términos y referencias concretas a personajes y objetivos.
+- [x] Escenas de extensión flexible, narraciones y correcciones de continuidad.
+- [x] Referencias por misión y dos citas breves traducidas documentadas.
+- [x] Regresiones editoriales, de combate y de guardado.
+
 ## Primer prompt sugerido
 "Lee AGENTS.md, README.md y docs/ROADMAP.md. Implementa exclusivamente el Hito 1. Mantén la demo jugable, trabaja incrementalmente, añade pruebas de navegación y de guardado, ejecuta npm run check, y documenta los cambios. No inventes el contenido canónico de Ace Combat 3."

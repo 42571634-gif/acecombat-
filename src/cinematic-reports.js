@@ -1,212 +1,267 @@
-// Cierres recreados. Las grabaciones se identifican para no hacer hablar a personajes muertos.
+// Redacción propia en español claro; contexto y referencias en docs/TEXT_REVIEW.md.
 export const cinematicReports=[
-  [
-    ['fiona','Bueno. Sobre lo de dejarte ganar... voy a necesitar pensarlo. Has venido demasiado preparado.'],
-    ['erich','El corredor está despejado. Todos los principales confirmados.','Se permite sonreír antes de apagar la lectura.'],
-    ['fiona','No lo estropees, Erich. Estaba intentando felicitarlo sin que se le note.'],
-  ],[
-    ['fiona','Corredor abierto. Que General Resource pase de uno en uno; no quisiera que se nos atragantara tanta gratitud.'],
-    ['erich','Podríamos guardar ese comentario para el canal privado.'],
-    ['fiona','Podríamos.','Tarda un segundo más de lo necesario en cerrarlo.'],
-  ],[
-    ['keith','Vale. No eres un folleto.','Asiente una sola vez.'],
-    ['dision','Te lo advertí, Keith. Hay pilotos a los que conviene observar antes de clasificarlos.'],
-    ['keith','Todavía puedo competir con él. No le he firmado una rendición.'],
-  ],[
-    ['dision','Clarkson ha conseguido su pausa. Yo puedo ofrecerte algo que no dependa de cuándo vuelvan a romperla. Ven a General Resource.'],
-    ['fiona','Nemo, te está reclutando en medio del regreso. Ni siquiera puede esperar a que apagues el motor.'],
-    ['keith','Dision, déjalo elegir. Si es tan bueno como dices, sabrá que lo estás apretando.'],
-  ],[
-    ['erich','La base está protegida. Esa frase sí la puedo decir sin mirar la orden.'],
-    ['fiona','¿Ves? Vas aprendiendo. Dentro de nada hasta podrás quejarte antes de pedir permiso.'],
-    ['erich','No estaba pidiendo...','Fiona se ríe; él acaba riéndose también.'],
-  ],[
-    ['rena','Conserva la lectura de esa señal. No quiero que alguien me cuente después lo que debí ver.'],
-    ['control','Reconocimiento cerrado. Los datos disponibles han sido remitidos al mando.'],
-    ['rena','Gracias por esperar. Normalmente deciden que ya he mirado bastante.'],
-  ],[
-    ['rena','Dision sigue ahí, detrás de todas esas respuestas que no termino de entender.'],
-    ['control','Salida no autorizada concluida. Continuación operativa disponible.'],
-    ['rena','Has podido volver y no lo has hecho. No sé cómo preguntarte por qué.','Mantiene el canal abierto un instante más.'],
-  ],[
-    ['erich','Ha llegado al agua. He vuelto a comprobarlo; esta vez por gusto.'],
-    ['fiona','Pues compruébame también a Nemo. Como nos lo cambien por alguien obediente, lo voy a notar.'],
-    ['fiona','Buen vuelo. Los dos.','La broma ya no le sirve para ocultar el alivio.'],
-  ],[
-    ['park','El transporte ha cambiado de condición. Clarkson y Fitzgerald son objetivos. Procedan a su derribo.'],
-    ['erich','Fiona acaba de pedirnos cobertura. Usted no puede cambiarle el nombre y esperar que yo...'],
-    ['fiona','Nemo. Aquí sigo.','El canal del transporte permanece activo mientras esperas decidir.'],
-  ],[
-    ['erich','Los bombarderos no llegarán. Todo el mundo va a querer hablar de eso.'],
-    ['rena','¿Y tú?'],
-    ['erich','Yo todavía no sé cómo hablar de lo otro.','El espacio de Fiona sigue vacío.'],
-  ],[
-    ['erich','Complejo intacto. He mantenido la línea.'],
-    ['rena','Ya lo he visto.'],
-    ['erich','Sí. No necesitaba decirlo. Bueno... quería decirlo.'],
-  ],[
-    ['control','Convoy detenido. Equipo de recuperación a cargo de la unidad de investigación.'],
-    ['erich','Ya tienen su carga. A ver si ahora recuerdan que había pilotos haciendo preguntas.'],
-    ['erich','Nemo, no borres nada. No voy a volver a pedir que me repitan la historia desde el principio.'],
-  ],[
-    ['rena','La lectura vuelve a ser estable.','Afloja la mano; le cuesta despegar los dedos.'],
-    ['erich','He estado pendiente. Todo el tiempo.'],
-    ['rena','Lo sé. Por eso he podido dejar de mirar solo la alarma.'],
-  ],[
-    ['park','Operación completada. Recuerden las condiciones de reserva.'],
-    ['erich','¿También para recordar qué insignia llevábamos?'],
-    ['park','Sobre todo para escoger ante quién hace esa pregunta, Jager.'],
-  ],[
-    ['park','UPEO respaldará la acción de Ouroboros. Ajusten sus lealtades a la nueva situación.'],
-    ['erich','¿Ajustarlas? ¿Como ajustamos las insignias?'],
-    ['park','Ha entendido perfectamente la instrucción.','Erich no vuelve a responderle.'],
-  ],[
-    ['erich','Rena ha salido en el Night Raven. Lo hemos tenido delante y aun así no he podido...'],
-    ['control','Sphyrna dañado. Se mantiene capacidad de ataque.'],
-    ['erich','Sí. Todavía hay algo que podemos hacer. Nemo, no me dejes quedarme mirando cómo se va.'],
-  ],[
-    ['control','Sphyrna neutralizado.'],
-    ['erich','Ya no tienes un portaaviones detrás, Park. Vas a tener que escuchar con tu propia voz al otro lado.'],
-    ['erich','Nemo, ponemos rumbo a su mando. Esta orden sí es mía.'],
-  ],[
-    ['erich','Park ha caído. Rena está viva. He comprobado las dos cosas, y esta vez no me importa repetirlas.'],
-    ['rena','Erich. Ya te he oído.','No le pide que deje de hablar.'],
-    ['erich','Entonces podemos volver. Sin esperar a que alguien encuentre otra forma de decirnos adónde.'],
-  ],[
-    ['keith','Has mantenido el ala. Me vale más que el discurso de bienvenida que se ha ahorrado la compañía.'],
-    ['dision','Empiezas a estar donde puedes aprovechar lo que eres, Nemo.'],
-    ['keith','No se lo pongas tan fácil para presumir. Todavía nos quedan misiones.'],
-  ],[
-    ['control','Centro de control neutralizado. Resultado de la lancha incorporado al informe.'],
-    ['keith','Ya puedes volver a mirar tu secreto, Dision. A mí me vendría bien una pista de por qué tenías tanta prisa.'],
-    ['dision','Cuando tengamos que hablar de ello, prefiero que la señal no llegue a todo Megafloat.'],
-  ],[
-    ['rena','Dision...','Reconocerlo no le ha devuelto la calma.'],
-    ['dision','Ahora ya sabes que aquel hangar merecía otra mirada, Nemo.'],
-    ['rena','No habléis como si yo no estuviera aquí.'],
-  ],[
-    ['keith','Ya está. La red ha perdido sus nodos y yo todavía tengo compañero. No ha sido una mala noche.'],
-    ['control','Interdicción completada. Regreso autorizado.'],
-    ['keith','Vuelve por mi lado, Nemo. Me he acostumbrado a saber dónde estás.'],
-  ],[
-    ['control','Transporte destruido. Intercepción completada.'],
-    ['keith','Ya lo hemos oído.','Baja el volumen del canal operativo.'],
-    ['dision','Regresemos.','Esta vez deja que el silencio dure.'],
-  ],[
-    ['keith','La próxima vez intentaré no ser yo la parte opcional del informe.'],
-    ['dision','Bombarderos contenidos. Keith, mantén el enlace hasta volver a la base.'],
-    ['keith','Nemo, seguimos aquí. Eso no lo pone en ninguna de sus casillas y a mí sí me importa.'],
-  ],[
-    ['control','Transbordador interceptado. Acceso de Neucom a su carga interrumpido.'],
-    ['keith','Todo eso para que otro departamento no tenga unos datos. A veces echo de menos cuando me gustaban los aviones sin apellidos.'],
-    ['keith','No te pongas solemne, Nemo. Dame una pista del rumbo de vuelta y seguimos discutiendo.'],
-  ],[
-    ['control','Operación sobre el complejo espacial completada.'],
-    ['dision','Otra capacidad que cambia de dueño. Siempre necesitan un dueño, ¿te has fijado?'],
-    ['dision','Pronto dejaré de fingir que eso es bastante. Me gustaría no tener que explicártelo desde el otro lado de la mira.'],
-  ],[
-    ['keith','Silos fuera de servicio. Ahora sí puedes decir que ese hueco está limpio.'],
-    ['control','Regreso autorizado.'],
-    ['keith','Buen trabajo, compañero. Ni se te ocurra pedirme que lo diga por el canal de la compañía.'],
-  ],[
-    ['dision','Dejo General Resource. Nemo, ven conmigo. Quiero verte elegir algo que no quepa en su siguiente orden.'],
-    ['keith','Mírame a mí también cuando le digas eso. Estás dejando a tu compañero en mitad del regreso.'],
-    ['dision','Te estoy mirando, Keith.','No reduce la distancia que empieza a abrirse entre ambos.'],
-  ],[
-    ['keith','Neucom ha perdido su fuerza sobre Megafloat. Nosotros todavía somos dos.'],
-    ['control','Interdicción completada.'],
-    ['keith','Lo sé, ya he dicho la parte importante. Nemo, vuelve a mi ala.'],
-  ],[
-    ['keith','Sphyrna fuera. Ahora el Night Raven tendrá que enseñarnos cuánto quiere que lo sigamos.'],
-    ['control','Presión sobre el objetivo secundario confirmada en el informe.'],
-    ['keith','Dame el rumbo disponible. Hoy no pienso discutir con una oportunidad.'],
-  ],[
-    ['control','Derrumbe confirmado. Night Raven todavía operativo.'],
-    ['keith','Claro que sí. Después de todo ese ruido, la única cosa que queríamos romper sigue entera.'],
-    ['keith','Nemo, comprueba tus alas. Si todavía sirven, esto no ha terminado.'],
-  ],[
-    ['keith','Ahora, Nemo. Si miras hacia mí vas a perder el hueco.','Última transmisión conservada; anterior al impacto.',true],
-    ['archive','Night Raven: neutralizado. Dision: amenaza resuelta. Canal de Keith: sin respuesta.'],
-    ['control','Nemo, regrese sobre Port Edwards.','La segunda posición de la formación queda sin asignar.'],
-  ],[
-    ['control','Geopelia neutralizados. General Resource confirma el cierre de la operación.'],
-    ['archive','Canal de Keith: sin respuesta.','La interfaz no sustituye su nombre.'],
-    ['control','Nemo, tiene autorización para regresar.','No hay otra voz en la formación.'],
-  ],[
-    ['control','Objetivos principales resueltos. Evacuación evaluada.'],
-    ['dision','Ahora conocen la distancia entre abandonar una posición y escapar de mí.'],
-    ['dision','Seguiremos hasta que dejen de confundir esa distancia con una esperanza.'],
-  ],[
-    ['control','Respuesta de Neucom neutralizada.'],
-    ['dision','Se acaba su margen. Siempre esperaron que el siguiente lanzamiento les devolviera el mundo anterior.'],
-    ['dision','Nemo, ven. Park todavía cree que habrá una negociación para él.'],
-  ],[
-    ['archive','Mando de Park neutralizado. Las comunicaciones de la operación siguen abiertas.'],
-    ['rena','Quítalo. Hay alguien donde no debería... Dision, no puedo apartarlo.','Su voz pierde el control del ritmo.'],
-    ['dision','Nemo. ¿Qué estás haciéndole?','Ya no le habla como a un discípulo.'],
-  ],[
-    ['keith','No apartes la vista de la abertura. Para eso he venido.','Grabación de la última aproximación; anterior al impacto.',true],
-    ['archive','Night Raven neutralizado. Sphyrna destruido. La señal de Keith se interrumpe.'],
-    ['dision','Todavía no has terminado conmigo.','La señal continúa dentro de la Electrosphere.'],
-  ],[
-    ['dision','Espera. No cierres... yo sigo aquí.','Fragmento recuperado antes de la eliminación de su presencia digital.',true],
-    ['archive','La última señal no vuelve a repetirse.'],
-    ['archive','Sin enlace de regreso.','La pantalla conserva un espacio donde antes había un interlocutor.'],
-  ],[
-    ['cynthia','Nada mal. Mi hermana empieza a quedarse sin argumentos para decir que exagero cuando espero más.'],
-    ['fiona','Estaba hablando de ti, no de Nemo.'],
-    ['cynthia','Lo sé, Fi. A veces hasta me doy cuenta antes de que lo digas.'],
-  ],[
-    ['control','Transbordador a salvo. Descenso completado.'],
-    ['fiona','Bien. Ahora tienes tripulación y conferencia, Cynthia. Elige por cuál quieres empezar a presumir.'],
-    ['cynthia','Por la formación que lo ha traído. También estabas tú, por si se te ha olvidado.','Fiona tarda en encontrar una réplica.'],
-  ],[
-    ['control','Cuatro sistemas láser desactivados. Regreso autorizado.'],
-    ['archive','La lectura de amenazas queda vacía. El horizonte vuelve a ocupar la pantalla.'],
-    ['control','Nemo, confirme retorno.','La voz humana llega con el mismo tono de antes.'],
-  ],[
-    ['control','Equipo de recuperación protegido. Información asegurada.'],
-    ['fiona','Mi hermana puede discutir con cualquiera del futuro. A mí me toca preguntarle si piensa volver a cenar en este.'],
-    ['fiona','No me mires así, Nemo. Cuando te importe alguien insoportable, ya me contarás cómo lo haces.'],
-  ],[
-    ['cynthia','Voy a seguir ese camino. Prefiero equivocarme al intentar llegar que pasarme la vida explicando por qué no debía salir.'],
-    ['fiona','No necesito que me ganes esta discusión. Necesito que estés cuando vuelva a llamarte.'],
-    ['cynthia','Nemo.','Las dos esperan una elección; ninguna consigue mirar a la otra.'],
-  ],[
-    ['cynthia','Has usado a Rena. ¿También era esto lo que ibas a enseñarnos al otro lado?'],
-    ['dision','No confundas lo que deseabas encontrar conmigo. No he vivido tu sueño, Cynthia.'],
-    ['cynthia','No. Lo he vivido yo. Y Fi no va a volver para decirme que me lo advirtió. Nemo, me voy de aquí.','Por primera vez, no convierte la decisión en una promesa.'],
-  ],[
-    ['control','Ouroboros en retirada. Persecución disponible.'],
-    ['cynthia','Se va. Otra vez consigue que parezca que todos le estamos pidiendo permiso para alcanzarlo.'],
-    ['cynthia','Vamos, Nemo. Hoy no necesita concedernos nada.'],
-  ],[
-    ['control','Salida del corredor confirmada. Contacto hacia Port Edwards.'],
-    ['cynthia','Todavía lo tenemos delante. Le diría a Fi que eso es suficiente para seguir, y ella me preguntaría hasta cuándo.'],
-    ['cynthia','No lo sé.','Conserva el rumbo, sin añadir una explicación.'],
-  ],[
-    ['cynthia','Ha caído. Puedes empezar a decirme para qué te resultaba tan útil que llegara viva, Simon.'],
-    ['simon','Primero vuelve a Neucom. Sería una pena desperdiciar lo que todavía podemos hacer contigo.'],
-    ['cynthia','Qué fácil te sale esa palabra. Conmigo.','Mira a Nemo antes de cerrar el enlace.'],
-  ],[
-    ['control','Escolta neutralizada. Resultado sobre el Sphyrna registrado.'],
-    ['fiona','Cynthia, si me has oído alguna vez, no me obligues a adivinar que todavía sabes mi voz.'],
-    ['fiona','Nemo... no cierres todavía.','Continúa mirando el indicador de llamada.'],
-  ],[
-    ['fiona','Yo quería que volviera. ¿Me has oído antes? Eso era lo que estaba pidiendo.','No mira la confirmación del derribo.'],
-    ['fiona','Dime que no...','Se traga el resto. No llega ninguna respuesta de Nemo.'],
-    ['fiona','Dision. Voy a encontrarlo. Que intente explicármelo mirándome a mí.'],
-  ],[
-    ['control','Sphyrna destruido. Dision y Rena se retiran hacia Geofront.'],
-    ['fiona','Entonces el portaaviones ya puede dejar de ocuparme toda la pantalla.'],
-    ['fiona','Márcame el túnel. No he dicho que quiera volver.','La orden sale fría; las manos no le acompañan.'],
-  ],[
-    ['control','Acceso a la cámara final confirmado.'],
-    ['fiona','Hemos cruzado. Iba a decirte algo cuando cruzáramos.','Busca la frase y la deja ir.'],
-    ['fiona','Sigue aquí, Nemo. Hasta que tenga una salida que pueda pronunciar entera.'],
-  ],[
-    ['simon','Objetivos eliminados. Así es como debía acabar.','Su satisfacción llega antes que el alivio de los demás.'],
-    ['fiona','Pues celébralo tú. A mí no me queda nada que quiera seguir persiguiendo aquí.'],
-    ['fiona','Nemo, vuelve a mi ala. Esta vez quiero acompañarte de regreso.','Espera sin dar por hecho que la seguirás.'],
+  [ // 01
+    ["fiona","Buen vuelo, Nemo. Ahora entiendo por qué te eligieron para SARF."],
+    ["erich","Los transportes identificados han sido neutralizados y el corredor está despejado."],
+    ["fiona","Regresemos juntos. Ya habrá tiempo para competir en un entrenamiento."],
+  ],
+  [ // 02
+    ["fiona","Los emisores han quedado fuera de servicio. General Resource podrá utilizar de nuevo el corredor."],
+    ["erich","Eso cumple la orden, pero no resuelve nuestras dudas sobre la neutralidad de UPEO."],
+    ["fiona","De acuerdo. Conservemos los registros y volvamos a la base."],
+  ],
+  [ // 03
+    ["keith","Has respondido bien a la emergencia, Nemo. Los contenedores ya no amenazan la ciudad."],
+    ["dision","Ha sido una buena prueba de coordinación entre General Resource y SARF."],
+    ["keith","La próxima vez competiremos durante el entrenamiento. Hoy era más importante proteger Chopinburg."],
+  ],
+  [ // 04
+    ["dision","Clarkson ha negociado un alto el fuego. Nemo, me gustaría que te incorporaras a General Resource."],
+    ["fiona","Puedes quedarte con nosotros en UPEO. No tienes que responder a Dision solo porque te lo pida ahora."],
+    ["keith","Decide lo que tú quieras, Nemo. Nosotros esperaremos tu respuesta."],
+  ],
+  [ // 05
+    ["erich","La base de Neucom está protegida. Hemos detenido a los atacantes de General Resource."],
+    ["fiona","Hicimos lo que debíamos: defender a quienes estaban recibiendo el ataque."],
+    ["erich","Sí. Me alegra que esta vez hayamos podido cumplir una orden con la que estaba de acuerdo."],
+  ],
+  [ // 06
+    ["rena","Conserva los registros del reconocimiento, incluida cualquier señal adicional que hayas investigado."],
+    ["control","Operación de reconocimiento concluida. Se han archivado los datos obtenidos."],
+    ["rena","Quiero seguir averiguando qué relación tiene ese lugar con mi pasado y con Dision."],
+  ],
+  [ // 07
+    ["rena","La investigación vuelve a llevarnos hacia Dision y el Night Raven. Todavía no tengo todas las respuestas."],
+    ["control","Salida concluida. Hay una nueva misión disponible para la formación."],
+    ["rena","Gracias por acompañarme, Nemo. Sé que podías haber obedecido la orden de regreso."],
+  ],
+  [ // 08
+    ["erich","El dirigible ha llegado al agua. Los obstáculos ya no bloquean su descenso."],
+    ["fiona","Buen trabajo, Nemo. El dirigible y su carga están a salvo."],
+    ["fiona","Erich, tú también has ayudado. Volvamos los tres a la base."],
+  ],
+  [ // 09
+    ["park","Clarkson y Fiona están acusados de espionaje. «Suspendan la escolta y derriben el avión»."],
+    ["rena","Cumpliré la nueva orden. No puedo confirmar la versión de Clarkson y Fiona."],
+    ["erich","No voy a atacar a Fiona. Las interferencias nos impiden hablar con ella; eso no demuestra que sea una espía."],
+    ["rena","Nemo, debes decidir si cumples la orden de Park. El transporte sigue dentro de nuestro alcance."],
+    ["erich","Yo voy a proteger a Fiona y a Clarkson. Si vienes conmigo, tendremos que enfrentarnos a la orden de UPEO."],
+  ],
+  [ // 10
+    ["erich","Los bombarderos ya no amenazan la zona. La intercepción ha terminado."],
+    ["rena","¿Estás en condiciones de regresar, Erich?"],
+    ["erich","Sí. Sigo afectado por lo del transporte, pero puedo mantener la formación hasta la base."],
+  ],
+  [ // 11
+    ["erich","El complejo espacial sigue protegido. Los atacantes no han conseguido destruirlo."],
+    ["rena","Has mantenido bien tu posición, Erich."],
+    ["erich","Gracias, Rena. Nemo, mantendré la cobertura mientras iniciamos el regreso."],
+  ],
+  [ // 12
+    ["control","Convoy detenido. El equipo de recuperación se hará cargo de la unidad de investigación."],
+    ["erich","El tren ya no podrá transportar la carga robada."],
+    ["erich","Nemo, conserva los registros. Todavía quedan preguntas sobre esa unidad y sobre la operación."],
+  ],
+  [ // 13
+    ["rena","Las lecturas de nanobots se han estabilizado. Podemos salir de la zona."],
+    ["erich","He vigilado tu señal, Rena. Te acompañaré hasta que estemos fuera."],
+    ["rena","Gracias. Avísame si vuelve a aparecer una concentración cerca de nuestra ruta."],
+  ],
+  [ // 14
+    ["park","Los objetivos asignados han sido destruidos. La operación permanece bajo reserva."],
+    ["erich","¿Tampoco podremos explicar por qué atacamos con esas identificaciones?"],
+    ["park","No comparta los detalles de la misión fuera de los canales autorizados, Jager."],
+  ],
+  [ // 15
+    ["park","UPEO apoyará la acción de Ouroboros. A partir de ahora deben seguir esa orientación."],
+    ["erich","¿Apoyar a Ouroboros? Necesitamos saber qué significa eso para Rena y para nuestra formación."],
+    ["park","La decisión ya está tomada. Cumplan las próximas instrucciones del mando."],
+  ],
+  [ // 16
+    ["erich","Rena ha salido en el Night Raven. No conseguimos recuperarla antes de su despegue."],
+    ["control","El Sphyrna ha recibido daños, pero conserva capacidad de combate."],
+    ["erich","Entonces todavía podemos destruir la plataforma. Nemo, continúo contigo."],
+  ],
+  [ // 17
+    ["control","Sphyrna neutralizado. Su núcleo ya no responde."],
+    ["erich","Park ha perdido la protección del portaaviones, pero su centro de mando sigue activo."],
+    ["erich","Nemo, debemos llegar hasta ese centro y detenerlo. Continuaré la aproximación contigo."],
+  ],
+  [ // 18
+    ["erich","Park ha sido derrotado. Rena sigue viva. Podemos dejar de combatir y regresar."],
+    ["rena","Estoy aquí, Erich. Puedo seguir la formación."],
+    ["erich","Nemo, volvamos juntos. No necesitamos otra orden de Park."],
+  ],
+  [ // 19
+    ["keith","Has mantenido la formación durante el ataque. Puedo contar contigo, Nemo."],
+    ["dision","La base de Neucom ha quedado neutralizada. Has completado tu primera operación con General Resource."],
+    ["keith","Buen trabajo. Volveremos juntos antes de que Dision intente asignarnos otra misión."],
+  ],
+  [ // 20
+    ["control","Centro de control neutralizado. La información del objetivo secundario consta en el informe."],
+    ["keith","Dision, ahora podremos comprobar si Nemo consiguió los datos que querías de la lancha."],
+    ["dision","Revisaremos los registros antes de decidir nuestra siguiente operación."],
+  ],
+  [ // 21
+    ["rena","Dision está relacionado con ese hangar. Necesito saber por qué vuelve a aparecer en mis recuerdos."],
+    ["dision","Nemo, las imágenes confirman que ese lugar merecía ser investigado."],
+    ["rena","Hablen conmigo cuando revisen los registros. Es mi pasado el que están investigando."],
+  ],
+  [ // 22
+    ["keith","Los nodos de energía están fuera de servicio. Hemos terminado la operación nocturna."],
+    ["control","Interdicción completada. Tienen autorización para regresar."],
+    ["keith","Nemo, vuelve cerca de mi posición. Las interferencias todavía pueden dificultar la navegación."],
+  ],
+  [ // 23
+    ["control","Transporte destruido. General Resource confirma el cierre de la intercepción."],
+    ["keith","Ahí viajaban Clarkson y Fiona. No voy a fingir que eran un blanco cualquiera."],
+    ["dision","La operación ha terminado. Iniciemos el regreso a la base."],
+  ],
+  [ // 24
+    ["keith","Se acabó la intercepción. Nemo, el informe indicará si pudiste ayudarme con el atacante."],
+    ["dision","La misión de los bombarderos ha concluido. Keith, mantén el enlace durante el regreso."],
+    ["keith","Seguiré la formación. Revisaremos lo ocurrido cuando estemos de vuelta."],
+  ],
+  [ // 25
+    ["control","Transbordador interceptado. Neucom no recibirá la carga que transportaba."],
+    ["keith","General Resource quería impedir esa transferencia de información. Hemos cumplido la orden."],
+    ["keith","Nemo, inicia el regreso. Yo cubriré la salida de la zona de descenso."],
+  ],
+  [ // 26
+    ["control","Operación sobre el complejo espacial completada. El resultado del lanzamiento ha quedado registrado."],
+    ["dision","Hemos reducido la capacidad espacial de Neucom, pero la rivalidad entre compañías continuará."],
+    ["dision","Nemo, pronto tendrás que decidir si quieres seguir luchando solo por los intereses de General Resource."],
+  ],
+  [ // 27
+    ["keith","Los silos han quedado fuera de servicio. Ya no podrán lanzar sus misiles."],
+    ["control","Búsqueda y ataque completados. Regreso autorizado."],
+    ["keith","Buen trabajo, Nemo. Mantén separación de las montañas hasta salir del desfiladero."],
+  ],
+  [ // 28
+    ["dision","Dejo General Resource para unirme a Ouroboros. Nemo, puedes venir conmigo si compartes mi propósito."],
+    ["keith","Yo me quedaré en General Resource. Nemo, puedes seguir volando conmigo si esa es tu decisión."],
+    ["dision","Tendrás que elegir, Nemo. Nuestro próximo destino ya no será el mismo."],
+  ],
+  [ // 29
+    ["keith","Hemos reducido la flota y los grupos aéreos de Neucom alrededor de Megafloat."],
+    ["control","Interdicción completada. La formación puede abandonar el área de combate."],
+    ["keith","Nemo, vuelve a mi posición. Ahora toca preparar la respuesta al Night Raven y al Sphyrna."],
+  ],
+  [ // 30
+    ["keith","El Sphyrna está destruido. El Night Raven sigue siendo una amenaza."],
+    ["control","El resultado del ataque secundario al Night Raven consta en el informe."],
+    ["keith","Si pudimos mantener el contacto, seguiremos su ruta. Si no, tendremos que buscar otra aproximación."],
+  ],
+  [ // 31
+    ["control","Derrumbe confirmado. El Night Raven no ha sido neutralizado y sigue operativo."],
+    ["keith","Atacamos los soportes, pero no conseguimos detener al avión dentro de Geofront."],
+    ["keith","Comprueba tu aeronave, Nemo. Necesitamos continuar la persecución fuera del corredor."],
+  ],
+  [ // 32
+    ["keith","Nemo, aprovecha mi aproximación para atacar. No pierdas de vista el blanco.","Última transmisión conservada; anterior al impacto.",true],
+    ["archive","Night Raven neutralizado. Amenaza de Dision resuelta. Keith no responde después de su última intervención."],
+    ["control","Nemo, regrese a Port Edwards. No hay otro avión asignado a su formación."],
+  ],
+  [ // 33
+    ["control","Los ocho Geopelia han sido neutralizados. General Resource da por terminada la operación."],
+    ["archive","El canal de Keith sigue sin respuesta. Nemo regresa sin su compañero."],
+    ["control","Tiene autorización para volver a la base. Mantenga la ruta de regreso indicada."],
+  ],
+  [ // 34
+    ["control","Objetivos principales destruidos. El resultado de la intercepción de helicópteros está registrado."],
+    ["dision","Si escaparon mandos de Neucom, todavía podrán preparar una respuesta contra nosotros."],
+    ["dision","Continuaremos según el resultado de esta operación. Nemo, mantente disponible para la siguiente salida."],
+  ],
+  [ // 35
+    ["control","Contraataque de Neucom neutralizado. La amenaza de lanzamiento ha quedado resuelta."],
+    ["dision","Las fuerzas restantes de Neucom ya no pueden mantener esta ofensiva."],
+    ["dision","La siguiente operación será contra UPEO. Park conserva su mando y debemos detenerlo."],
+  ],
+  [ // 36
+    ["archive","El centro de mando de Park ha sido neutralizado. Las comunicaciones siguen abiertas."],
+    ["rena","No consigo apartar esa presencia. Está interfiriendo con mi control del avión."],
+    ["dision","Nemo, tu intervención está afectando a Rena. Quiero que te alejes de ella."],
+  ],
+  [ // 37
+    ["keith","Voy a abrirte una oportunidad contra el Night Raven. Ataca el blanco, no intentes seguirme.","Grabación de la última aproximación; anterior al impacto.",true],
+    ["archive","Night Raven y Sphyrna neutralizados. La señal de Keith se ha interrumpido."],
+    ["dision","Nemo, sigo en la Electrosphere. El enfrentamiento entre nosotros todavía no ha terminado."],
+  ],
+  [ // 38
+    ["dision","Mi señal sigue activa. No quiero desaparecer de la red.","Fragmento recuperado antes de la eliminación de su presencia digital.",true],
+    ["archive","La presencia digital de Dision ha sido eliminada. No vuelve a detectarse su señal."],
+    ["archive","El último enlace de comunicación con Dision se ha cerrado."],
+  ],
+  [ // 39
+    ["cynthia","La base ha quedado neutralizada. El informe también recoge los radares y depósitos secundarios."],
+    ["fiona","Nemo, revisaremos ese resultado antes de saber cuál será nuestra próxima misión."],
+    ["cynthia","Buen trabajo. En Neucom necesitaremos que sigas tomando decisiones con cuidado."],
+  ],
+  [ // 40
+    ["control","Transbordador a salvo. Su descenso ha concluido sin perder la carga."],
+    ["fiona","La tripulación ha llegado. Eso era lo que más me preocupaba."],
+    ["cynthia","Gracias a los dos. La investigación está asegurada porque protegimos a quienes la transportaban."],
+  ],
+  [ // 41
+    ["control","Los cuatro sistemas láser han quedado desactivados. Puede abandonar el área orbital."],
+    ["archive","Ya no se detectan satélites hostiles activos en la zona de operación."],
+    ["control","Nemo, confirme la ruta de regreso. Neucom Space mantendrá el enlace durante el retorno."],
+  ],
+  [ // 42
+    ["control","Equipo de recuperación protegido. La información del satélite está asegurada."],
+    ["fiona","Ya podemos escoltarlos de vuelta. General Resource no ha conseguido quedarse con los datos."],
+    ["fiona","Nemo, gracias por cubrir a la tripulación. Después hablaré con Cynthia de lo que le preocupa."],
+  ],
+  [ // 43
+    ["control","Alerta de Neucom: Ouroboros ha iniciado un golpe militar. Se ordena regresar a las unidades que siguen en vuelo."],
+    ["cynthia","Ouroboros ha iniciado un golpe militar. Voy a dejar Neucom y unirme a ellos. Nemo, puedes acompañarme."],
+    ["fiona","Yo volveré a Neucom. No confío en Ouroboros y no voy a seguir a Cynthia."],
+    ["cynthia","Nemo, decide con cuál de nosotras continuarás. Después de esta elección volaremos en bandos distintos."],
+  ],
+  [ // 44
+    ["cynthia","Creía que tu revolución consistía en vivir en la red. Ahora veo que buscas imponerla mediante la guerra."],
+    ["dision","Tú elegiste creer en ese futuro, Cynthia. Mis motivos no son los tuyos."],
+    ["cynthia","Me equivoqué al seguirte. Nemo, abandono Ouroboros. Quiero detener lo que Dision está haciendo."],
+  ],
+  [ // 45
+    ["control","Las fuerzas de Ouroboros se retiran. La ruta de persecución está disponible."],
+    ["cynthia","Dision y el Night Raven intentan escapar. No podemos dejar que vuelvan a atacar."],
+    ["cynthia","Nemo, continuaré la persecución. Cubre mi aproximación mientras seguimos sus señales."],
+  ],
+  [ // 46
+    ["control","Corredor cruzado. El contacto continúa hacia Port Edwards."],
+    ["cynthia","El Night Raven sigue delante. No conseguimos detenerlo dentro de Geofront."],
+    ["cynthia","Nemo, avancemos hacia Port Edwards. Tendremos que encontrar otra forma de reducir su ventaja."],
+  ],
+  [ // 47
+    ["cynthia","El Night Raven ha caído. Simon, tu información sobre los generadores nos permitió alcanzarlo."],
+    ["simon","«No quiero perder a mis sujetos de experimento». Regresen a Neucom; he preparado su retorno."],
+    ["cynthia","Nemo, gracias por acompañarme. Quiero que podamos elegir nuestro siguiente destino, no que Simon decida por nosotros."],
+    ["cynthia","Podemos volver a Neucom o buscar otro lugar. Quiero saber qué decides tú."],
+  ],
+  [ // 48
+    ["control","Escolta de Ouroboros neutralizada. El daño a los sectores del Sphyrna consta en el informe."],
+    ["fiona","Cynthia sigue sin responder a mis llamadas. Quiero continuar buscándola."],
+    ["fiona","Nemo, mantengamos el enlace abierto mientras decidimos la siguiente aproximación al Sphyrna."],
+  ],
+  [ // 49
+    ["fiona","Hemos derribado a Cynthia. Yo quería encontrarla y traerla de vuelta, no que terminara así."],
+    ["fiona","No sé cómo aceptar que mi hermana haya muerto en este combate."],
+    ["fiona","Culpo a Dision por haberla llevado hasta Ouroboros. Nemo, quiero encontrarlo y detenerlo."],
+  ],
+  [ // 50
+    ["control","Sphyrna destruido. Dision y Rena se retiran hacia Geofront."],
+    ["fiona","El portaaviones ya no puede seguir atacando, pero los dos aviones han escapado."],
+    ["fiona","Nemo, seguiremos sus señales hacia el túnel. Todavía no podemos terminar la operación."],
+  ],
+  [ // 51
+    ["control","Acceso a la cámara final confirmado. Las señales de los fugitivos continúan dentro de Geofront."],
+    ["fiona","Hemos cruzado el corredor. Ahora sabemos por dónde han escapado el Night Raven y Dision."],
+    ["fiona","Nemo, acompáñame hasta el final de la persecución. Quiero que salgamos juntos de Geofront."],
+  ],
+  [ // 52
+    ["simon","El Night Raven y Dision han sido derrotados. La operación de Neucom ha terminado."],
+    ["fiona","Nemo, he decidido dejar Neucom. Estoy cansada de seguir perdiendo gente en esta guerra."],
+    ["fiona","Gracias por acompañarme. Quiero que regresemos juntos; este será mi último vuelo con la compañía."],
   ],
 ];

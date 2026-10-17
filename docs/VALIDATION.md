@@ -1,4 +1,12 @@
-# Verificación v0.6
+# Verificación v0.7
+
+`npm run check`: 22 módulos con sintaxis válida y 59 pruebas aprobadas. Se mantienen las regresiones de combate, guardados y las 156 combinaciones de misión/dificultad. Las 477 intervenciones tienen un interlocutor registrado; no hay voz inventada para Nemo y las grabaciones de fallecidos conservan su identificación.
+
+Pruebas editoriales: destino de Clarkson y escolta sin anticipar el cambio de orden, radio bloqueada por interferencias, Rena/Erich después de la orden de Park, explicación de sublimación, alerta del golpe posterior a la misión, generadores Aeon, despedida de Fiona y referencias visibles. Se elimina la exigencia de seis turnos exactos por escena. El contraste de fuentes es puntual y no equivale a una traducción completa; ver TEXT_REVIEW.md.
+
+Navegador local: introducción con presentación de SARF/UPEO, nueva conversación de las hermanas y escolta de Clarkson con destino e interferencias. Vista móvil 390×844: ancho 375 y scrollWidth 375, sin desbordamiento. Sin errores ni advertencias JavaScript.
+
+## Registro de verificación v0.6
 
 `npm run check`: 22 módulos y 56 pruebas. Las 52 misiones se completan en las tres dificultades usando movimiento, misiles con azar reproducible, cañón y contramedidas reales. El piloto de pruebas suspende el cañón y espera nuevas pasadas cuando prioriza secundarios. No modifica la vida ni declara victorias artificiales.
 

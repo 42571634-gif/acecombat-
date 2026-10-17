@@ -106,16 +106,16 @@ test('Las 52 misiones se completan en Fácil, Normal y Experto, incluidos secund
   for(const difficulty of Object.keys(DIFFICULTIES))for(const id of Object.keys(missions))completeMission(id,difficulty);
 });
 
-test('Diálogos triplicados: seis intervenciones y tres de informe, con texto específico por capítulo',()=>{
+test('Cada capítulo conserva una escena y un informe propios, con extensión flexible',()=>{
   const text=[];
   for(const mission of Object.values(missions)){
     const spoken=mission.dialogue.filter(line=>line.kind!=='narration');
-    assert.equal(spoken.length,6);assert.equal(mission.reportDialogue.filter(line=>line.kind!=='narration').length,3);
+    assert.ok(spoken.length>=6);assert.ok(mission.reportDialogue.filter(line=>line.kind!=='narration').length>=3);
     assert.equal(story[mission.id+'Intro'].dialogue,mission.dialogue);
     for(const line of spoken.slice(2)){assert.ok(line.text.trim());text.push(line.text);}
     assert.equal(mission.adaptation,true);assert.ok(mission.source.url);
   }
-  assert.equal(new Set(text).size,208);assert.equal(story.intro.dialogue.length,3);
+  assert.equal(new Set(text).size,text.length);assert.equal(story.intro.dialogue.length,3);
 });
 
 test('Interfaz bullet hell: preferencia persistente, pausa, contramedidas y arrastre táctil',()=>{

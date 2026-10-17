@@ -91,3 +91,7 @@ Control solo coordina: contactos, permiso, resultado. Registro automático es un
 7. El conflicto no necesita que todos sean equilibrados o estén en lo cierto. La adaptación evita corregir inmediatamente sus contradicciones con un sermón de otro personaje.
 
 Implementación: `src/characters.js`, `src/cinematic-scenes.js` y `src/cinematic-reports.js`. Cada capítulo conserva su referencia, `confidence` y `adaptation`. Las fuentes fijan el marco; la voz final y cada frase implementada son escritura propia.
+# Revisión de voz v0.7
+
+La claridad tiene prioridad sobre el subtexto: cada escena debe identificar el objetivo y el motivo del desacuerdo. Se conservan los rasgos documentados, reduciendo bromas, metáforas y monólogos añadidos que dificulten la comprensión. Los perfiles de esta biblia orientan la adaptación; no autorizan a inventar sucesos ni equivalen al guion original. Véase TEXT_REVIEW.md para el contraste realizado.
+
