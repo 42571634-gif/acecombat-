@@ -19,3 +19,6 @@ export function dialogueLine([character,text,direction='',recorded=false]){
   if(!voice)throw new Error('Personaje desconocido: '+character);
   return {character,speaker:voice.name,text,direction,recorded};
 }
+for(const id of ['fiona','erich','rena','keith','dision','cynthia','park','clarkson','simon']){
+  characters[id].portrait='./assets/portraits/'+id+(id==='simon'?'.webp':'.jpg');
+}

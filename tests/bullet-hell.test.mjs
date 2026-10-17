@@ -20,7 +20,7 @@ test('Las tres dificultades cambian densidad, velocidad, blindaje y tolerancia a
 test('Abanicos y anillos se alternan, viajan por el campo y tienen límites de población',()=>{
   const f=flightFor();
   emitPattern(f,isTargetLocked);emitPattern(f,isTargetLocked);emitPattern(f,isTargetLocked);
-  assert.equal(f.pattern,3);assert.equal(f.bullets.length,25);
+  assert.equal(f.pattern,3);assert.equal(f.bullets.length,27);
   assert.ok(f.bullets.some(b=>b.vy<0));
   const first=f.bullets[0],x=first.x,y=first.y;
   advanceFlight(f,100);assert.notEqual(first.y,y);assert.ok(Number.isFinite(first.x-x));

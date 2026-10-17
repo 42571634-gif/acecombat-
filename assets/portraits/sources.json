@@ -1,0 +1,69 @@
+{
+  "accessed": "2026-10-17",
+  "note": "Retratos incorporados por petición explícita del usuario. No son imágenes originales del proyecto; no se atribuye una licencia libre. Simon se descargó mediante el navegador; su servidor rechaza algunos clientes.",
+  "portraits": [
+    {
+      "id": "rena",
+      "url": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/img/rena.jpg",
+      "source": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/page03.html",
+      "credit": "Namco / Bandai Namco Entertainment",
+      "file": "rena.jpg"
+    },
+    {
+      "id": "fiona",
+      "url": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/img/fiona.jpg",
+      "source": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/page03.html",
+      "credit": "Namco / Bandai Namco Entertainment",
+      "file": "fiona.jpg"
+    },
+    {
+      "id": "erich",
+      "url": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/img/erich.jpg",
+      "source": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/page03.html",
+      "credit": "Namco / Bandai Namco Entertainment",
+      "file": "erich.jpg"
+    },
+    {
+      "id": "clarkson",
+      "url": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/img/clarkson.jpg",
+      "source": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/page04.html",
+      "credit": "Namco / Bandai Namco Entertainment",
+      "file": "clarkson.jpg"
+    },
+    {
+      "id": "park",
+      "url": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/img/park.jpg",
+      "source": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/page04.html",
+      "credit": "Namco / Bandai Namco Entertainment",
+      "file": "park.jpg"
+    },
+    {
+      "id": "dision",
+      "url": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/img/dision.jpg",
+      "source": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/page05.html",
+      "credit": "Namco / Bandai Namco Entertainment",
+      "file": "dision.jpg"
+    },
+    {
+      "id": "keith",
+      "url": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/img/keith.jpg",
+      "source": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/page05.html",
+      "credit": "Namco / Bandai Namco Entertainment",
+      "file": "keith.jpg"
+    },
+    {
+      "id": "cynthia",
+      "url": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/img/cynthia.jpg",
+      "source": "https://www.bandainamcoent.co.jp/cs/list/acecombat3/page05.html",
+      "credit": "Namco / Bandai Namco Entertainment",
+      "file": "cynthia.jpg"
+    },
+    {
+      "id": "simon",
+      "file": "simon.webp",
+      "url": "https://static.wikia.nocookie.net/acecombat/images/e/e6/Simons-ace3.jpg/revision/latest/scale-to-width-down/268?cb=20100926053026",
+      "source": "https://acecombat.fandom.com/wiki/Simon_Orestes_Cohen",
+      "credit": "Namco / Bandai Namco Entertainment; archivo en Acepedia"
+    }
+  ]
+}

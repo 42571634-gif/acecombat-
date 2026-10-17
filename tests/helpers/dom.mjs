@@ -1,19 +1,20 @@
 import assert from 'node:assert/strict';
 import { createApp } from '../../src/game.js';
 // DOM y reloj controlados: se ejercitan los mismos eventos de la interfaz sin dependencias.
-export function environment(storage, {campaignId="jp52",battleMode='tactical'}={}) {
+export function environment(storage, {campaignId="jp52",battleMode='tactical',animation=false}={}) {
   const values = new Map();
   storage ||= { getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value) };
   const elements = new Map();
   const listeners = new Map();
   const intervals = new Map();
   const delays = new Map();
+  const frames = new Map();
   let clock = 0, sequence = 0;
   const drawing = { targets: [], x: 360 };
   const ctx = new Proxy({}, { get: (_, name) => (...args) => {
     if (name === 'clearRect') drawing.targets = [];
     if (name === 'strokeRect') drawing.targets.push({ x: args[0] + 13, y: args[1] + 13 });
-    if (name === 'translate') drawing.x = args[0];
+    if (name === 'translate'&&args[1]>=280) drawing.x = args[0];
   }});
   function element(id) {
     let html = '';
@@ -37,13 +38,16 @@ export function environment(storage, {campaignId="jp52",battleMode='tactical'}={
     addEventListener: (event, callback) => listeners.set(event, callback) };
   element('difficulty');
   const app = createApp({ document, campaignId, battleMode, window: { addEventListener: (event, callback) => listeners.set(event, callback) }, storage,
+    requestFrame:animation?callback=>{const id=++sequence;frames.set(id,callback);return id;}:undefined,
+    cancelFrame:animation?id=>frames.delete(id):undefined,
     now: () => clock, repeat: callback => { const id = ++sequence; intervals.set(id, callback); return id; },
     stopRepeat: id => intervals.delete(id), delay: callback => { const id = ++sequence; delays.set(id, callback); return id; },
     stopDelay: id => delays.delete(id),
   });
-  const env = { app, document, storage, drawing, listeners, intervals, delays,
+  const env = { app, document, storage, drawing, listeners, intervals, delays,frames,
     get: id => elements.get(id),
     tick(ms = 0) { clock += ms; for (const callback of [...intervals.values()]) callback(); },
+    frame(ms=16){clock+=ms;const callbacks=[...frames.values()];frames.clear();for(const callback of callbacks)callback(clock);},
     flush() { for (const [id, callback] of [...delays]) { delays.delete(id); callback(); } },
     clickChoice(index = 0) { elements.get('actions').children[index].onclick(); },
     actTarget(predicate=()=>true) {

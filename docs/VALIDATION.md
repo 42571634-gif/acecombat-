@@ -1,4 +1,10 @@
-# Verificación v0.4
+# Verificación v0.5
+
+`npm run check`: **20 módulos con sintaxis válida y 47 pruebas aprobadas, cero fallos**. Conservadas las 156 combinaciones de misión/dificultad y las regresiones de rutas y guardado. Nuevas pruebas: nueve retratos, botones persistentes, respuesta al pulsar, teclado con foco, liberación de controles, ciclo único de animación, pausa, refuerzos inactivos, secundarios, orden de jefes y blindaje aplicado una sola vez.
+
+Navegador real: retratos de Fiona y Erich cargados; primera oleada de Awakening eliminada (3/5), mensaje de Erich y dos refuerzos en fase 2, sin victoria prematura. Radio bajo el campo y controles. Vista móvil solicitada 390×844: clientWidth 375 y scrollWidth 375, sin desbordamiento horizontal. Sin errores ni advertencias JavaScript. No se ha medido latencia física en un teléfono.
+
+## Registro de verificación v0.4
 
 `npm run check`: **17 módulos con sintaxis válida y 40 pruebas aprobadas**. Además de las regresiones de combate, grafo, guardado y 156 combinaciones de misión/dificultad, se validan las 471 intervenciones con personajes registrados, la ausencia de voz inventada para Nemo, apariciones por ruta, grabaciones de Keith/Dision tras sus muertes y presentación de iniciales/acotaciones. Se mantiene la cantidad de intervenciones; la revisión elimina mínimos artificiales de caracteres para permitir réplicas cortas y silencios.
 

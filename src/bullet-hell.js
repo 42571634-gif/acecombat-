@@ -1,3 +1,4 @@
+import { assignEnemyTypes,ENEMY_TYPES } from './enemy-types.js?v=0.5.0';
 // Patrones originales. Coordenadas lógicas independientes del tamaño de pantalla.
 export const DIFFICULTIES = Object.freeze({
   easy: {label:'Fácil', interval:1.5, speed:85, fan:3, damage:10, radius:4, invulnerability:1.6, armor:0.8},
@@ -11,22 +12,28 @@ export function prepareBulletHell(flight,difficulty='normal') {
   flight.patternClock=0;flight.pattern=0;flight.gunClock=0;flight.invulnerable=0;flight.bombs=3;flight.focus=false;
   flight.keyU=false;flight.keyD=false;flight.drag=null;flight.emitterIndex=0;
   for(const target of flight.targets){
+    target.baseHp=target.hp;
     if(!isSensor(target)&&target.role!=='civilian')target.hp=Math.ceil((target.role==='boss'?30:target.hp*7)*flight.config.armor);
     target.maxHp=target.hp;
     // Los contactos se mantienen por encima de la zona de maniobra.
     target.vy=0;target.y=Math.min(265,target.y);
   }
+  assignEnemyTypes(flight);
 }
 export function emitPattern(flight,isLocked) {
+  if(flight.waveTransition>0)return;
   const candidates=flight.targets.filter(t=>t.alive&&t.role!=='civilian'&&!isLocked(flight,t));
   if(!candidates.length)return;
   const source=candidates[flight.emitterIndex++%candidates.length],c=flight.config;
   const aimed=Math.atan2(flight.y-source.y,flight.x-source.x);
   const phase=flight.pattern++%3;
-  const count=phase===2?c.fan*3:c.fan;
+  const archetype=ENEMY_TYPES[source.enemyType];
+  const kind=archetype?{aimed:0,curtain:1,ring:2}[archetype.pattern]:phase;
+  const count=kind===2?c.fan*3:archetype?.pattern==='curtain'?c.fan+2:c.fan;
   for(let i=0;i<count;i++){
-    const angle=phase===2?(i/count)*Math.PI*2+flight.pattern*.19:phase===1?Math.PI/2+(i-(count-1)/2)*.25:aimed+(i-(count-1)/2)*.16;
-    flight.bullets.push({x:source.x,y:source.y,vx:Math.cos(angle)*c.speed,vy:Math.sin(angle)*c.speed,r:4,kind:phase});
+    const angle=kind===2?(i/count)*Math.PI*2+flight.pattern*.19:kind===1?Math.PI/2+(i-(count-1)/2)*.25:aimed+(i-(count-1)/2)*.16;
+    const speed=c.speed*(archetype?.speed||1);
+    flight.bullets.push({x:source.x,y:source.y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,r:4,kind});
   }
 }
 // Segmento-círculo: evita atravesar hitboxes entre dos fotogramas.
@@ -51,6 +58,7 @@ export function advanceBulletHell(flight,dt,keys,isLocked,damageTarget) {
     flight.y=Math.max(285,Math.min(403,flight.y+dy/length*speed*step));
     flight.patternClock+=step;flight.gunClock-=step;
     if(flight.patternClock>=c.interval){flight.patternClock-=c.interval;emitPattern(flight,isLocked);}
+    if(flight.waveTransition>0)flight.gunClock=.1;
     if(flight.gunClock<=0){
       flight.gunClock+=.1;
       for(const offset of [-7,7])flight.playerBullets.push({x:flight.x+offset,y:flight.y-15});

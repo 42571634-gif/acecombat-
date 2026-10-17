@@ -1,3 +1,11 @@
+# v0.5 — retratos, respuesta y oleadas
+
+- Nueve retratos locales con fuentes y créditos; iniciales como respaldo si falla una imagen.
+- Respuesta de objetivos al pulsar, botones persistentes, movimiento inmediato y un único ciclo requestAnimationFrame. Menos reconstrucciones del DOM y recarga de misil visible.
+- Quince misiones de dos o tres fases, refuerzos tras eliminar el grupo anterior y radio contextual con retratos bajo el campo.
+- Tres enemigos originales: Dardo ágil con disparo dirigido, Manta blindado con cortinas y Lince dron con anillos; siluetas, colores y movimiento propios.
+- Conservadas rutas, secundarios, guardados y modo táctico. 47 pruebas aprobadas, incluidas las 156 combinaciones de misión y dificultad.
+
 # v0.4 — voces y guion dramático
 
 - Reescritas las 471 intervenciones de introducción, briefings e informes con rivalidad, afecto, subtexto, contradicciones y voces diferenciadas.

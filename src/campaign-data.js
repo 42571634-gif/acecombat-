@@ -1,6 +1,6 @@
-import { expandedDialogue } from './dialogue-expansion.js?v=0.4.0';
-import { reportDialogue } from './report-dialogue.js?v=0.4.0';
-import { dialogueLine } from './characters.js?v=0.4.0';
+import { expandedDialogue } from './dialogue-expansion.js?v=0.5.0';
+import { reportDialogue } from './report-dialogue.js?v=0.5.0';
+import { dialogueLine } from './characters.js?v=0.5.0';
 // Adaptaciones originales en español. Referencias y límites en docs/RESEARCH.md.
 // [número, título, lugar, mecánica, objetivo, contexto, interlocutor, diálogo recreado, informe]
 const chapters = [

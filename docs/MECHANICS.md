@@ -1,3 +1,11 @@
+# Actualización v0.5
+
+Los enemigos aéreos comunes tienen tres diseños originales: Dardo (silueta delta roja, ágil, fuego dirigido, blindaje base 6), Manta (alas anchas ámbar, dos motores, cortinas, blindaje 10) y Lince (dron hexagonal violeta, anillos, blindaje 8). El blindaje se multiplica una sola vez por la dificultad y por la resistencia táctica original del blanco. Instalaciones, sensores y jefes conservan sus reglas especiales. Los patrones alternados descritos para v0.3 quedan como respaldo para blancos sin arquetipo.
+
+Quince misiones usan dos o tres fases: 01, 03, 09, 15, 17, 24, 30, 32, 33, 37, 40, 47, 48, 50 y 52. Al eliminar los objetivos principales activos aparece el mensaje de radio de la siguiente fase y sus refuerzos llegan tras 0,8 segundos de simulación. Se limpian proyectiles y se concede protección breve; integridad, tiempo y contramedidas no se reinician. Pausar congela la transición. No se puede atacar un refuerzo antes de que llegue. Los secundarios permanecen disponibles y deben resolverse antes del último principal para modificar la ruta. Victoria al completar todos los principales; derrota por las condiciones anteriores de integridad, tiempo o civiles. No cambian decisiones ni finales. Cargar o reintentar reinicia la misión completa.
+
+La radio bajo los controles añade intervenciones originales específicas por fase. Los objetivos responden a pointerdown y conservan su botón entre impactos. Los controles direccionales dan un desplazamiento inicial al pulsar y movimiento continuo mientras se mantienen; teclado también funciona con botones enfocados. El navegador anima con requestAnimationFrame; los entornos sin esa API usan temporizador de 16 ms. La recarga del misil se indica en pantalla: no es retardo del control. No se ha medido latencia en dispositivos físicos.
+
 # Mecánicas de la adaptación
 
 ## Combate actual: bullet hell (v0.3)

@@ -1,5 +1,7 @@
-import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.4.0';
-export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.4.0';
+import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.5.0';
+import { prepareWaves,checkNextWave,advanceWaves,isActiveTarget } from './waves.js?v=0.5.0';
+import { moveEnemy } from './enemy-types.js?v=0.5.0';
+export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.5.0';
 function seeded(seed) {
   let value=seed>>>0;
   return ()=>{value=(1664525*value+1013904223)>>>0;return value/4294967296;};
@@ -22,10 +24,11 @@ export function createFlight(id,mission,now,random=seeded(mission.seed||1),optio
     x:80+(i%5)*135,y:235+Math.floor(i/5)*52,vx:0,vy:0,hp:mission.secondary.hp||1,alive:true,
   });
   for(let i=0;i<(mission.civilianCount||0);i++) flight.targets.push({id:'civilian-'+i,label:'Civil · NO DISPARAR',role:'civilian',required:false,x:615,y:300,vx:-5,vy:0,hp:1,alive:true});
-  if(options.mode==='bullethell')prepareBulletHell(flight,options.difficulty);
+  if(options.mode==='bullethell'){prepareBulletHell(flight,options.difficulty);prepareWaves(flight);}
   return flight;
 }
 export function isTargetLocked(flight,target) {
+  if(target.active===false)return true;
   return target.role==='boss' && flight.targets.some(other=>other.alive&&(other.role==='generator'||other.role==='boss'&&other.sequence<target.sequence)) ||
     target.role==='support' && flight.targets.some(other=>other.alive&&other.role==='gate') ||
     target.role==='gate' && flight.targets.some(other=>other.alive&&other.role==='gate'&&other.sequence<target.sequence);
@@ -36,6 +39,7 @@ export function advanceFlight(flight,now,keys={}) {
   flight.last=now;flight.t=Math.max(0,flight.t-dt);flight.elapsed+=dt;
   if(flight.t<=0){flight.status='defeat';flight.feedback='Se agotó el tiempo de operación.';return;}
   flight.cooldown=Math.max(0,flight.cooldown-dt);
+  advanceWaves(flight,dt);
   if(flight.mode==='bullethell')advanceBulletHell(flight,dt,keys,isTargetLocked,damageTarget);
   else {
     if(flight.keyL||keys.ArrowLeft||keys.KeyA)flight.x-=190*dt;
@@ -43,8 +47,9 @@ export function advanceFlight(flight,now,keys={}) {
     flight.x=Math.max(35,Math.min(685,flight.x));
   }
   if(flight.status!=='active')return;
-  for(const target of flight.targets) if(target.alive){
-    target.x+=target.vx*dt;target.y+=target.vy*dt;
+  for(const target of flight.targets) if(isActiveTarget(target)){
+    if(target.enemyType)moveEnemy(target,flight.elapsed);else target.x+=target.vx*dt;
+    target.y+=target.vy*dt;
     if(target.x<30||target.x>690){target.x=Math.max(30,Math.min(690,target.x));target.vx*=-1;}
     if(target.y>385){
       const damage=flight.m.type==='containers'?35:15;
@@ -54,7 +59,7 @@ export function advanceFlight(flight,now,keys={}) {
     }
   }
   if(flight.m.type==='tunnel'){
-    const gate=flight.targets.find(target=>target.alive&&target.role==='gate');
+    const gate=flight.targets.find(target=>isActiveTarget(target)&&target.role==='gate');
     if(gate && Math.abs(flight.x-gate.x)>135)flight.hp=Math.max(0,flight.hp-5*dt);
   }
   for(const shot of flight.shots)shot.life-=dt;
@@ -63,7 +68,8 @@ export function advanceFlight(flight,now,keys={}) {
   if(flight.t<=0||flight.hp<=0){flight.status='defeat';flight.feedback=flight.hp<=0?'La zona o unidad protegida ha perdido su integridad.':'Se agotó el tiempo de operación.';}
 }
 export function fireMissile(flight,x,y){
-  if(flight.status!=='active'||flight.cooldown>0)return false;
+  if(flight.status!=='active')return false;
+  if(flight.cooldown>0){flight.feedback='Misil recargando. Puedes seguir moviéndote y disparando con el cañón.';return false;}
   if(flight.protected&&Math.hypot(x-flight.protected.x,y-flight.protected.y)<25){flight.hp=0;flight.status='defeat';flight.feedback='Fuego sobre la unidad protegida: misión fallida.';return false;}
   const nearest=flight.targets.filter(target=>target.alive&&!isTargetLocked(flight,target))
     .map(target=>({target,distance:Math.hypot(x-target.x,y-target.y)})).sort((a,b)=>a.distance-b.distance)[0];
@@ -85,5 +91,6 @@ export function damageTarget(flight,target,damage=1){
   if(!['scan','cloud','gate'].includes(target.role))flight.kills++;
   flight.feedback=target.role==='scan'?'Registro de reconocimiento completado.':target.role==='cloud'?'Concentración neutralizada con ANB.':target.role==='gate'?'Paso del corredor completado.':target.group?'Objetivo secundario completado.':'Objetivo neutralizado.';
   if(flight.completed===flight.m.total)flight.status='victory';
+  else checkNextWave(flight);
   return true;
 }

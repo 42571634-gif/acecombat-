@@ -45,5 +45,13 @@ Implementado en v0.2: 52 misiones jugables en el grafo, cinco finales y fuentes 
 - [ ] Accesibilidad y soporte táctil integral.
 - [ ] Optimización de rendimiento y despliegue estático (GitHub Pages).
 
+## Ampliación v0.5 completada
+
+- [x] Nueve retratos locales con fuentes y créditos.
+- [x] Respuesta al pulsar, botones persistentes y animación sincronizada con el navegador.
+- [x] Quince misiones con dos o tres fases y radio contextual.
+- [x] Dardo, Manta y Lince con siluetas, movimientos y patrones diferentes.
+- [x] Pruebas de regresión y revisión móvil sin desbordamiento.
+
 ## Primer prompt sugerido
 "Lee AGENTS.md, README.md y docs/ROADMAP.md. Implementa exclusivamente el Hito 1. Mantén la demo jugable, trabaja incrementalmente, añade pruebas de navegación y de guardado, ejecuta npm run check, y documenta los cambios. No inventes el contenido canónico de Ace Combat 3."

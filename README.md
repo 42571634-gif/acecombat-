@@ -1,6 +1,8 @@
-# Electrosphere 2040 · 52 misiones · v0.4
+# Electrosphere 2040 · 52 misiones · v0.5
 
 Adaptación fan no oficial en español de la campaña japonesa de Ace Combat 3. Incluye **52 misiones distribuidas entre rutas y cinco finales**, con briefing, conversación recreada, objetivo jugable e informe para cada misión. No es una reproducción íntegra del guion ni del simulador de vuelo original.
+
+La v0.5 incorpora **nueve retratos locales**, controles con respuesta al pulsar y animación sincronizada con el navegador. **Quince misiones tienen dos o tres oleadas**, con radio contextual bajo el campo de combate. Tres enemigos originales se distinguen por silueta, color y comportamiento: Dardo (ágil, disparo dirigido), Manta (blindado, cortinas) y Lince (dron, anillos). Fuentes y créditos de retratos en [ASSETS.md](docs/ASSETS.md).
 
 La v0.4 reescribe las 471 intervenciones como escenas con voces diferenciadas: Fiona competitiva y afectuosa, Erich inseguro que aprende a decidir, Rena reservada, Keith orgulloso y leal, Cynthia brillante y arrogante, Dision seductor y autoritario, Simon clínico. La [biblia de personajes](docs/CHARACTER_BIBLE.md) distingue los perfiles oficiales de las decisiones creativas. Incluye acotaciones, intercambio entre compañeros y grabaciones identificadas; Nemo conserva su silencio. No cambian rutas, guardados ni bullet hell.
 
@@ -70,4 +72,4 @@ Comprueba la sintaxis de todos los módulos y ejecuta las pruebas. Incluyen las 
 - tests/: regresiones de la demo anterior y pruebas de la campaña ampliada.
 - docs/RESEARCH.md, docs/CAMPAIGN_MAP.md y docs/STORY_SCHEMA.md: referencias, mapa y contrato técnico.
 
-Proyecto experimental sin afiliación con Bandai Namco. No contiene ROM, audio, imágenes, cinemáticas ni diálogos extraídos del juego.
+Proyecto experimental sin afiliación con Bandai Namco. Retratos © Namco / Bandai Namco Entertainment, con procedencia documentada. Diálogos adaptados y gráficos de combate originales; no contiene ROM, audio ni cinemáticas del juego.

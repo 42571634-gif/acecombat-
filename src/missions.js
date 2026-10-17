@@ -1,4 +1,4 @@
-import { chapterList } from './campaign-data.js?v=0.4.0';
+import { chapterList } from './campaign-data.js?v=0.5.0';
 
 export const TYPE_RULES = {
   intercept:{label:'Intercepción',verb:'Destruir',hint:'Blancos rojos: interceptar antes de que alcancen el corredor.'},
