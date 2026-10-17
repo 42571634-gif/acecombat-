@@ -1,5 +1,6 @@
 
 :root{color-scheme:dark;--bg:#080f1b;--panel:#111e2c;--edge:#31536a;--a:#6ef3df;--txt:#d9edf7;--muted:#8fa9b8;--gold:#ffcd74}
+.difficulty-picker{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:16px;font-size:13px}.difficulty-picker select{font:inherit;color:var(--txt);background:#123347;border:1px solid var(--edge);border-radius:6px;padding:10px;max-width:100%}.controls button{touch-action:none;user-select:none}.speaker{align-items:flex-start}select:focus-visible{outline:3px solid var(--gold)}
 *{box-sizing:border-box}
 body{margin:0;background:radial-gradient(circle at 85% 0,#16354a 0,transparent 48%),var(--bg);font-family:system-ui,Segoe UI,sans-serif;color:var(--txt)}
 .app{max-width:1080px;margin:auto;padding:16px}

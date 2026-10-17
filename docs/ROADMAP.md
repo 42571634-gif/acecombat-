@@ -23,6 +23,8 @@ Implementado: grafo declarativo, motor independiente, historial reproducible, gu
 - [x] Documentación de fuentes, equivalencias y mecánicas.
 
 ## Hito 2 — Combate táctico divertido
+
+Ampliación v0.3 solicitada: [x] bullet hell con movimiento en dos ejes, tres dificultades, proyectiles, contramedidas y controles táctiles. Se mantienen las reglas narrativas y el modo táctico anterior en la API para regresiones. [x] Conversaciones triplicadas en introducción y las 52 misiones (briefing e informe). Los pendientes siguientes corresponden al diseño táctico anterior, no a requisitos de esta entrega.
 - [ ] Implementar fijado de misil y objetivos móviles con estados.
 - [ ] Introducir pausas/turnos como modo alternativo.
 - [ ] Añadir combustible, munición, contramedidas y enemigos con comportamientos diferenciados.

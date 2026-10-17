@@ -1,3 +1,12 @@
+# v0.3 — bullet hell y conversaciones ampliadas
+
+- Combate por defecto con cañón automático, proyectiles enemigos por abanicos dirigidos, cortinas y anillos, movimiento en dos ejes y hitbox visible.
+- Tres dificultades con velocidad, densidad, blindaje, daño y ventana de invulnerabilidad diferentes; preferencia local independiente de las partidas.
+- Tres contramedidas por intento; precisión con Shift, movimiento táctil por arrastre y botones de cuatro direcciones.
+- Conservadas las condiciones de las 52 misiones, objetivos secundarios y cinco finales. El núcleo táctico anterior sigue disponible para las regresiones del motor; la interfaz utiliza bullet hell.
+- Triplicadas las intervenciones: introducción 1→3, cada briefing 2→6 y cada informe 1→3 (157→471). Textos originales específicos, fuentes y marcas de adaptación conservadas.
+- Versionados recursos como 0.3.0 para actualizar móviles sin reutilizar módulos antiguos.
+
 # v0.2 — campaña japonesa de 52 misiones
 
 - Añadidos 52 capítulos adaptados, 162 nodos y cinco finales con fuentes por misión.

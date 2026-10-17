@@ -1,21 +1,31 @@
-import { missions } from './missions.js?v=0.2.0';
-import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.2.0';
-import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.2.0';
-import { createFlight,advanceFlight,fireMissile,isTargetLocked } from './combat.js?v=0.2.0';
-import { draw } from './draw.js?v=0.2.0';
+import { missions } from './missions.js?v=0.3.0';
+import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.3.0';
+import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.3.0';
+import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.3.0';
+import { draw } from './draw.js?v=0.3.0';
 
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-export function createApp({document,window,storage,campaignId='jp52',now=()=>performance.now(),repeat=setInterval,stopRepeat=clearInterval,delay=setTimeout,stopDelay=clearTimeout}){
+export function createApp({document,window,storage,campaignId='jp52',battleMode='bullethell',now=()=>performance.now(),repeat=setInterval,stopRepeat=clearInterval,delay=setTimeout,stopDelay=clearTimeout}){
   const errors=validateGraph();if(errors.length)throw new Error(errors.join('\n'));
   const $=id=>document.getElementById(id);
   let campaignState=createCampaign({campaignId}),flight=null,ticker=null,transition=null,savedAvailable=false;
   let hidden=Boolean(document.hidden),manualPause=false,archiveOpen=false,targetSignature='';
   const keys={},profile=loadProfile(storage);
+  let difficulty='normal';
+  try{const saved=storage.getItem('electrosphere.difficulty');if(Object.hasOwn(DIFFICULTIES,saved))difficulty=saved;}catch{}
+  if($('difficulty')){
+    $('difficulty').value=difficulty;
+    $('difficulty').onchange=()=>{
+      difficulty=Object.hasOwn(DIFFICULTIES,$('difficulty').value)?$('difficulty').value:'normal';
+      try{storage.setItem('electrosphere.difficulty',difficulty);}catch{}
+      if(flight?.status==='defeat')startMission(flight.id);
+    };
+  }
   const isPaused=()=>hidden||manualPause||archiveOpen;
-  function clearKeys(){for(const key of Object.keys(keys))delete keys[key];if(flight){flight.keyL=false;flight.keyR=false;}}
+  function clearKeys(){for(const key of Object.keys(keys))delete keys[key];if(flight){flight.keyL=false;flight.keyR=false;flight.keyU=false;flight.keyD=false;flight.drag=null;}}
   function cleanup(){
     if(ticker!==null)stopRepeat(ticker);if(transition!==null)stopDelay(transition);
-    ticker=transition=null;flight=null;manualPause=false;targetSignature='';clearKeys();
+    ticker=transition=null;flight=null;manualPause=false;targetSignature='';clearKeys();if($('difficulty'))$('difficulty').disabled=false;
   }
   function persist(){
     const result=saveCampaign(storage,campaignState);
@@ -28,7 +38,7 @@ export function createApp({document,window,storage,campaignId='jp52',now=()=>per
     const summary=campaignSummary(campaignState),node=currentNode(campaignState);
     $('loyalty').textContent=campaignState.faction;$('missions').textContent=summary.missionCount;
     $('kills').textContent=summary.kills+(flight?.status==='active'?flight.kills:0);
-    $('state').textContent=node.kind==='ending'?'Final alcanzado':node.kind==='mission'?(isPaused()?'Misión en pausa':'En misión'):campaignState.node==='intro'?'Introducción':'En curso';
+    $('state').textContent=node.kind==='ending'?'Final alcanzado':node.kind==='mission'?(flight?.status==='defeat'?'Misión fallida':isPaused()?'Misión en pausa':'En misión'):campaignState.node==='intro'?'Introducción':'En curso';
     const active={UPEO:'UPEO',GR:'GR',NEUCOM:'NEU',OUROBOROS:'OURO'}[campaignState.faction];
     for(const id of ['UPEO','GR','NEU','OURO'])$('r'+id).classList.toggle('active',active===id);
     if($('mode'))$('mode').textContent=campaignState.simulatorMission?'SIMULADOR · Progreso independiente':campaignState.campaignId==='demo-v1'?'DEMO ANTERIOR · Compatible':'CAMPAÑA JAPONESA · 52 MISIONES';
@@ -37,7 +47,7 @@ export function createApp({document,window,storage,campaignId='jp52',now=()=>per
     if($('chapter'))$('chapter').textContent=node.missionId?missions[node.missionId]?.name||'—':'—';
   }
   function choose(id){
-    try{campaignState=chooseOption(campaignState,id);persist();render();}
+    try{campaignState=chooseOption(campaignState,id);persist();render();$('main').scrollIntoView?.({block:'start'});}
     catch(error){$('saveStatus').textContent=error.message;}
   }
   function restart(){cleanup();campaignState=createCampaign({campaignId});persist();render();}
@@ -96,11 +106,34 @@ export function createApp({document,window,storage,campaignId='jp52',now=()=>per
   }
   function startMission(id){
     cleanup();const mission=missionById(campaignState,id);
-    $('main').innerHTML=`<div class="tag">${escapeHtml(mission.arc||'Simulador táctico de vuelo')} · ${escapeHtml(mission.place)}</div><h2>${escapeHtml(mission.title)}</h2><p class="fine">${escapeHtml(mission.goal)}</p><p class="fine">${escapeHtml(mission.rules?.hint||'Apunta y dispara sobre los blancos.')} ←/→ o A/D para virar. Puedes pausar y usar los botones de objetivos.</p><div class="hud"><span id="hudTarget">OBJETIVOS 0/${mission.total}</span><span id="hudLife">INTEGRIDAD 100%</span><span id="hudTime">TIEMPO ${mission.time}s</span></div>${mission.secondary?`<p class="secondary-goal" id="secondaryProgress">◇ ${escapeHtml(mission.secondary.label)}: 0/${mission.secondary.count} · Opcional: cambia la ruta</p>`:''}<canvas id="radar" width="720" height="420" aria-label="Radar táctico jugable"></canvas><div class="controls"><button id="left">◀ VIRAR</button><button id="pause">Pausar</button><button id="right">VIRAR ▶</button></div><p class="fine" id="combatHint">${escapeHtml(mission.rules?.label||'Radar táctico')} · Recarga 0,45 s · Alcance 500</p><details class="target-list"><summary>Objetivos accesibles · teclado o toque</summary><div class="buttons" id="targetActions"></div></details><div class="buttons"><button id="retry">Reiniciar misión</button></div>${sourceMarkup(mission)}`;
-    flight=createFlight(id,mission,now());const currentFlight=flight,canvas=$('radar');
+    $('main').innerHTML=`<div class="tag">${escapeHtml(mission.arc||'Simulador táctico de vuelo')} · ${escapeHtml(mission.place)}</div><h2>${escapeHtml(mission.title)}</h2><p class="fine">${escapeHtml(mission.goal)}</p><p class="fine">${escapeHtml(mission.rules?.hint||'Apunta y dispara sobre los blancos.')} Disparo automático en bullet hell. Flechas/WASD para moverte; Shift reduce la velocidad; X activa una contramedida. En celular, arrastra dentro del campo o usa los botones. Toca blancos o usa la lista para misiles y sensores. Puedes pausar.</p><div class="hud"><span id="hudTarget">OBJETIVOS 0/${mission.total}</span><span id="hudLife">INTEGRIDAD 100%</span><span id="hudTime">TIEMPO ${mission.time}s</span></div>${mission.secondary?`<p class="secondary-goal" id="secondaryProgress">◇ ${escapeHtml(mission.secondary.label)}: 0/${mission.secondary.count} · Opcional: cambia la ruta</p>`:''}<canvas id="radar" width="720" height="420" aria-label="Radar táctico jugable"></canvas><div class="controls"><button id="left">◀ VIRAR</button><button id="pause">Pausar</button><button id="right">VIRAR ▶</button></div><p class="fine" id="combatHint">${escapeHtml(mission.rules?.label||'Radar táctico')} · Misil 0,45 s · Alcance 500 · 3 contramedidas por intento</p><details class="target-list"><summary>Objetivos accesibles · teclado o toque</summary><div class="buttons" id="targetActions"></div></details><div class="buttons"><button id="retry">Reiniciar misión</button></div>${sourceMarkup(mission)}`;
+    flight=createFlight(id,mission,now(),undefined,{mode:battleMode,difficulty});const currentFlight=flight,canvas=$('radar');
+    if($('difficulty'))$('difficulty').disabled=true;
+    if(battleMode==='bullethell'){
+      $('combatHint').textContent=`${DIFFICULTIES[difficulty].label} · Disparo automático · Arrastra para esquivar · Toca un blanco para misil/sensor · Shift: precisión · X: contramedida`;
+      const controls=document.createElement('div');controls.className='controls';
+      controls.innerHTML='<button id="up">▲ SUBIR</button><button id="bomb">Contramedida (3)</button><button id="down">BAJAR ▼</button>';
+      $('main').insertBefore(controls,$('combatHint'));
+      $('bomb').onclick=()=>{if(!isPaused()&&flight===currentFlight){step();if(useBomb(flight))$('combatHint').textContent=flight.feedback;step();}};
+      for(const [button,key] of [['up','keyU'],['down','keyD']]){
+        $(button).onpointerdown=event=>{if(flight!==currentFlight||flight.status!=='active'||isPaused())return;event.preventDefault();flight[key]=true;$(button).setPointerCapture(event.pointerId);};
+        $(button).onpointerup=$(button).onpointercancel=$(button).onlostpointercapture=()=>{if(flight===currentFlight)flight[key]=false;};
+      }
+      canvas.onpointermove=event=>{
+        if(flight!==currentFlight||!flight.drag||flight.drag.id!==event.pointerId||isPaused()||flight.status!=='active')return;
+        step();if(flight.status!=='active')return;
+        const rect=canvas.getBoundingClientRect();
+        flight.x=Math.max(15,Math.min(705,flight.x+(event.clientX-flight.drag.x)*720/rect.width));
+        flight.y=Math.max(285,Math.min(403,flight.y+(event.clientY-flight.drag.y)*420/rect.height));
+        flight.drag={id:event.pointerId,x:event.clientX,y:event.clientY};draw(flight,canvas);
+      };
+      canvas.onpointerup=canvas.onpointercancel=canvas.onlostpointercapture=()=>{if(flight===currentFlight)flight.drag=null;};
+    }
     canvas.onpointerdown=event=>{
       if(flight!==currentFlight||isPaused())return;step();if(flight!==currentFlight||flight.status!=='active')return;
-      const rect=canvas.getBoundingClientRect();fireMissile(flight,(event.clientX-rect.left)*720/rect.width,(event.clientY-rect.top)*420/rect.height);
+      const rect=canvas.getBoundingClientRect(),x=(event.clientX-rect.left)*720/rect.width,y=(event.clientY-rect.top)*420/rect.height;
+      if(flight.mode!=='bullethell'||y<280)fireMissile(flight,x,y);
+      if(flight.mode==='bullethell'){event.preventDefault();canvas.setPointerCapture(event.pointerId);flight.drag={id:event.pointerId,x:event.clientX,y:event.clientY};}
       $('combatHint').textContent=flight.feedback;step();
     };
     for(const [id,key] of [['left','keyL'],['right','keyR']]){
@@ -123,8 +156,11 @@ export function createApp({document,window,storage,campaignId='jp52',now=()=>per
     $('hudLife').textContent=`INTEGRIDAD ${Math.round(currentFlight.hp)}%`;$('hudTime').textContent=`TIEMPO ${Math.ceil(currentFlight.t)}s`;
     if(currentFlight.m.secondary)$('secondaryProgress').textContent=`◇ ${currentFlight.m.secondary.label}: ${currentFlight.objectives[currentFlight.m.secondary.id]}/${currentFlight.m.secondary.count} · Opcional: cambia la ruta`;
     draw(currentFlight,$('radar'));updateTargets();
+    if($('bomb')){$('bomb').textContent=`Contramedida (${currentFlight.bombs})`;$('bomb').disabled=currentFlight.bombs<=0||currentFlight.status!=='active';}
     if(currentFlight.status!=='active'){
       currentFlight.settled=true;stopRepeat(ticker);ticker=null;
+      for(const id of ['pause','left','right','up','down'])if($(id))$(id).disabled=true;
+      if($('difficulty'))$('difficulty').disabled=false;
       campaignState=resolveMission(campaignState,{status:currentFlight.status,kills:currentFlight.kills,integrity:currentFlight.hp,timeRemaining:currentFlight.t,
         ...(campaignState.campaignId==='jp52'?{completed:currentFlight.completed,objectives:currentFlight.objectives}:{})});
       if(currentFlight.status==='victory'&&campaignState.campaignId==='jp52'&&!profile.missions.includes(currentFlight.id)){profile.missions.push(currentFlight.id);saveProfile(storage,profile);}
@@ -163,7 +199,7 @@ export function createApp({document,window,storage,campaignId='jp52',now=()=>per
   if($('missionSearch'))$('missionSearch').oninput=renderArchive;
   if($('returnCampaign'))$('returnCampaign').onclick=returnCampaign;
   if($('continueSimulation'))$('continueSimulation').onclick=()=>{const result=loadCampaign(storage,{simulator:true});if(result.ok&&result.state){closeArchive();cleanup();campaignState=result.state;render();}else $('saveStatus').textContent=result.message||'No hay una simulación guardada.';};
-  document.addEventListener('keydown',event=>{if(!flight||flight.status!=='active'||isPaused())return;if(['ArrowLeft','ArrowRight'].includes(event.code))event.preventDefault();keys[event.code]=true;});
+  document.addEventListener('keydown',event=>{if(!flight||flight.status!=='active'||isPaused()||['INPUT','SELECT','TEXTAREA','BUTTON'].includes(event.target?.tagName))return;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Space'].includes(event.code))event.preventDefault();keys[event.code]=true;if(event.code==='KeyX'&&!event.repeat&&useBomb(flight))$('combatHint').textContent=flight.feedback;});
   document.addEventListener('keyup',event=>{delete keys[event.code];});window.addEventListener('blur',clearKeys);
   document.addEventListener('visibilitychange',()=>{if(document.hidden&&!hidden&&!manualPause&&!archiveOpen)step();hidden=Boolean(document.hidden);clearKeys();if(flight)flight.last=now();updateSide();});
   const initialSave=loadCampaign(storage);savedAvailable=Boolean(initialSave.ok&&initialSave.state);$('load').disabled=!savedAvailable;

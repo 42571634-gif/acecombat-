@@ -1,4 +1,4 @@
-import { missions } from './missions.js?v=0.2.0';
+import { missions } from './missions.js?v=0.3.0';
 
 export const endingData = {
   upeo:{label:'UPEO · Erich y Rena',mission:'m18',description:'Park ha sido derrotado y Rena sobrevive. Nemo y Erich terminan el recorrido que comenzó intentando mantener la paz desde SARF.'},
@@ -28,6 +28,7 @@ export const story = {
   intro:{kind:'dialogue',tag:'Campaña japonesa · 52 misiones entre rutas',title:'Una guerra que cambia con tus decisiones',
     body:'Nemo entra en SARF mientras UPEO intenta contener la guerra entre General Resource y Neucom. La campaña conserva las 52 misiones repartidas entre rutas y cinco finales. Los combates y conversaciones son adaptaciones originales en español.',
     speaker:['Terminal de Nemo','Cada misión guarda sus fuentes. Algunas bifurcaciones dependen de tu respuesta; otras, de objetivos secundarios.'],
+    dialogue:[{speaker:'Terminal de Nemo',text:'Cada misión guarda sus fuentes. Algunas bifurcaciones dependen de tu respuesta; otras, de objetivos secundarios.'},{speaker:'Archivo de campaña',text:'UPEO intenta contener un conflicto que las corporaciones describen según sus propios intereses. Nemo comienza en SARF; los compañeros de cada vuelo también tendrán algo que perder cuando las órdenes cambien.'},{speaker:'Terminal de Nemo',text:'Conserva los informes y escucha antes de elegir. Una campaña recorre una parte de las 52 misiones; volver a empezar permite conocer otras decisiones y otros finales sin borrar el archivo personal.'}],
     options:[option('choice-1','Comenzar con SARF','m01Intro')],adaptation:true,confidence:'community-transcript',source:{url:'https://w.atwiki.jp/acacac/pages/4.html',title:'Índice japonés de transcripciones'}},
 };
 for (const mission of Object.values(missions)) {
@@ -55,6 +56,7 @@ for (const mission of Object.values(missions)) {
   const ending=Object.entries(endingData).find(([,data])=>data.mission===id);
   if(ending) options=[option('choice-1','Concluir esta ruta','ending-'+ending[0])];
   story[id+'Report']={kind:'dialogue',tag:'Informe de misión · '+name,title:'Consecuencias de la operación',body:mission.report,
+    dialogue:mission.reportDialogue,
     speaker:['Nemo · registro de vuelo','Resultado incorporado al historial. La ruta disponible se calcula con las decisiones y objetivos registrados.'],options,...meta};
 }
 for(const [id,ending] of Object.entries(endingData)) story['ending-'+id]={kind:'ending',...ending,

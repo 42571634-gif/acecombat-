@@ -1,5 +1,5 @@
-import { story } from './story.js?v=0.2.0';
-import { missions } from './missions.js?v=0.2.0';
+import { story } from './story.js?v=0.3.0';
+import { missions } from './missions.js?v=0.3.0';
 
 export const SAVE_VERSION = 1;
 export const FACTIONS = ['UPEO', 'GR', 'NEUCOM', 'OUROBOROS'];

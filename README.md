@@ -1,6 +1,12 @@
-# Electrosphere 2040 · 52 misiones · v0.2
+# Electrosphere 2040 · 52 misiones · v0.3
 
 Adaptación fan no oficial en español de la campaña japonesa de Ace Combat 3. Incluye **52 misiones distribuidas entre rutas y cinco finales**, con briefing, conversación recreada, objetivo jugable e informe para cada misión. No es una reproducción íntegra del guion ni del simulador de vuelo original.
+
+Jugar en GitHub Pages: https://42571634-gif.github.io/acecombat-/ (requiere que Pages esté activado sobre `main` / raíz).
+
+La versión 0.3 incorpora **bullet hell con tres dificultades** y triplica las intervenciones de la campaña: 471 frente a 157, contando introducción, briefings e informes. Cada misión tiene seis intervenciones previas y tres posteriores, con escritura específica para el capítulo y sin copiar los diálogos originales.
+
+Elige **Fácil, Normal o Experto** antes de despegar. El cañón dispara automáticamente; usa flechas/WASD o arrastre táctil para esquivar. Shift activa movimiento de precisión; X o el botón Contramedida limpia los proyectiles (tres usos por intento). Toca los blancos de la zona superior o usa la lista accesible para misiles, sensores, ANB y pasos. Los controles de subir/bajar y virar permiten jugar sin arrastrar. La preferencia de dificultad se conserva en el navegador; queda bloqueada durante el combate y puede cambiarse tras una derrota, reiniciando el intento.
 
 ## Ejecutar
 

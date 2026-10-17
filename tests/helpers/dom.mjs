@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { createApp } from '../../src/game.js';
 // DOM y reloj controlados: se ejercitan los mismos eventos de la interfaz sin dependencias.
-export function environment(storage, {campaignId="jp52"}={}) {
+export function environment(storage, {campaignId="jp52",battleMode='tactical'}={}) {
   const values = new Map();
   storage ||= { getItem: key => values.get(key) ?? null, setItem: (key, value) => values.set(key, value) };
   const elements = new Map();
@@ -19,7 +19,7 @@ export function environment(storage, {campaignId="jp52"}={}) {
     let html = '';
     const item = {
       textContent: '', value: '', hidden:true, children: [], disabled: false,
-      classList: { toggle() {} }, appendChild(child) { this.children.push(child); },
+      classList: { toggle() {} }, appendChild(child) { this.children.push(child); }, insertBefore(child) { this.children.push(child); },
       getContext: () => ctx, getBoundingClientRect: () => ({ left: 0, top: 0, width: 720, height: 420 }),
       setPointerCapture() {},
       get innerHTML() { return html; },
@@ -35,7 +35,8 @@ export function environment(storage, {campaignId="jp52"}={}) {
   for (const id of ['main', 'loyalty', 'missions', 'kills', 'state', 'save', 'load', 'reset', 'saveStatus', 'rUPEO', 'rGR', 'rNEU', 'rOURO', 'mode', 'chapter', 'collection', 'career', 'archive', 'archivePanel', 'closeArchive', 'archiveList', 'missionSearch', 'returnCampaign', 'continueSimulation']) element(id);
   const document = { hidden: false, getElementById: id => elements.get(id), createElement: () => element(),
     addEventListener: (event, callback) => listeners.set(event, callback) };
-  const app = createApp({ document, campaignId, window: { addEventListener: (event, callback) => listeners.set(event, callback) }, storage,
+  element('difficulty');
+  const app = createApp({ document, campaignId, battleMode, window: { addEventListener: (event, callback) => listeners.set(event, callback) }, storage,
     now: () => clock, repeat: callback => { const id = ++sequence; intervals.set(id, callback); return id; },
     stopRepeat: id => intervals.delete(id), delay: callback => { const id = ++sequence; delays.set(id, callback); return id; },
     stopDelay: id => delays.delete(id),

@@ -91,3 +91,7 @@ Cada misión tiene briefing, dos intervenciones de conversación adaptada, comba
 | 50 | Revenge | Neucom · Fiona | Asalto por fases | [Capítulo 50](https://w.atwiki.jp/acacac/pages/60.html) |
 | 51 | Tunnel Vision | Neucom · Fiona | Navegación por corredor | [Capítulo 51](https://w.atwiki.jp/acacac/pages/61.html) |
 | 52 | Sole Survivor | Neucom · Fiona | Asalto por fases | [Capítulo 52](https://w.atwiki.jp/acacac/pages/62.html) |
+# Ampliación narrativa v0.3
+
+Se han añadido 208 intervenciones de briefing y 104 de informe, además de dos en la introducción. Las 471 intervenciones actuales triplican las 157 anteriores. Los archivos `dialogue-expansion.js` y `report-dialogue.js` contienen escritura original en español específica por capítulo: contexto, tensiones entre compañeros, objetivos y consecuencias ya documentados. No son traducciones, transcripciones adicionales ni prueba de hechos nuevos. Se conservan `source`, `confidence: community-transcript` y `adaptation: true`. Los registros de Nemo son un recurso narrativo propio de la adaptación, no afirmaciones sobre sus líneas en el guion original. El bullet hell es una reinterpretación jugable de las mismas operaciones.
+

@@ -1,4 +1,4 @@
-import { isTargetLocked } from './combat.js?v=0.2.0';
+import { isTargetLocked } from './combat.js?v=0.3.0';
 export function draw(flight,canvas){
   if(!flight||!canvas)return;
   const ctx=canvas.getContext('2d');
@@ -12,13 +12,21 @@ export function draw(flight,canvas){
     if(gate){ctx.fillStyle='#16404a';ctx.fillRect(gate.x-65,35,130,345);}
   }
   if(flight.protected){ctx.fillStyle='#6ef3b9';ctx.fillRect(flight.protected.x-20,flight.protected.y-8,40,16);ctx.fillText('PROTEGER '+Math.round(flight.protected.hp)+'%',flight.protected.x-44,flight.protected.y+30);}
-  ctx.save();ctx.translate(flight.x,365);ctx.fillStyle='#67f6e0';ctx.beginPath();ctx.moveTo(0,-19);ctx.lineTo(-12,15);ctx.lineTo(0,8);ctx.lineTo(12,15);ctx.closePath();ctx.fill();ctx.restore();
+  if(flight.mode==='bullethell'){
+    ctx.fillStyle='#0c2738';ctx.fillRect(0,280,720,140);
+    ctx.font='11px monospace';ctx.fillStyle='#77a7b2';ctx.fillText('ZONA DE MANIOBRA · '+flight.config.label.toUpperCase(),14,414);
+    for(const bullet of flight.playerBullets){ctx.fillStyle='#aaffed';ctx.fillRect(bullet.x-2,bullet.y-9,4,14);}
+    for(const bullet of flight.bullets){ctx.fillStyle=['#ff818f','#ffc76e','#dd9aff'][bullet.kind];ctx.beginPath();ctx.arc(bullet.x,bullet.y,bullet.r,0,Math.PI*2);ctx.fill();}
+  }
+  ctx.save();ctx.translate(flight.x,flight.y||365);ctx.fillStyle=flight.invulnerable>0&&Math.floor(flight.invulnerable*12)%2?'#fff':'#67f6e0';ctx.beginPath();ctx.moveTo(0,-19);ctx.lineTo(-12,15);ctx.lineTo(0,8);ctx.lineTo(12,15);ctx.closePath();ctx.fill();
+  if(flight.mode==='bullethell'){ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(0,0,flight.config.radius,0,Math.PI*2);ctx.fill();if(flight.focus){ctx.strokeStyle='#fff';ctx.beginPath();ctx.arc(0,0,12,0,Math.PI*2);ctx.stroke();}}ctx.restore();
   for(const target of flight.targets){
     if(!target.alive)continue;
     const locked=isTargetLocked(flight,target);
     const color=locked?'#527078':target.role==='civilian'?'#78e4a7':target.group?'#85aaff':target.role==='boss'?'#ee85e6':['scan','cloud','gate'].includes(target.role)?'#6ef3df':['facility','support','generator'].includes(target.role)?'#ffc170':'#ff7884';
     ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=target.group?1:2;
     ctx.strokeRect(target.x-13,target.y-13,26,26);
+    if(flight.mode==='bullethell'&&target.maxHp>1){ctx.fillStyle='#254052';ctx.fillRect(target.x-16,target.y+20,32,3);ctx.fillStyle=color;ctx.fillRect(target.x-16,target.y+20,32*Math.max(0,target.hp)/target.maxHp,3);}
     if(!locked){ctx.beginPath();ctx.moveTo(target.x-18,target.y);ctx.lineTo(target.x+18,target.y);ctx.moveTo(target.x,target.y-18);ctx.lineTo(target.x,target.y+18);ctx.stroke();}
     ctx.font='10px monospace';
     const label=locked?'BLOQUEADO':target.role==='civilian'?'CIVIL':target.group?'SECUNDARIO':target.role==='boss'?'NÚCLEO '+target.hp:target.role==='scan'?'REGISTRAR':target.role==='gate'?'PASO '+(target.sequence+1):target.role==='cloud'?'ANB':target.label;
@@ -26,5 +34,5 @@ export function draw(flight,canvas){
   }
   for(const shot of flight.shots){ctx.strokeStyle='#aafbf2';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(shot.sx,shot.sy);ctx.lineTo(shot.x,shot.y);ctx.stroke();}
   for(const effect of flight.effects){ctx.strokeStyle='#ffd475';ctx.beginPath();ctx.arc(effect.x,effect.y,30*(1-effect.life/.6)+10,0,Math.PI*2);ctx.stroke();}
-  ctx.fillStyle='#77b9c6';ctx.font='11px monospace';ctx.fillText('NEMO',flight.x+16,365);
+  ctx.fillStyle='#77b9c6';ctx.font='11px monospace';ctx.fillText('NEMO',Math.min(670,flight.x+16),flight.y||365);
 }

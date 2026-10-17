@@ -1,4 +1,4 @@
-import { chapterList } from './campaign-data.js?v=0.2.0';
+import { chapterList } from './campaign-data.js?v=0.3.0';
 
 export const TYPE_RULES = {
   intercept:{label:'Intercepción',verb:'Destruir',hint:'Blancos rojos: interceptar antes de que alcancen el corredor.'},
@@ -10,8 +10,8 @@ export const TYPE_RULES = {
   containers:{label:'Contenedores en descenso',verb:'Interceptar',hint:'Neutraliza los contenedores antes de que alcancen el suelo; cada fuga daña la zona protegida.'},
   containment:{label:'Contención ANB',verb:'Neutralizar',hint:'Los pulsos ANB desactivan nubes de nanobots. El campo residual no cuenta como derribo.'},
   tunnel:{label:'Navegación por corredor',verb:'Cruzar',hint:'Alinea tu aeronave con la puerta iluminada y pulsa sobre ella. Los botones de objetivos también permiten alinear el paso.'},
-  orbital:{label:'Intercepción orbital',verb:'Desactivar',hint:'Los satélites se desplazan por trayectorias orbitales. Necesitan dos impactos cada uno.'},
-  boss:{label:'Asalto por fases',verb:'Atacar',hint:'Neutraliza primero los generadores ámbar. Los núcleos magenta se desbloquean después y necesitan tres impactos.'},
+  orbital:{label:'Intercepción orbital',verb:'Desactivar',hint:'Desactiva los satélites. Su blindaje depende de la dificultad; combina cañón automático y misiles.'},
+  boss:{label:'Asalto por fases',verb:'Atacar',hint:'Neutraliza primero los generadores ámbar. Los núcleos magenta se desbloquean por fases y tienen más blindaje.'},
 };
 
 const secondary = {

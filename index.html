@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="data:,">
 <title>Electrosphere · Historia interactiva 52 misiones</title>
-<link rel="stylesheet" href="./src/styles.css?v=0.2.0">
+<link rel="stylesheet" href="./src/styles.css?v=0.3.0">
 </head>
 <body>
 <div class="app">
@@ -15,7 +15,7 @@
 <h1>ELECTROSPHERE <small style="font-size:11px;letter-spacing:0;color:#a8d5dd">2040</small>
 </h1>
 </div>
-<div class="chip">NOVELA INTERACTIVA + COMBATE TÁCTICO</div>
+<div class="chip">NOVELA INTERACTIVA + BULLET HELL</div>
 </header>
 <nav class="campaign-nav" aria-label="Modos de juego"><button id="archive">Archivo de 52 misiones</button><button id="returnCampaign">Volver a la campaña</button><button id="continueSimulation">Continuar simulación</button></nav>
 <section id="archivePanel" class="panel archive-panel" hidden aria-label="Archivo de misiones">
@@ -23,6 +23,7 @@
 <p>Consulta los objetivos, sus fuentes y prueba cualquier misión. El simulador tiene su propio guardado y no cambia tus decisiones de campaña. Abrir este archivo pausa el combate.</p>
 <label for="missionSearch">Buscar por nombre, número, lugar o ruta</label><input id="missionSearch" type="search" placeholder="Ejemplo: Neucom, 39, Geofront…">
 <div id="archiveList" class="archive-grid"></div></section>
+<div class="difficulty-picker"><label for="difficulty">Dificultad del combate</label><select id="difficulty"><option value="easy">Fácil · patrones espaciados, daño reducido</option><option value="normal" selected>Normal · desafío equilibrado</option><option value="expert">Experto · patrones densos y rápidos</option></select><span class="fine">Se elige antes de despegar o después de una derrota.</span></div>
 <main class="layout">
 <section class="panel scene" id="main">
 </section>
@@ -68,7 +69,7 @@
 </main>
 <footer class="foot">Proyecto experimental de aficionados, sin afiliación a Bandai Namco. Inspirado en Ace Combat 3: Electrosphere (1999). Sin música, imágenes ni recursos extraídos del juego.</footer>
 </div>
-<script type="module" src="./src/game.js?v=0.2.0">
+<script type="module" src="./src/game.js?v=0.3.0">
 </script>
 </body>
 </html>

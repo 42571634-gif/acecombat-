@@ -1,4 +1,14 @@
-# Verificación v0.2
+# Verificación v0.3
+
+`npm run check`: **14 módulos con sintaxis válida y 37 pruebas aprobadas**. El piloto automático de pruebas completa las 52 misiones en las tres dificultades (156 combinaciones), usando movimiento, esquiva prevista, disparos y contramedidas reales; no cambia vida ni declara victorias artificiales. La ayuda de alineación de túneles coincide con la lista accesible de la interfaz. Se prueban secundarios, generadores y jefes secuenciales, colisión, invulnerabilidad, límite de contramedidas, disparo automático y protección de civiles, controles y preferencia persistente.
+
+Las pruebas tácticas anteriores se conservan en modo explícito `tactical` para comparar rutas, guardados y regresiones. La interfaz pública usa `bullethell` por defecto. Estas pruebas de simulación confirman que las misiones son completables; no sustituyen una evaluación humana del equilibrio de dificultad.
+
+Se comprueban seis intervenciones de briefing y tres de informe por misión, 208 nuevas intervenciones previas distintas y metadatos de adaptación. Incluida la introducción, el total pasa de 157 a 471.
+
+Navegador real: combate Experto con proyectiles y cañón automático, pausa sin consumir tiempo, selector bloqueado en vuelo, seis intervenciones en Awakening y controles táctiles visibles. Diseño móvil solicitado 390×844: ancho CSS 375, scrollWidth 375, sin desbordamiento horizontal. Sin errores ni advertencias JavaScript durante la comprobación.
+
+## Registro de verificación v0.2
 
 Fecha: 17 de octubre de 2026.
 
