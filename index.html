@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Electrosphere · Historia interactiva 52 misiones</title>
+<link rel="stylesheet" href="./src/styles.css?v=0.2.0">
+</head>
+<body>
+<div class="app">
+<header class="top">
+<div>
+<div class="eyebrow">Fan concept · Experiencia narrativa no oficial</div>
+<h1>ELECTROSPHERE <small style="font-size:11px;letter-spacing:0;color:#a8d5dd">2040</small>
+</h1>
+</div>
+<div class="chip">NOVELA INTERACTIVA + COMBATE TÁCTICO</div>
+</header>
+<nav class="campaign-nav" aria-label="Modos de juego"><button id="archive">Archivo de 52 misiones</button><button id="returnCampaign">Volver a la campaña</button><button id="continueSimulation">Continuar simulación</button></nav>
+<section id="archivePanel" class="panel archive-panel" hidden aria-label="Archivo de misiones">
+<div class="archive-heading"><div><div class="eyebrow">Biblioteca de campaña</div><h2>52 expedientes de vuelo</h2></div><button id="closeArchive">Cerrar archivo</button></div>
+<p>Consulta los objetivos, sus fuentes y prueba cualquier misión. El simulador tiene su propio guardado y no cambia tus decisiones de campaña. Abrir este archivo pausa el combate.</p>
+<label for="missionSearch">Buscar por nombre, número, lugar o ruta</label><input id="missionSearch" type="search" placeholder="Ejemplo: Neucom, 39, Geofront…">
+<div id="archiveList" class="archive-grid"></div></section>
+<main class="layout">
+<section class="panel scene" id="main">
+</section>
+<aside class="panel">
+<div class="eyebrow">Terminal de Nemo</div><p id="mode" class="fine"></p><p id="chapter" class="current-chapter"></p>
+<h3 style="margin-top:12px">Registro de vuelo</h3>
+<div class="stat">
+<span>Identidad</span>
+<span>NEMO / SARF</span>
+</div>
+<div class="stat">
+<span>Lealtad</span>
+<span id="loyalty">UPEO</span>
+</div>
+<div class="stat">
+<span>Misiones realizadas</span>
+<span id="missions">0</span>
+</div>
+<div class="stat">
+<span>Blancos destruidos</span>
+<span id="kills">0</span>
+</div>
+<div class="stat">
+<span>Estado de campaña</span>
+<span id="state">Introducción</span>
+</div>
+<h3 style="margin-top:24px">Archivo personal</h3><progress id="career" max="52" value="0" aria-label="Misiones únicas completadas"></progress><p id="collection" class="fine">0/52 misiones · 0/5 finales</p><h3>Facciones</h3>
+<div class="route">
+<span id="rUPEO" class="active">UPEO</span>
+<span id="rGR">GENERAL RESOURCE</span>
+<span id="rNEU">NEUCOM</span>
+<span id="rOURO">OUROBOROS</span>
+</div>
+<p class="fine">Cada vuelo desbloquea un momento de la historia. Las decisiones cambian tus alianzas y el final.</p>
+<div style="margin-top:20px" class="buttons">
+<button id="save">Guardar partida</button>
+<button id="load" disabled>Continuar guardada</button>
+<button id="reset">↻ Nueva campaña</button>
+</div>
+<p class="fine" id="saveStatus" role="status" aria-live="polite"></p>
+<p class="fine" style="margin-top:20px">Adaptación de las 52 misiones distribuidas entre las rutas japonesas. Los diálogos y las misiones jugables son recreaciones originales; no sustituyen el guion íntegro del videojuego.</p>
+</aside>
+</main>
+<footer class="foot">Proyecto experimental de aficionados, sin afiliación a Bandai Namco. Inspirado en Ace Combat 3: Electrosphere (1999). Sin música, imágenes ni recursos extraídos del juego.</footer>
+</div>
+<script type="module" src="./src/game.js?v=0.2.0">
+</script>
+</body>
+</html>
