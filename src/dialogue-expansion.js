@@ -143,9 +143,9 @@ export const expandedDialogue = [
     'Dos destinos posteriores registrados: permanecer con Keith o seguir a Dision. La decisión conservará las alianzas anteriores como antecedentes, sin borrar el sentido de la ruptura.',
   ],[
     'Elegir quedarse no hace que la guerra vuelva al punto donde la dejamos. Dision ya ha abierto otra línea y ahora Megafloat está en medio de lo que pretende hacer con ella.',
-    'Contacto con la amenaza sobre Megafloat confirmado. La defensa prioriza interrumpir la capacidad de ataque de Ouroboros mientras se conserva la identificación de cada fuerza presente.',
+    'Fuerzas de Neucom sobre Megafloat identificadas. La interdicción prioriza reducir la flota y los grupos aéreos asignados, conservando la identificación de cada fuerza presente.',
     'No necesito que vuelvas a prometer que estás conmigo en cada salida. Necesito que podamos seguir coordinándonos cuando lo que viene de frente ya no se parece a las operaciones de antes.',
-    'Defensa de la instalación registrada. La permanencia con Keith mantiene General Resource como ruta, pero no elimina la transformación del conflicto provocada por Ouroboros.',
+    'Interdicción sobre Megafloat registrada. La permanencia con Keith mantiene General Resource como ruta, pero no devuelve a la cadena de mando las certezas que tenía antes de la ruptura de Dision.',
   ],[
     'El Sphyrna sostiene la operación y el Night Raven puede inclinarla de golpe. Si queremos perseguirlo después, habrá que hacerle daño antes de cerrar el ataque al portaaviones.',
     'Objetivo principal y señal del Night Raven separados. El orden de resolución importa: neutralizar la plataforma termina la misión y fija el grado de presión logrado sobre el aparato secundario.',
