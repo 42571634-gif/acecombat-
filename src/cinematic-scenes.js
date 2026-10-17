@@ -57,12 +57,12 @@ export const cinematicScenes=[
     ['fiona','Eso ya suena a una respuesta tuya. Nemo, los obstáculos primero. El dirigible vuelve entero.'],
     ['fiona','Y tú también. No voy a explicar que salvamos media ciudad y perdí al rival que me habían prometido.'],
   ],[
-    ['erich','¿Solo nosotros para escoltar al representante? He revisado la formación tres veces. Sigue diciendo nosotros.'],
-    ['fiona','Perfecto. A la cuarta la revisas volando. Yo me quedo con Clarkson; vosotros vigilad el cielo.'],
-    ['clarkson','Les estoy pidiendo tiempo para una conversación. Comprendo que desde ahí arriba parezca una petición pequeña.'],
-    ['erich','No, señor. Es que hay muchas maneras de impedir que llegue a ella.'],
-    ['fiona','Erich. Mírame. Tú a un lado, Nemo al otro. Si llaman, contestamos los tres.','Espera hasta que él asiente.'],
-    ['clarkson','Si conseguimos llegar, intentaré que no tengan que repetir este vuelo mañana.'],
+    ['erich','Control, confirmad la escolta. ¿Nemo y yo somos los únicos cazas asignados al transporte?'],
+    ['fiona','Confirmado. Yo viajo aquí dentro con Clarkson. Vosotros dos nos cubrís desde fuera.'],
+    ['clarkson','Confío en ustedes, teniente. Si tenemos que cambiar de rumbo, avísenme antes de que empiecen a disparar.'],
+    ['erich','Haré lo posible para que ningún atacante se acerque al transporte, señor.'],
+    ['fiona','Erich, no tienes que cubrir los dos lados. Ocúpate del izquierdo. Nemo estará en el derecho.','Su voz llega por el canal de escolta.'],
+    ['clarkson','Entonces continuemos. Gracias a los dos por protegernos.'],
   ],[
     ['park','Bombarderos de Neucom a gran altitud. Mantengan la formación y limítense a cumplir el objetivo.'],
     ['erich','La formación... sí, señor.','Mira el espacio que ocupaba Fiona en la pantalla.'],

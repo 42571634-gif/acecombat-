@@ -107,9 +107,10 @@ test('Las 52 misiones se completan en Fácil, Normal y Experto, incluidos secund
 test('Diálogos triplicados: seis intervenciones y tres de informe, con texto específico por capítulo',()=>{
   const text=[];
   for(const mission of Object.values(missions)){
-    assert.equal(mission.dialogue.length,6);assert.equal(mission.reportDialogue.length,3);
+    const spoken=mission.dialogue.filter(line=>line.kind!=='narration');
+    assert.equal(spoken.length,6);assert.equal(mission.reportDialogue.filter(line=>line.kind!=='narration').length,3);
     assert.equal(story[mission.id+'Intro'].dialogue,mission.dialogue);
-    for(const line of mission.dialogue.slice(2)){assert.ok(line.text.trim());text.push(line.text);}
+    for(const line of spoken.slice(2)){assert.ok(line.text.trim());text.push(line.text);}
     assert.equal(mission.adaptation,true);assert.ok(mission.source.url);
   }
   assert.equal(new Set(text).size,208);assert.equal(story.intro.dialogue.length,3);

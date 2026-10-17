@@ -1,6 +1,6 @@
-import { isTargetLocked } from './combat.js?v=0.5.0';
-import { ENEMY_TYPES,drawEnemy } from './enemy-types.js?v=0.5.0';
-import { isActiveTarget } from './waves.js?v=0.5.0';
+import { isTargetLocked } from './combat.js?v=0.5.1';
+import { ENEMY_TYPES,drawEnemy } from './enemy-types.js?v=0.5.1';
+import { isActiveTarget } from './waves.js?v=0.5.1';
 export function draw(flight,canvas){
   if(!flight||!canvas)return;
   const ctx=canvas.getContext('2d');

@@ -6,7 +6,7 @@ import { story } from '../src/story.js';
 import { environment } from './helpers/dom.mjs';
 
 test('Las 471 intervenciones tienen un interlocutor definido; Nemo no recibe voz inventada',()=>{
-  const lines=[...story.intro.dialogue,...Object.values(missions).flatMap(m=>[...m.dialogue,...m.reportDialogue])];
+  const lines=[...story.intro.dialogue,...Object.values(missions).flatMap(m=>[...m.dialogue,...m.reportDialogue])].filter(line=>line.kind!=='narration');
   assert.equal(lines.length,471);
   for(const line of lines){
     const profile=characters[line.character];assert.ok(profile,line.speaker);

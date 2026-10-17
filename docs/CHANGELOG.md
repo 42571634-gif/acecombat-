@@ -1,3 +1,10 @@
+# v0.5.1 — continuidad de escenas
+
+- Narración intercalada sin retrato para cambios de lugar, canal, organización y operaciones posteriores.
+- Aclarada la disposición de Fiona, Clarkson, Erich y Nemo durante la escolta; diálogo sin referencias ambiguas a una conversación o a «ella».
+- Separada la primera intercepción de la orden de Park, manteniendo el transporte en vuelo.
+- Conservados guardados, decisiones y combate. 49 pruebas aprobadas.
+
 # v0.5 — retratos, respuesta y oleadas
 
 - Nueve retratos locales con fuentes y créditos; iniciales como respaldo si falla una imagen.

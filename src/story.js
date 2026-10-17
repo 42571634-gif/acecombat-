@@ -1,5 +1,5 @@
-import { missions } from './missions.js?v=0.5.0';
-import { dialogueLine } from './characters.js?v=0.5.0';
+import { missions } from './missions.js?v=0.5.1';
+import { dialogueLine } from './characters.js?v=0.5.1';
 
 export const endingData = {
   upeo:{label:'UPEO · Erich y Rena',mission:'m18',description:'El nombre de Park se apaga en el canal de mando. Rena sigue viva. Erich repite que pueden regresar y, esta vez, nadie le exige que espere una autorización. Nemo conserva su puesto a su lado.'},
@@ -38,7 +38,7 @@ for (const mission of Object.values(missions)) {
   const briefingOptions=[option('choice-1','Despegar · '+mission.rules.label,id+'Combat')];
   if(id==='m07') briefingOptions.push(option('return','Obedecer el regreso · Fragile Cargo',toIntro(8)));
   story[id+'Intro']={kind:'dialogue',tag:`${mission.arc} · ${mission.number}/52`,title:name,body:mission.briefing,dialogue:mission.dialogue,
-    speaker:[mission.dialogue[0].speaker,mission.dialogue[0].text],options:briefingOptions,...meta};
+    speaker:[mission.dialogue.find(line=>line.kind!=='narration').speaker,mission.dialogue.find(line=>line.kind!=='narration').text],options:briefingOptions,...meta};
   story[id+'Combat']={kind:'mission',mission:id,next:id+'Report',...meta};
   let options=routeEdges[id].map(n=>option('choice-1','Continuar · '+missions['m'+String(n).padStart(2,'0')].name,toIntro(n)));
   if(id==='m04') options=[option('stay','Permanecer en UPEO',toIntro(5)),option('dision','Ingresar en General Resource',toIntro(19),faction('GR'))];

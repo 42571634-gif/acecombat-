@@ -1,6 +1,7 @@
-import { expandedDialogue } from './dialogue-expansion.js?v=0.5.0';
-import { reportDialogue } from './report-dialogue.js?v=0.5.0';
-import { dialogueLine } from './characters.js?v=0.5.0';
+import { expandedDialogue } from './dialogue-expansion.js?v=0.5.1';
+import { reportDialogue } from './report-dialogue.js?v=0.5.1';
+import { dialogueLine } from './characters.js?v=0.5.1';
+import { situateScene,narration } from './scene-narration.js?v=0.5.1';
 // Adaptaciones originales en español. Referencias y límites en docs/RESEARCH.md.
 // [número, título, lugar, mecánica, objetivo, contexto, interlocutor, diálogo recreado, informe]
 const chapters = [
@@ -62,8 +63,8 @@ const arcFor = n => n<=4 ? 'UPEO · Inicio' : n<=9 ? 'UPEO · Ruptura' : n<=18 ?
 const factionFor = n => n<=18 ? 'UPEO' : n<=33 ? 'GR' : n<=38 ? 'OUROBOROS' : n<=43 ? 'NEUCOM' : n===44 ? 'OUROBOROS' : 'NEUCOM';
 export const chapterList = chapters.map(([number,name,place,type,goal,briefing,speaker,line,report]) => ({
   id: 'm'+String(number).padStart(2,'0'), number, name, place, type, goal, briefing,
-  dialogue: expandedDialogue[number-1].map(dialogueLine), report,
-  reportDialogue: reportDialogue[number-1].map(dialogueLine),
+  dialogue: situateScene(number,expandedDialogue[number-1].map(dialogueLine)), report,
+  reportDialogue: [...(number===9?[narration('La primera intercepción ha terminado. El transporte de Clarkson y Fiona sigue en vuelo cuando Park entra en el canal y cambia las órdenes.','Tras la intercepción · Orden de Park')]:[]),...reportDialogue[number-1].map(dialogueLine)],
   faction:factionFor(number), arc:arcFor(number),
   source:{url:`https://w.atwiki.jp/acacac/pages/${number+10}.html`,title:`AC3 台詞集 · Mission ${number}`,accessed:'2026-10-17'},
   confidence:'community-transcript', adaptation:true,

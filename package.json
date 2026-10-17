@@ -1,6 +1,6 @@
 {
   "name": "electrosphere-narrative",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "description": "Adaptación fan: campaña japonesa de 52 misiones con rutas, bullet hell con tres dificultades y fuentes por capítulo",
   "scripts": {

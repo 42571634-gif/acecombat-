@@ -39,3 +39,7 @@ Guardar durante combate conserva el punto de inicio de la misión; una carga rei
 ## Reloj y controles
 
 La simulación usa tiempo transcurrido real. Pausa manual, pestaña oculta y archivo abierto congelan el tiempo y liberan controles. La lista de objetivos permite jugar con teclado/toque y mantiene el foco al actualizarse. Los núcleos de jefe se desbloquean después de los generadores y en orden.
+# Narración intercalada (v0.5.1)
+
+Los arrays dialogue y reportDialogue admiten bloques `{kind:'narration',label,text,adaptation:true}` entre intervenciones. Son puentes editoriales sin personaje, speaker, retrato ni voz atribuida a Nemo. La interfaz los presenta como un aside etiquetado Narración. Se usan para cambios de escenario, canal o tiempo; no fijan duraciones no documentadas. Los consumidores que necesiten un interlocutor deben seleccionar una intervención con kind distinto de narration.
+

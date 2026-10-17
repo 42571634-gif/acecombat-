@@ -1,4 +1,8 @@
-# Verificación v0.5
+# Verificación v0.5.1
+
+`npm run check`: 21 módulos y 49 pruebas aprobadas. Se comprueba posición de narraciones entre réplicas, contexto de la escolta y orden de Park, transición orbital, renderizado accesible sin avatar y escape de HTML. Las narraciones se excluyen del recuento de 471 intervenciones habladas y no se registran como personajes. Se conservan las pruebas de rutas, guardado y las 156 combinaciones de misión/dificultad.
+
+## Registro de verificación v0.5
 
 `npm run check`: **20 módulos con sintaxis válida y 47 pruebas aprobadas, cero fallos**. Conservadas las 156 combinaciones de misión/dificultad y las regresiones de rutas y guardado. Nuevas pruebas: nueve retratos, botones persistentes, respuesta al pulsar, teclado con foco, liberación de controles, ciclo único de animación, pausa, refuerzos inactivos, secundarios, orden de jefes y blindaje aplicado una sola vez.
 

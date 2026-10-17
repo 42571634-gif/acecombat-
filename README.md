@@ -1,4 +1,6 @@
-# Electrosphere 2040 · 52 misiones · v0.5
+# Electrosphere 2040 · 52 misiones · v0.5.1
+
+La v0.5.1 incorpora narración intercalada en los cambios de escenario, organización y canal. Los bloques sin retrato sitúan a los personajes y distinguen los saltos temporales del diálogo continuo. La escolta de Clarkson aclara quién viaja en el transporte y quién vuela fuera; la orden de Park se sitúa después de la intercepción. No se fijan horas ni duraciones que las fuentes no indiquen.
 
 Adaptación fan no oficial en español de la campaña japonesa de Ace Combat 3. Incluye **52 misiones distribuidas entre rutas y cinco finales**, con briefing, conversación recreada, objetivo jugable e informe para cada misión. No es una reproducción íntegra del guion ni del simulador de vuelo original.
 

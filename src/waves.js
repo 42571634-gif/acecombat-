@@ -1,4 +1,4 @@
-import { dialogueLine } from './characters.js?v=0.5.0';
+import { dialogueLine } from './characters.js?v=0.5.1';
 // Agrupación jugable de los objetivos existentes. No añade bajas ni sucesos al canon.
 const waves=(...stages)=>stages.map(([label,character,text])=>({label,message:dialogueLine([character,text]),adaptation:true}));
 export const WAVE_PLANS={

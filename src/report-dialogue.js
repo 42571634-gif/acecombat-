@@ -1,1 +1,1 @@
-export { cinematicReports as reportDialogue } from './cinematic-reports.js?v=0.5.0';
+export { cinematicReports as reportDialogue } from './cinematic-reports.js?v=0.5.1';
