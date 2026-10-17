@@ -85,10 +85,12 @@ test('Los secundarios sobreviven a los cambios de fase y los dos jefes se desblo
   advanceFlight(f,900);assert.equal(isActiveTarget(secondary),true);
   const before=f.objectives.sphyrna;damageTarget(f,secondary,secondary.hp);assert.equal(f.objectives.sphyrna,before+1);
   const boss=flight('m52');const bosses=boss.targets.filter(t=>t.role==='boss');
-  assert.equal(boss.waves.length,3);assert.ok(bosses.every(t=>!t.active));
-  for(const t of boss.targets.filter(t=>t.role==='generator'))damageTarget(boss,t,t.hp);
-  advanceFlight(boss,900);assert.equal(isTargetLocked(boss,bosses[0]),false);assert.equal(isTargetLocked(boss,bosses[1]),true);
-  damageTarget(boss,bosses[0],bosses[0].hp);advanceFlight(boss,1800);
+  assert.equal(boss.waves.length,4);assert.ok(bosses.every(t=>!t.active));
+  for(const t of boss.targets.filter(t=>t.role==='generator'&&t.active))damageTarget(boss,t,t.hp);
+  advanceFlight(boss,900);assert.equal(isTargetLocked(boss,bosses[0]),true,'Queda la capa interior.');
+  for(const t of boss.targets.filter(t=>t.role==='generator'&&t.active))damageTarget(boss,t,t.hp);
+  advanceFlight(boss,1800);assert.equal(isTargetLocked(boss,bosses[0]),false);assert.equal(isTargetLocked(boss,bosses[1]),true);
+  damageTarget(boss,bosses[0],bosses[0].hp);advanceFlight(boss,2700);
   assert.equal(isTargetLocked(boss,bosses[1]),false);assert.equal(boss.status,'active');
 });
 

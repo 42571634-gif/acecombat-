@@ -1,4 +1,4 @@
-import { dialogueLine } from './characters.js?v=0.5.1';
+import { dialogueLine } from './characters.js?v=0.6.0';
 // Agrupación jugable de los objetivos existentes. No añade bajas ni sucesos al canon.
 const waves=(...stages)=>stages.map(([label,character,text])=>({label,message:dialogueLine([character,text]),adaptation:true}));
 export const WAVE_PLANS={
@@ -21,11 +21,16 @@ export const WAVE_PLANS={
 export const isActiveTarget=target=>target.alive&&target.active!==false;
 export function prepareWaves(flight){
   flight.waves=WAVE_PLANS[flight.id]||waves(['Operación','control','Objetivos adquiridos. Mantenga la aproximación y confirme cada contacto.']);
+  if(flight.m.type==='boss'){
+    const original=flight.waves,cores=flight.targets.filter(t=>t.role==='boss');
+    flight.waves=waves(['Defensas exteriores','control','Ataca los puntos exteriores marcados. Los sistemas internos siguen protegidos.'],['Sistemas internos','control','La primera capa está abierta. Neutraliza los sistemas internos para exponer el núcleo.'],...cores.map(t=>[t.label+' · núcleo','control','Núcleo expuesto. Dispara cuando la compuerta esté abierta; el punto vulnerable es pequeño.']));
+    flight.waves[0].message=original[0].message;
+  }
   flight.waveIndex=0;flight.waveTransition=0;flight.waveEvents=[{index:0,...flight.waves[0]}];
   const required=flight.targets.filter(t=>t.required);
   for(const target of flight.targets){
     if(!target.required){target.wave=0;target.active=true;continue;}
-    target.wave=flight.waves.length===1?0:flight.m.type==='boss'?(target.role==='boss'?1+target.sequence-(flight.m.total-(flight.m.bossCount||1)):0):Math.floor(target.sequence*flight.waves.length/required.length);
+    target.wave=flight.waves.length===1?0:flight.m.type==='boss'?(target.role==='boss'?2+target.sequence-(flight.m.total-(flight.m.bossCount||1)):target.depth):Math.floor(target.sequence*flight.waves.length/required.length);
     target.active=target.wave===0;
   }
 }

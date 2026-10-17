@@ -1,4 +1,12 @@
-# Verificación v0.5.1
+# Verificación v0.6
+
+`npm run check`: 22 módulos y 56 pruebas. Las 52 misiones se completan en las tres dificultades usando movimiento, misiles con azar reproducible, cañón y contramedidas reales. El piloto de pruebas suspende el cañón y espera nuevas pasadas cuando prioriza secundarios. No modifica la vida ni declara victorias artificiales.
+
+Pruebas nuevas: paso y retorno de contactos sin curación ni bajas duplicadas; tipos de blancos por historia; acierto y fallo de misiles; seguimiento de transporte frente a base fija; daño y derrota del aliado independiente; cobertura con consumo y recarga; bloqueo de capas y compuerta del núcleo; controles móviles y pausa desde el archivo.
+
+Navegador local: escolta de Clarkson con aliado visible, cobertura activada y energía; asalto al Sphyrna con dos capas completadas y transición al núcleo (3/4 objetivos). Vista móvil 390×844: ancho 375 y scrollWidth 375, sin desbordamiento; jefe y controles visibles. Sin errores ni advertencias JavaScript. La revisión automatizada confirma completabilidad, no sustituye una evaluación humana del equilibrio en teléfonos físicos.
+
+## Registro de verificación v0.5.1
 
 `npm run check`: 21 módulos y 49 pruebas aprobadas. Se comprueba posición de narraciones entre réplicas, contexto de la escolta y orden de Park, transición orbital, renderizado accesible sin avatar y escape de HTML. Las narraciones se excluyen del recuento de 471 intervenciones habladas y no se registran como personajes. Se conservan las pruebas de rutas, guardado y las 156 combinaciones de misión/dificultad.
 

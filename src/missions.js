@@ -1,17 +1,17 @@
-import { chapterList } from './campaign-data.js?v=0.5.1';
+import { chapterList } from './campaign-data.js?v=0.6.0';
 
 export const TYPE_RULES = {
-  intercept:{label:'Intercepción',verb:'Destruir',hint:'Blancos rojos: interceptar antes de que alcancen el corredor.'},
+  intercept:{label:'Intercepción',verb:'Destruir',hint:'Intercepta los contactos aéreos. Si escapan de pantalla volverán en otra pasada con el daño recibido; el tiempo de misión sigue contando.'},
   ground:{label:'Ataque a instalaciones',verb:'Destruir',hint:'Instalaciones ámbar: neutralizar. Los secundarios azules son opcionales.'},
   naval:{label:'Operación naval',verb:'Destruir',hint:'Prioriza los buques marcados. Los contactos verdes son civiles y no deben recibir fuego.'},
-  train:{label:'Interdicción ferroviaria',verb:'Detener',hint:'El convoy se desplaza lateralmente; neutraliza sus segmentos antes del límite.'},
-  escort:{label:'Protección',verb:'Interceptar',hint:'Protege el contacto verde. Los blancos que cruzan el corredor dañan su integridad.'},
+  train:{label:'Interdicción ferroviaria',verb:'Detener',hint:'El convoy avanza sobre la vía; neutraliza sus segmentos antes del límite. Los vagones intactos vuelven en otra pasada.'},
+  escort:{label:'Protección',verb:'Interceptar',hint:'La unidad verde tiene integridad propia. Vuela delante de ella y activa Cobertura cerca del aliado para interceptar proyectiles; la energía se recarga al desactivarla. Transportes te siguen; bases permanecen fijas.'},
   recon:{label:'Reconocimiento',verb:'Registrar',hint:'Los puntos cian se registran con sensores, sin destruirlos. Investiga las señales azules antes de terminar.'},
   containers:{label:'Contenedores en descenso',verb:'Interceptar',hint:'Neutraliza los contenedores antes de que alcancen el suelo; cada fuga daña la zona protegida.'},
   containment:{label:'Contención ANB',verb:'Neutralizar',hint:'Los pulsos ANB desactivan nubes de nanobots. El campo residual no cuenta como derribo.'},
   tunnel:{label:'Navegación por corredor',verb:'Cruzar',hint:'Alinea tu aeronave con la puerta iluminada y pulsa sobre ella. Los botones de objetivos también permiten alinear el paso.'},
   orbital:{label:'Intercepción orbital',verb:'Desactivar',hint:'Desactiva los satélites. Su blindaje depende de la dificultad; combina cañón automático y misiles.'},
-  boss:{label:'Asalto por fases',verb:'Atacar',hint:'Neutraliza primero los generadores ámbar. Los núcleos magenta se desbloquean por fases y tienen más blindaje.'},
+  boss:{label:'Asalto por capas',verb:'Atacar',hint:'Destruye defensas exteriores, sistemas internos y finalmente los núcleos. El núcleo solo recibe fuego con la compuerta abierta; alinea el cañón o intenta un misil de menor precisión.'},
 };
 
 const secondary = {
@@ -31,10 +31,11 @@ export const missions = Object.fromEntries(chapterList.map(chapter => {
   const hasCivilians = [4,15,20].includes(number);
   return [id,{
     ...chapter, title:`${String(number).padStart(2,'0')} · ${chapter.name.toUpperCase()}`,
-    total, time:type==='boss' || secondary[id] ? 100 : 75,
+    total, time:type==='boss' ? 150 : secondary[id] ? 110 : 90,
+    targetDomain:number===43?'air':null,
     secondary:secondary[id] || null, civilianCount:hasCivilians?1:0,
     supportCount:number===31?2:0, bossCount:bossNames[id]?.length||1, bossNames:bossNames[id]||[], seed:number*7919,
-    rules:TYPE_RULES[type],
+    rules:TYPE_RULES[number===43?'intercept':type],
     adaptationNote:'Objetivos, tiempos y radar simplificados para esta adaptación. La fuente enlazada documenta la misión original.',
   }];
 }));

@@ -1,3 +1,13 @@
+# v0.6 — operaciones según su objetivo
+
+- Terreno en avance y retorno de blancos supervivientes conservando daño e identidad, sin duplicar bajas.
+- Instalaciones, buques, tren, contenedores, satélites y aviones diferenciados; operación 43 con blancos aéreos y flota de 29 con grupos aéreos.
+- Misiles con acierto por dificultad y evasión del blanco; fallo visible, recarga consumida y sensores sin azar.
+- Transportes aliados que siguen al jugador, bases fijas, integridad independiente y cobertura de proximidad con energía limitada. Corregida la ocultación visual del aliado.
+- Todos los jefes con capas exteriores/interiores, núcleos pequeños móviles y compuertas temporizadas; jefes dobles secuenciales.
+- Control táctil del cañón automático y de cobertura. Plazos de 90/110/150 segundos para operaciones regulares, con secundarios y jefes.
+- Rutas, cantidades de objetivos y guardados conservados. 56 pruebas, incluidas 156 combinaciones de misión/dificultad.
+
 # v0.5.1 — continuidad de escenas
 
 - Narración intercalada sin retrato para cambios de lugar, canal, organización y operaciones posteriores.

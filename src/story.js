@@ -1,5 +1,5 @@
-import { missions } from './missions.js?v=0.5.1';
-import { dialogueLine } from './characters.js?v=0.5.1';
+import { missions } from './missions.js?v=0.6.0';
+import { dialogueLine } from './characters.js?v=0.6.0';
 
 export const endingData = {
   upeo:{label:'UPEO · Erich y Rena',mission:'m18',description:'El nombre de Park se apaga en el canal de mando. Rena sigue viva. Erich repite que pueden regresar y, esta vez, nadie le exige que espere una autorización. Nemo conserva su puesto a su lado.'},

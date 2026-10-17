@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from '../src/combat.js';
-import { emitPattern } from '../src/bullet-hell.js';
+import { emitPattern,toggleAutoFire } from '../src/bullet-hell.js';
 import { missions } from '../src/missions.js';
 import { story } from '../src/story.js';
 import { environment } from './helpers/dom.mjs';
@@ -70,7 +70,9 @@ test('El cañón automático destruye blancos por impacto y respeta civiles y bl
 function completeMission(id,difficulty){
   const f=flightFor(id,difficulty);let now=0;
   while(f.status==='active'&&now<f.m.time*1000){
-    const target=f.targets.find(t=>t.alive&&t.group&&!isTargetLocked(f,t))||f.targets.find(t=>t.alive&&t.required&&!isTargetLocked(f,t));
+    const optionalPending=f.targets.some(t=>t.alive&&t.group);
+    if(f.gunEnabled===optionalPending)toggleAutoFire(f);
+    const target=f.targets.find(t=>t.alive&&t.group&&!isTargetLocked(f,t))||(!optionalPending&&f.targets.find(t=>t.alive&&t.required&&!isTargetLocked(f,t)));
     const options=[{}, {KeyA:true},{KeyD:true},{KeyW:true},{KeyS:true},{KeyA:true,KeyW:true},{KeyD:true,KeyW:true},{KeyA:true,KeyS:true},{KeyD:true,KeyS:true}];
     let best=options[0],score=-Infinity;
     for(const keys of options){
@@ -98,7 +100,7 @@ function completeMission(id,difficulty){
   }
   assert.equal(f.status,'victory',`${id} / ${difficulty}: ${f.feedback} (${f.hp}% / ${f.completed}; x=${f.x}, y=${f.y}; ${JSON.stringify(f.targets.filter(t=>t.alive).map(t=>[t.id,t.x,t.y,t.hp]))})`);
   assert.equal(f.completed,f.m.total);
-  if(f.m.secondary)assert.equal(f.objectives[f.m.secondary.id],f.m.secondary.count);
+  if(f.m.secondary)assert.equal(f.objectives[f.m.secondary.id],f.m.secondary.count,`${id} / ${difficulty}: secundarios`);
 }
 test('Las 52 misiones se completan en Fácil, Normal y Experto, incluidos secundarios y jefes',()=>{
   for(const difficulty of Object.keys(DIFFICULTIES))for(const id of Object.keys(missions))completeMission(id,difficulty);
@@ -129,6 +131,6 @@ test('Interfaz bullet hell: preferencia persistente, pausa, contramedidas y arra
   env.get('pause').onclick();const time=env.get('hudTime').textContent;
   env.tick(5000);env.get('bomb').onclick();assert.equal(env.get('hudTime').textContent,time);
   assert.equal(env.get('bomb').textContent,'Contramedida (2)');
-  env.get('pause').onclick();env.tick(100);assert.equal(env.get('hudTime').textContent,'TIEMPO 75s');
+  env.get('pause').onclick();env.tick(100);assert.equal(env.get('hudTime').textContent,`TIEMPO ${missions.m01.time}s`);
   const reopened=environment(env.storage,{battleMode:'bullethell'});assert.equal(reopened.get('difficulty').value,'expert');
 });

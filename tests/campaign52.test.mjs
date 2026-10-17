@@ -179,9 +179,9 @@ test('El archivo muestra 52 expedientes, filtra y pausa sin perder el combate ac
   env.get('missionSearch').value='Zero Gravity';env.get('missionSearch').oninput();
   assert.equal(env.get('archiveList').children.length,1);
   env.get('closeArchive').onclick();env.tick(1000);
-  assert.equal(env.get('hudTime').textContent,'TIEMPO 73s');
+  assert.equal(env.get('hudTime').textContent,`TIEMPO ${missions.m01.time-2}s`);
   env.get('pause').onclick();env.tick(60000);env.get('pause').onclick();env.tick(1000);
-  assert.equal(env.get('hudTime').textContent,'TIEMPO 72s');
+  assert.equal(env.get('hudTime').textContent,`TIEMPO ${missions.m01.time-3}s`);
 });
 
 test('La interfaz completa una campaña japonesa nueva y conserva su final en el perfil',()=>{

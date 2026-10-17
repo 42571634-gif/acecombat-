@@ -1,7 +1,9 @@
-import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.5.1';
-import { prepareWaves,checkNextWave,advanceWaves,isActiveTarget } from './waves.js?v=0.5.1';
-import { moveEnemy } from './enemy-types.js?v=0.5.1';
-export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.5.1';
+import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.6.0';
+import { prepareWaves,checkNextWave,advanceWaves,isActiveTarget } from './waves.js?v=0.6.0';
+import { moveEnemy } from './enemy-types.js?v=0.6.0';
+import { prepareOperation,advanceOperation,missileHitChance,coreOpen } from './operations.js?v=0.6.0';
+export { missileHitChance } from './operations.js?v=0.6.0';
+export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.6.0';
 function seeded(seed) {
   let value=seed>>>0;
   return ()=>{value=(1664525*value+1013904223)>>>0;return value/4294967296;};
@@ -12,7 +14,7 @@ export function createFlight(id,mission,now,random=seeded(mission.seed||1),optio
     objectives:mission.secondary?{[mission.secondary.id]:0}:{},protected:type==='escort'?{x:360,y:305,hp:100}:null,targets:[],feedback:'',elapsed:0};
   const bossCount=mission.bossCount||1;
   for(let i=0;i<mission.total;i++) {
-    const role=type==='boss'?(i>=mission.total-bossCount?'boss':'generator'):type==='recon'?'scan':type==='containment'?'cloud':type==='tunnel'?(i>=mission.total-(mission.supportCount||0)?'support':'gate'):type==='escort'&&mission.number===8?'facility':['ground','naval','train'].includes(type)?'facility':'hostile';
+    const role=type==='boss'?(i>=mission.total-bossCount?'boss':'generator'):type==='recon'?'scan':type==='containment'?'cloud':type==='tunnel'?(i>=mission.total-(mission.supportCount||0)?'support':'gate'):mission.targetDomain==='air'?'hostile':type==='escort'&&mission.number===8?'facility':['ground','naval','train'].includes(type)?'facility':'hostile';
     flight.targets.push({id:'required-'+i,label:role==='gate'?`Paso ${i+1}`:role==='boss'?(mission.bossNames?.[i-(mission.total-bossCount)]||'Núcleo'):role==='support'?`Soporte ${i-(mission.total-mission.supportCount)+1}`:role==='generator'?`Generador ${i+1}`:`Objetivo ${i+1}`,
       role,required:true,sequence:i,x:85+(i%5)*135+random()*18,y:65+Math.floor(i/5)*85+random()*15,
       vx:['facility','support','generator','scan','cloud','gate'].includes(role)?(type==='train'?32:0):(random()-.5)*24,
@@ -24,11 +26,12 @@ export function createFlight(id,mission,now,random=seeded(mission.seed||1),optio
     x:80+(i%5)*135,y:235+Math.floor(i/5)*52,vx:0,vy:0,hp:mission.secondary.hp||1,alive:true,
   });
   for(let i=0;i<(mission.civilianCount||0);i++) flight.targets.push({id:'civilian-'+i,label:'Civil · NO DISPARAR',role:'civilian',required:false,x:615,y:300,vx:-5,vy:0,hp:1,alive:true});
-  if(options.mode==='bullethell'){prepareBulletHell(flight,options.difficulty);prepareWaves(flight);}
+  flight.random=random;
+  if(options.mode==='bullethell'){prepareBulletHell(flight,options.difficulty);prepareOperation(flight);prepareWaves(flight);}
   return flight;
 }
 export function isTargetLocked(flight,target) {
-  if(target.active===false)return true;
+  if(target.active===false||target.inView===false)return true;
   return target.role==='boss' && flight.targets.some(other=>other.alive&&(other.role==='generator'||other.role==='boss'&&other.sequence<target.sequence)) ||
     target.role==='support' && flight.targets.some(other=>other.alive&&other.role==='gate') ||
     target.role==='gate' && flight.targets.some(other=>other.alive&&other.role==='gate'&&other.sequence<target.sequence);
@@ -40,6 +43,7 @@ export function advanceFlight(flight,now,keys={}) {
   if(flight.t<=0){flight.status='defeat';flight.feedback='Se agotó el tiempo de operación.';return;}
   flight.cooldown=Math.max(0,flight.cooldown-dt);
   advanceWaves(flight,dt);
+  if(flight.mode==='bullethell')advanceOperation(flight,dt);
   if(flight.mode==='bullethell')advanceBulletHell(flight,dt,keys,isTargetLocked,damageTarget);
   else {
     if(flight.keyL||keys.ArrowLeft||keys.KeyA)flight.x-=190*dt;
@@ -49,7 +53,7 @@ export function advanceFlight(flight,now,keys={}) {
   if(flight.status!=='active')return;
   for(const target of flight.targets) if(isActiveTarget(target)){
     if(target.enemyType)moveEnemy(target,flight.elapsed);else target.x+=target.vx*dt;
-    target.y+=target.vy*dt;
+    if(flight.mode!=='bullethell')target.y+=target.vy*dt;
     if(target.x<30||target.x>690){target.x=Math.max(30,Math.min(690,target.x));target.vx*=-1;}
     if(target.y>385){
       const damage=flight.m.type==='containers'?35:15;
@@ -65,7 +69,7 @@ export function advanceFlight(flight,now,keys={}) {
   for(const shot of flight.shots)shot.life-=dt;
   for(const effect of flight.effects)effect.life-=dt;
   flight.shots=flight.shots.filter(shot=>shot.life>0);flight.effects=flight.effects.filter(effect=>effect.life>0);
-  if(flight.t<=0||flight.hp<=0){flight.status='defeat';flight.feedback=flight.hp<=0?'La zona o unidad protegida ha perdido su integridad.':'Se agotó el tiempo de operación.';}
+  if(flight.t<=0||flight.hp<=0){flight.status='defeat';flight.feedback=flight.hp<=0?'La aeronave o zona protegida ha perdido su integridad.':'Se agotó el tiempo de operación.';}
 }
 export function fireMissile(flight,x,y){
   if(flight.status!=='active')return false;
@@ -75,10 +79,14 @@ export function fireMissile(flight,x,y){
     .map(target=>({target,distance:Math.hypot(x-target.x,y-target.y)})).sort((a,b)=>a.distance-b.distance)[0];
   if(!nearest||nearest.distance>=32||Math.hypot(nearest.target.x-flight.x,nearest.target.y-(flight.y||365))>500){flight.feedback='Sin contacto válido dentro del alcance.';return false;}
   const target=nearest.target;
+  if(!coreOpen(flight,target)){flight.feedback='Núcleo cerrado · Espera a que se abra la compuerta.';return false;}
   if(target.role==='gate'&&Math.abs(flight.x-target.x)>65){flight.feedback='Alinea la aeronave con el paso antes de cruzarlo.';return false;}
   flight.cooldown=.45;
   if(target.role==='civilian'){flight.hp=0;flight.status='defeat';flight.feedback='Fuego sobre un contacto civil: misión fallida.';return false;}
   flight.shots.push({sx:flight.x,sy:flight.y||365,x:target.x,y:target.y,life:.3});
+  if(flight.mode==='bullethell'&&flight.random()>missileHitChance(flight,target)){
+    flight.shots.at(-1).miss=true;flight.feedback='Misil evadido · El blanco sigue activo. Reintenta o alinea el cañón.';return false;
+  }
   return damageTarget(flight,target,flight.mode==='bullethell'&&!['scan','cloud','gate'].includes(target.role)?3:1);
 }
 export function damageTarget(flight,target,damage=1){

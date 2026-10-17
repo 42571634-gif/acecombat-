@@ -1,11 +1,13 @@
-import { missions } from './missions.js?v=0.5.1';
-import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.5.1';
-import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.5.1';
-import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.5.1';
-import { draw } from './draw.js?v=0.5.1';
-import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.5.1';
-import { ENEMY_TYPES } from './enemy-types.js?v=0.5.1';
-import { isActiveTarget } from './waves.js?v=0.5.1';
+import { missions } from './missions.js?v=0.6.0';
+import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.6.0';
+import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.6.0';
+import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.6.0';
+import { draw } from './draw.js?v=0.6.0';
+import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.6.0';
+import { ENEMY_TYPES } from './enemy-types.js?v=0.6.0';
+import { isActiveTarget } from './waves.js?v=0.6.0';
+import { missileHitChance,coreOpen } from './operations.js?v=0.6.0';
+import { toggleAutoFire } from './bullet-hell.js?v=0.6.0';
 
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export function createApp({document,window,storage,campaignId='jp52',battleMode='bullethell',now=()=>performance.now(),repeat=setInterval,stopRepeat=clearInterval,delay=setTimeout,stopDelay=clearTimeout,requestFrame=window.requestAnimationFrame?.bind(window),cancelFrame=window.cancelAnimationFrame?.bind(window)}){
@@ -108,14 +110,17 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
         targetButtons.set(target.id,button);$('targetActions').appendChild(button);
       }
       if(!button)continue;
-      const title=(target.group?'◇ ':'')+(target.enemyType?ENEMY_TYPES[target.enemyType].name+' · ':'')+target.label+(target.hp>1?` · Blindaje ${target.hp}`:'');
+      const title=(target.group?'◇ ':'')+(target.enemyType?ENEMY_TYPES[target.enemyType].name+' · ':'')+target.label+(target.hp>1?` · Blindaje ${target.hp}`:'')+(flight.mode==='bullethell'?target.inView===false?' · Próxima pasada':!coreOpen(flight,target)?' · Compuerta cerrada':` · Acierto ${Math.round(missileHitChance(flight,target)*100)}%`:'');
       if(button.textContent!==title)button.textContent=title;
-      button.hidden=!isActiveTarget(target);button.disabled=!isActiveTarget(target)||target.role==='civilian'||isTargetLocked(flight,target);
+      button.hidden=!isActiveTarget(target);button.disabled=!isActiveTarget(target)||target.role==='civilian'||isTargetLocked(flight,target)||!coreOpen(flight,target);
     }
   }
   function updateBattleRadio(){
     if(!flight?.waves||!$('radioMessages'))return;
     setText('waveStatus',`FASE ${flight.waveIndex+1}/${flight.waves.length} · ${flight.waves[flight.waveIndex].label}${flight.waveTransition>0?' · En aproximación':''} · ${flight.cooldown>0?'Misil: '+Math.ceil(flight.cooldown*10)/10+' s':'Misil listo'}`);
+    if(flight.protected)setText('escortStatus',`${flight.protected.label}: ${Math.ceil(flight.protected.hp)}% · Cobertura ${Math.floor(flight.coverEnergy)}% · ${flight.protected.mobile?'Te sigue':'Posición fija'}`);
+    if($('cover')){$('cover').textContent=flight.coverEscort?'Desactivar cobertura':'Activar cobertura';$('cover').setAttribute?.('aria-pressed',String(flight.coverEscort));}
+    if($('gun')){$('gun').textContent=flight.gunEnabled?'Cañón: automático':'Cañón: en espera';$('gun').setAttribute?.('aria-pressed',String(flight.gunEnabled));}
     while(radioCount<flight.waveEvents.length){
       const event=flight.waveEvents[radioCount++],entry=document.createElement('div');
       entry.innerHTML=messageMarkup(event.message);$('radioMessages').appendChild(entry);bindPortraits(entry);
@@ -148,8 +153,10 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
     if(battleMode==='bullethell'){
       $('combatHint').textContent=`${DIFFICULTIES[difficulty].label} · Disparo automático · Arrastra para esquivar · Toca un blanco para misil/sensor · Shift: precisión · X: contramedida`;
       const controls=document.createElement('div');controls.className='controls';
-      controls.innerHTML='<button id="up">▲ SUBIR</button><button id="bomb">Contramedida (3)</button><button id="down">BAJAR ▼</button>';
+      controls.innerHTML='<button id="up">▲ SUBIR</button><button id="bomb">Contramedida (3)</button><button id="down">BAJAR ▼</button><button id="gun" aria-pressed="true">Cañón: automático</button>';
       $('main').insertBefore(controls,$('combatHint'));
+      $('gun').onclick=()=>{if(flight!==currentFlight||isPaused())return;step();toggleAutoFire(flight);updateBattleRadio();};
+      if(flight.protected){const escort=document.createElement('div');escort.innerHTML='<p class="phase-status" id="escortStatus" role="status"></p><button id="cover" aria-pressed="false">Activar cobertura</button>';$('main').insertBefore(escort,$('combatHint'));$('cover').onclick=()=>{if(flight!==currentFlight||isPaused())return;step();flight.coverEscort=!flight.coverEscort;updateBattleRadio();};}
       const radio=document.createElement('div');
       radio.innerHTML='<p class="phase-status" id="waveStatus"></p><div class="enemy-key" aria-label="Tipos de enemigo"><span>▲ Dardo · ágil / dirigido</span><span>◀▶ Manta · blindado / cortina</span><span>⬡ Lince · dron / anillos</span></div><section class="battle-radio" aria-label="Radio de combate"><h3>Radio de combate</h3><div id="radioMessages" role="log" aria-live="polite" aria-relevant="additions"></div></section>';
       $('main').insertBefore(radio,$('combatHint'));
@@ -190,12 +197,13 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
     setText('hudLife',`INTEGRIDAD ${Math.round(currentFlight.hp)}%`);setText('hudTime',`TIEMPO ${Math.ceil(currentFlight.t)}s`);
     if(currentFlight.m.secondary)setText('secondaryProgress',`◇ ${currentFlight.m.secondary.label}: ${currentFlight.objectives[currentFlight.m.secondary.id]}/${currentFlight.m.secondary.count} · Opcional: cambia la ruta`);
     draw(currentFlight,$('radar'));updateTargets();updateBattleRadio();
+    if(currentFlight.feedback)setText('combatHint',currentFlight.feedback);
     if($('bomb')){$('bomb').textContent=`Contramedida (${currentFlight.bombs})`;$('bomb').disabled=currentFlight.bombs<=0||currentFlight.status!=='active';}
     if(currentFlight.status!=='active'){
       currentFlight.settled=true;stopTicker();
-      for(const id of ['pause','left','right','up','down'])if($(id))$(id).disabled=true;
+      for(const id of ['pause','left','right','up','down','cover','gun'])if($(id))$(id).disabled=true;
       if($('difficulty'))$('difficulty').disabled=false;
-      campaignState=resolveMission(campaignState,{status:currentFlight.status,kills:currentFlight.kills,integrity:currentFlight.hp,timeRemaining:currentFlight.t,
+      campaignState=resolveMission(campaignState,{status:currentFlight.status,kills:currentFlight.kills,integrity:Math.min(currentFlight.hp,currentFlight.protected?.hp??100),timeRemaining:currentFlight.t,
         ...(campaignState.campaignId==='jp52'?{completed:currentFlight.completed,objectives:currentFlight.objectives}:{})});
       if(currentFlight.status==='victory'&&campaignState.campaignId==='jp52'&&!profile.missions.includes(currentFlight.id)){profile.missions.push(currentFlight.id);saveProfile(storage,profile);}
       persist();clearKeys();

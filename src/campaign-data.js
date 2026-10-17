@@ -1,7 +1,7 @@
-import { expandedDialogue } from './dialogue-expansion.js?v=0.5.1';
-import { reportDialogue } from './report-dialogue.js?v=0.5.1';
-import { dialogueLine } from './characters.js?v=0.5.1';
-import { situateScene,narration } from './scene-narration.js?v=0.5.1';
+import { expandedDialogue } from './dialogue-expansion.js?v=0.6.0';
+import { reportDialogue } from './report-dialogue.js?v=0.6.0';
+import { dialogueLine } from './characters.js?v=0.6.0';
+import { situateScene,narration } from './scene-narration.js?v=0.6.0';
 // Adaptaciones originales en español. Referencias y límites en docs/RESEARCH.md.
 // [número, título, lugar, mecánica, objetivo, contexto, interlocutor, diálogo recreado, informe]
 const chapters = [

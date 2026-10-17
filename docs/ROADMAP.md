@@ -53,5 +53,13 @@ Implementado en v0.2: 52 misiones jugables en el grafo, cinco finales y fuentes 
 - [x] Dardo, Manta y Lince con siluetas, movimientos y patrones diferentes.
 - [x] Pruebas de regresión y revisión móvil sin desbordamiento.
 
+## Ampliación v0.6 completada
+
+- [x] Escenario en avance, pasadas y conservación de daño de los blancos.
+- [x] Acierto probabilístico de misiles y control de cañón.
+- [x] Escoltas móviles, bases fijas, daño independiente y cobertura táctil.
+- [x] Defensas exteriores/interiores y núcleos con compuerta en todos los jefes.
+- [x] Blancos específicos y matriz del diseño de las 52 misiones.
+
 ## Primer prompt sugerido
 "Lee AGENTS.md, README.md y docs/ROADMAP.md. Implementa exclusivamente el Hito 1. Mantén la demo jugable, trabaja incrementalmente, añade pruebas de navegación y de guardado, ejecuta npm run check, y documenta los cambios. No inventes el contenido canónico de Ace Combat 3."

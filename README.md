@@ -1,4 +1,8 @@
-# Electrosphere 2040 · 52 misiones · v0.5.1
+# Electrosphere 2040 · 52 misiones · v0.6
+
+La v0.6 adapta el combate al objetivo de cada capítulo: escenario en avance, blancos aéreos/terrestres/navales diferenciados, pasadas de contactos supervivientes, misiles con probabilidad de fallo, escoltas con integridad propia y jefes con defensas exteriores, sistemas internos y núcleos de apertura intermitente. Las 52 misiones conservan sus objetivos y bifurcaciones; [diseño por misión](docs/MISSION_DESIGN.md).
+
+**Controles nuevos:** Cobertura protege al aliado cercano consumiendo energía; desactívala para recargar. Los transportes siguen tu posición con retraso; las bases permanecen fijas. El botón Cañón permite suspender el fuego automático para priorizar secundarios. La lista de blancos muestra el porcentaje de acierto del misil y avisa si un objetivo volverá en otra pasada. El núcleo solo puede atacarse con la compuerta abierta. El tiempo límite sigue contando aunque dejes escapar blancos.
 
 La v0.5.1 incorpora narración intercalada en los cambios de escenario, organización y canal. Los bloques sin retrato sitúan a los personajes y distinguen los saltos temporales del diálogo continuo. La escolta de Clarkson aclara quién viaja en el transporte y quién vuela fuera; la orden de Park se sitúa después de la intercepción. No se fijan horas ni duraciones que las fuentes no indiquen.
 

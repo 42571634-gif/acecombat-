@@ -1,4 +1,5 @@
-import { assignEnemyTypes,ENEMY_TYPES } from './enemy-types.js?v=0.5.1';
+import { assignEnemyTypes,ENEMY_TYPES } from './enemy-types.js?v=0.6.0';
+import { coreOpen,hitProtected } from './operations.js?v=0.6.0';
 // Patrones originales. Coordenadas lógicas independientes del tamaño de pantalla.
 export const DIFFICULTIES = Object.freeze({
   easy: {label:'Fácil', interval:1.5, speed:85, fan:3, damage:10, radius:4, invulnerability:1.6, armor:0.8},
@@ -10,7 +11,7 @@ export function prepareBulletHell(flight,difficulty='normal') {
   flight.mode='bullethell';flight.difficulty=Object.hasOwn(DIFFICULTIES,difficulty)?difficulty:'normal';
   flight.config=DIFFICULTIES[flight.difficulty];flight.y=365;flight.bullets=[];flight.playerBullets=[];
   flight.patternClock=0;flight.pattern=0;flight.gunClock=0;flight.invulnerable=0;flight.bombs=3;flight.focus=false;
-  flight.keyU=false;flight.keyD=false;flight.drag=null;flight.emitterIndex=0;
+  flight.keyU=false;flight.keyD=false;flight.drag=null;flight.emitterIndex=0;flight.gunEnabled=true;
   for(const target of flight.targets){
     target.baseHp=target.hp;
     if(!isSensor(target)&&target.role!=='civilian')target.hp=Math.ceil((target.role==='boss'?30:target.hp*7)*flight.config.armor);
@@ -25,7 +26,8 @@ export function emitPattern(flight,isLocked) {
   const candidates=flight.targets.filter(t=>t.alive&&t.role!=='civilian'&&!isLocked(flight,t));
   if(!candidates.length)return;
   const source=candidates[flight.emitterIndex++%candidates.length],c=flight.config;
-  const aimed=Math.atan2(flight.y-source.y,flight.x-source.x);
+  const aim=flight.protected&&flight.pattern%2===0?flight.protected:flight;
+  const aimed=Math.atan2(aim.y-source.y,aim.x-source.x);
   const phase=flight.pattern++%3;
   const archetype=ENEMY_TYPES[source.enemyType];
   const kind=archetype?{aimed:0,curtain:1,ring:2}[archetype.pattern]:phase;
@@ -49,7 +51,7 @@ export function advanceBulletHell(flight,dt,keys,isLocked,damageTarget) {
   while(remaining>1e-8&&flight.status==='active'){
     const step=Math.min(1/120,remaining);remaining-=step;
     flight.invulnerable=Math.max(0,flight.invulnerable-step);
-    flight.focus=Boolean(keys.ShiftLeft||keys.ShiftRight);
+    flight.focus=Boolean(keys.ShiftLeft||keys.ShiftRight||flight.coverEscort);
     const speed=flight.focus?100:240;
     let dx=Number(Boolean(flight.keyR||keys.ArrowRight||keys.KeyD))-Number(Boolean(flight.keyL||keys.ArrowLeft||keys.KeyA));
     let dy=Number(Boolean(flight.keyD||keys.ArrowDown||keys.KeyS))-Number(Boolean(flight.keyU||keys.ArrowUp||keys.KeyW));
@@ -59,13 +61,14 @@ export function advanceBulletHell(flight,dt,keys,isLocked,damageTarget) {
     flight.patternClock+=step;flight.gunClock-=step;
     if(flight.patternClock>=c.interval){flight.patternClock-=c.interval;emitPattern(flight,isLocked);}
     if(flight.waveTransition>0)flight.gunClock=.1;
-    if(flight.gunClock<=0){
+    if(!flight.gunEnabled)flight.gunClock=.1;
+    if(flight.gunClock<=0&&flight.gunEnabled){
       flight.gunClock+=.1;
       for(const offset of [-7,7])flight.playerBullets.push({x:flight.x+offset,y:flight.y-15});
     }
     for(const bullet of flight.playerBullets){
       const oldY=bullet.y;bullet.y-=520*step;
-      const target=flight.targets.find(t=>t.alive&&!isSensor(t)&&t.role!=='civilian'&&!isLocked(flight,t)&&hits(bullet.x,oldY,bullet.x,bullet.y,t.x,t.y,18));
+      const target=flight.targets.find(t=>t.alive&&!isSensor(t)&&t.role!=='civilian'&&!isLocked(flight,t)&&coreOpen(flight,t)&&hits(bullet.x,oldY,bullet.x,bullet.y,t.x,t.y,t.hitRadius||18));
       if(target){bullet.y=-50;damageTarget(flight,target,1);if(flight.status!=='active')break;}
     }
     flight.playerBullets=flight.playerBullets.filter(b=>b.y>-20);
@@ -76,11 +79,12 @@ export function advanceBulletHell(flight,dt,keys,isLocked,damageTarget) {
         flight.hp=Math.max(0,flight.hp-c.damage);flight.invulnerable=c.invulnerability;bullet.y=500;
         flight.feedback='Impacto · Aprovecha la invulnerabilidad para reposicionarte.';
         if(flight.hp<=0){flight.status='defeat';flight.feedback='Aeronave derribada por el fuego enemigo.';break;}
-      }
+      }else if(hitProtected(flight,bullet,hits,ax,ay)&&flight.status!=='active')break;
     }
     flight.bullets=flight.bullets.filter(b=>b.x>-30&&b.x<750&&b.y>-30&&b.y<450);
   }
 }
+export function toggleAutoFire(flight){if(flight.mode!=='bullethell'||flight.status!=='active')return false;flight.gunEnabled=!flight.gunEnabled;return flight.gunEnabled;}
 export function useBomb(flight) {
   if(flight.mode!=='bullethell'||flight.status!=='active'||flight.bombs<=0)return false;
   flight.bombs--;flight.bullets=[];flight.invulnerable=Math.max(flight.invulnerable,1);
