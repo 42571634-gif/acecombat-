@@ -1,8 +1,9 @@
-import { missions } from './missions.js?v=0.3.0';
-import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.3.0';
-import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.3.0';
-import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.3.0';
-import { draw } from './draw.js?v=0.3.0';
+import { missions } from './missions.js?v=0.4.0';
+import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.4.0';
+import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.4.0';
+import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.4.0';
+import { draw } from './draw.js?v=0.4.0';
+import { characters } from './characters.js?v=0.4.0';
 
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export function createApp({document,window,storage,campaignId='jp52',battleMode='bullethell',now=()=>performance.now(),repeat=setInterval,stopRepeat=clearInterval,delay=setTimeout,stopDelay=clearTimeout}){
@@ -74,7 +75,7 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
     const dialogue=node.dialogue||[{speaker:node.speaker[0],text:node.speaker[1]}];
     const result=campaignState.results.at(-1);
     const resultMarkup=campaignState.node.endsWith('Report')&&result?`<div class="debrief">${result.completed??result.kills} objetivos principales · ${Math.round(result.integrity)}% integridad · ${Math.ceil(result.timeRemaining)}s restantes${Object.entries(result.objectives||{}).map(([id,count])=>` · ${escapeHtml(id)}: ${count}`).join('')}</div>`:'';
-    $('main').innerHTML=`<div class="tag">${escapeHtml(node.tag)}</div><h2>${escapeHtml(node.title)}</h2><p>${escapeHtml(node.body)}</p>${resultMarkup}${dialogue.map(message=>`<div class="speaker"><div class="avatar">◈</div><div><b>${escapeHtml(message.speaker)}</b><p>${escapeHtml(message.text)}</p></div></div>`).join('')}${sourceMarkup(node)}<div class="buttons" id="actions"></div>`;
+    $('main').innerHTML=`<div class="tag">${escapeHtml(node.tag)}</div><h2>${escapeHtml(node.title)}</h2><p>${escapeHtml(node.body)}</p>${resultMarkup}${dialogue.map(message=>`<div class="speaker" data-character="${escapeHtml(message.character||'legacy')}"><div class="avatar" aria-hidden="true">${escapeHtml(characters[message.character]?.initials||'◈')}</div><div><b>${escapeHtml(message.speaker)}${message.recorded?' · grabación':''}</b>${message.direction?`<p class="direction">${escapeHtml(message.direction)}</p>`:''}<p>${escapeHtml(message.text)}</p></div></div>`).join('')}${sourceMarkup(node)}<div class="buttons" id="actions"></div>`;
     for(const option of node.options){
       if(campaignState.simulatorMission&&option.next!==campaignState.simulatorMission+'Combat')continue;
       const button=document.createElement('button');button.className='choice'+(node.options.length===1?' primary':'');button.textContent='› '+option.text;

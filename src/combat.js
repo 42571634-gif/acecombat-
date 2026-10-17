@@ -1,5 +1,5 @@
-import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.3.0';
-export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.3.0';
+import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.4.0';
+export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.4.0';
 function seeded(seed) {
   let value=seed>>>0;
   return ()=>{value=(1664525*value+1013904223)>>>0;return value/4294967296;};

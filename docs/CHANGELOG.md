@@ -1,3 +1,12 @@
+# v0.4 — voces y guion dramático
+
+- Reescritas las 471 intervenciones de introducción, briefings e informes con rivalidad, afecto, subtexto, contradicciones y voces diferenciadas.
+- Investigados perfiles oficiales de Namco y escenas comunitarias clave; añadidas biblia de personajes y fuentes, separando hechos de interpretación creativa.
+- Sustituidos los monólogos de Nemo por interlocutores; Nemo permanece silencioso. Control y Registro automático tienen funciones delimitadas.
+- Incorporadas iniciales, colores por interlocutor, acotaciones y rótulo de grabación. No se hace hablar en presente a los personajes muertos.
+- Añadidos controles de continuidad por ruta y soporte visual probado. Conservados seis turnos previos y tres posteriores en las 52 misiones.
+- Combate, dificultades, grafo de decisiones y formato de guardado conservados. Recursos versionados como 0.4.0.
+
 # v0.3 — bullet hell y conversaciones ampliadas
 
 - Combate por defecto con cañón automático, proyectiles enemigos por abanicos dirigidos, cortinas y anillos, movimiento en dos ejes y hitbox visible.

@@ -1,5 +1,11 @@
 # Investigación de la campaña japonesa
 
+## Dirección de personajes v0.4
+
+Se contrastaron los perfiles oficiales de Namco: [UPEO](https://www.bandainamcoent.co.jp/cs/list/acecombat3/page03.html), [Clarkson/Park](https://www.bandainamcoent.co.jp/cs/list/acecombat3/page04.html) y [Dision/Keith/Cynthia](https://www.bandainamcoent.co.jp/cs/list/acecombat3/page05.html). Las escenas 04, 09, 28, 36, 43, 44, 47, 48, 49, 50 y 52 se consultaron como puntos de continuidad en el archivo japonés. La noticia sobre Fiona en la rama de Cynthia está documentada en 44; no se introduce en el arco alternativo. Las páginas individuales de wiki.gg no pudieron abrirse directamente y no se usan como fundamento principal de personalidad.
+
+Los perfiles fijan rasgos generales. Deseos, miedos, lenguaje, subtexto y todas las frases nuevas son interpretación creativa identificada en [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md). No se copiaron parlamentos ni se presentan las escenas recreadas como traducción. La v0.4 conserva 471 intervenciones y sustituye los monólogos explicativos de Nemo por voces del elenco; las acciones y acotaciones son recursos dramáticos originales. Las grabaciones posteriores a muertes se rotulan. Los sucesos, destinos y condiciones del grafo no se alteran.
+
 Consulta: 17 de octubre de 2026.
 
 ## Diálogos por capítulos encontrados

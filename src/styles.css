@@ -20,6 +20,7 @@ h3{margin:0 0 8px}
 .avatar{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--edge);font-size:21px;border-radius:6px;background:#163041;flex-shrink:0}
 .speaker b{display:block;color:var(--a)}
 .speaker p{margin:4px 0 0;font-size:14px}
+.speaker{border-left-color:var(--voice,var(--a))}.speaker b{color:var(--voice,var(--a))}.speaker .direction{font-size:12px;font-style:italic;color:#b7bac8;margin:6px 0 9px}.speaker[data-character=fiona]{--voice:#ffbd85}.speaker[data-character=erich]{--voice:#a5cbff}.speaker[data-character=rena]{--voice:#d6c3ff}.speaker[data-character=keith]{--voice:#ffd773}.speaker[data-character=dision]{--voice:#fa9ca7}.speaker[data-character=cynthia]{--voice:#92e7ff}.speaker[data-character=park]{--voice:#dbb0a0}.speaker[data-character=simon]{--voice:#b7e79b}.speaker[data-character=archive]{--voice:#a1b2bf;font-family:monospace}.speaker>div:last-child{min-width:0}
 .buttons{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
 button{font:inherit;border:1px solid #3e7785;background:#163a4c;color:#efffff;border-radius:7px;padding:11px 14px;cursor:pointer;text-align:left}
 button:hover{background:#24566a}

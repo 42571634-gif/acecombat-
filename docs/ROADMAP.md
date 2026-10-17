@@ -16,6 +16,8 @@ Implementado: grafo declarativo, motor independiente, historial reproducible, gu
 
 ## Ampliación v0.2 — 52 misiones
 
+Ampliación v0.4: [x] Perfiles investigados en fuentes oficiales, biblia de personajes, 471 intervenciones reescritas con voz propia, escenas con subtexto, acotaciones y continuidad de interlocutores. Ver CHARACTER_BIBLE.md.
+
 - [x] Briefing, conversación adaptada, combate e informe para cada misión.
 - [x] Bifurcaciones por decisiones y objetivos secundarios.
 - [x] Archivo con búsqueda y simulador con guardado independiente.

@@ -1,5 +1,6 @@
-import { expandedDialogue } from './dialogue-expansion.js?v=0.3.0';
-import { reportDialogue } from './report-dialogue.js?v=0.3.0';
+import { expandedDialogue } from './dialogue-expansion.js?v=0.4.0';
+import { reportDialogue } from './report-dialogue.js?v=0.4.0';
+import { dialogueLine } from './characters.js?v=0.4.0';
 // Adaptaciones originales en español. Referencias y límites en docs/RESEARCH.md.
 // [número, título, lugar, mecánica, objetivo, contexto, interlocutor, diálogo recreado, informe]
 const chapters = [
@@ -61,8 +62,8 @@ const arcFor = n => n<=4 ? 'UPEO · Inicio' : n<=9 ? 'UPEO · Ruptura' : n<=18 ?
 const factionFor = n => n<=18 ? 'UPEO' : n<=33 ? 'GR' : n<=38 ? 'OUROBOROS' : n<=43 ? 'NEUCOM' : n===44 ? 'OUROBOROS' : 'NEUCOM';
 export const chapterList = chapters.map(([number,name,place,type,goal,briefing,speaker,line,report]) => ({
   id: 'm'+String(number).padStart(2,'0'), number, name, place, type, goal, briefing,
-  dialogue: [{speaker,text:line},{speaker:'Nemo · registro táctico',text:goal},...expandedDialogue[number-1].map((text,index)=>({speaker:index%2?'Nemo · registro táctico':speaker,text}))], report,
-  reportDialogue: [...reportDialogue[number-1].map((text,index)=>({speaker:index||[32,37,38].includes(number)?'Nemo · registro de vuelo':speaker,text})),{speaker:'Nemo · registro de vuelo',text:'Resultado incorporado al historial. La ruta disponible se calcula con las decisiones y objetivos registrados.'}],
+  dialogue: expandedDialogue[number-1].map(dialogueLine), report,
+  reportDialogue: reportDialogue[number-1].map(dialogueLine),
   faction:factionFor(number), arc:arcFor(number),
   source:{url:`https://w.atwiki.jp/acacac/pages/${number+10}.html`,title:`AC3 台詞集 · Mission ${number}`,accessed:'2026-10-17'},
   confidence:'community-transcript', adaptation:true,

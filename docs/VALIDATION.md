@@ -1,4 +1,12 @@
-# Verificación v0.3
+# Verificación v0.4
+
+`npm run check`: **17 módulos con sintaxis válida y 40 pruebas aprobadas**. Además de las regresiones de combate, grafo, guardado y 156 combinaciones de misión/dificultad, se validan las 471 intervenciones con personajes registrados, la ausencia de voz inventada para Nemo, apariciones por ruta, grabaciones de Keith/Dision tras sus muertes y presentación de iniciales/acotaciones. Se mantiene la cantidad de intervenciones; la revisión elimina mínimos artificiales de caracteres para permitir réplicas cortas y silencios.
+
+Verificación en navegador real: nueva introducción, selección de Utopian Dreams desde el archivo, seis intervenciones entre las hermanas con identidad visual y acotación. Ancho móvil solicitado 390 px: clientWidth 375 y scrollWidth 375, sin desbordamiento. Sin errores ni advertencias JavaScript en la revisión. El combate no cambia en esta entrega.
+
+La continuidad automatizada verifica presencias y estructura; la coherencia emocional es una decisión editorial revisada contra los perfiles oficiales y las escenas de las bifurcaciones. Ver CHARACTER_BIBLE.md para fuentes y límites de interpretación.
+
+## Registro de verificación v0.3
 
 `npm run check`: **14 módulos con sintaxis válida y 37 pruebas aprobadas**. El piloto automático de pruebas completa las 52 misiones en las tres dificultades (156 combinaciones), usando movimiento, esquiva prevista, disparos y contramedidas reales; no cambia vida ni declara victorias artificiales. La ayuda de alineación de túneles coincide con la lista accesible de la interfaz. Se prueban secundarios, generadores y jefes secuenciales, colisión, invulnerabilidad, límite de contramedidas, disparo automático y protección de civiles, controles y preferencia persistente.
 

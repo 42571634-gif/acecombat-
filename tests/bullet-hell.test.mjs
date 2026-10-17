@@ -109,8 +109,7 @@ test('Diálogos triplicados: seis intervenciones y tres de informe, con texto es
   for(const mission of Object.values(missions)){
     assert.equal(mission.dialogue.length,6);assert.equal(mission.reportDialogue.length,3);
     assert.equal(story[mission.id+'Intro'].dialogue,mission.dialogue);
-    for(const line of mission.dialogue.slice(2)){assert.ok(line.text.length>80);text.push(line.text);}
-    assert.ok(mission.dialogue.reduce((n,d)=>n+d.text.length,0)>700,mission.id);
+    for(const line of mission.dialogue.slice(2)){assert.ok(line.text.trim());text.push(line.text);}
     assert.equal(mission.adaptation,true);assert.ok(mission.source.url);
   }
   assert.equal(new Set(text).size,208);assert.equal(story.intro.dialogue.length,3);

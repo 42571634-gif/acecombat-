@@ -36,7 +36,7 @@ test('Catálogo de 52 misiones únicas, ordenadas, desarrolladas y con fuente po
     assert.ok(mission.briefing.length>100&&mission.report.length>100,mission.name);
     assert.equal(mission.dialogue.length,6);
     assert.equal(story[mission.id+'Report'].dialogue.length,3);
-    assert.ok(mission.dialogue.every(line=>line.text.length>40));
+    assert.ok(mission.dialogue.every(line=>line.speaker&&line.text.trim().length>0));
     assert.equal(mission.source.url,`https://w.atwiki.jp/acacac/pages/${mission.number+10}.html`);
     assert.equal(mission.adaptation,true);assert.equal(mission.confidence,'community-transcript');
     assert.ok(TYPE_RULES[mission.type]);

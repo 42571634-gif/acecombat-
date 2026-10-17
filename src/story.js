@@ -1,11 +1,12 @@
-import { missions } from './missions.js?v=0.3.0';
+import { missions } from './missions.js?v=0.4.0';
+import { dialogueLine } from './characters.js?v=0.4.0';
 
 export const endingData = {
-  upeo:{label:'UPEO · Erich y Rena',mission:'m18',description:'Park ha sido derrotado y Rena sobrevive. Nemo y Erich terminan el recorrido que comenzó intentando mantener la paz desde SARF.'},
-  general:{label:'General Resource · Keith',mission:'m33',description:'La derrota de Dision cuesta la vida de Keith. Tras los Geopelia, General Resource proclama su victoria, pero el recorrido de Nemo conserva una última anomalía.'},
-  dision:{label:'Ouroboros · Dision',mission:'m38',description:'El duelo en la Electrosphere elimina la presencia digital de Dision. Las identidades que parecían sostener esta revolución se deshacen con su derrota.'},
-  cynthia:{label:'Ouroboros · Cynthia',mission:'m47',description:'Cynthia rompe con Ouroboros y ayuda a terminar su proyecto. Los generadores y el Night Raven dejan de sostener una revolución que había convertido a las personas en instrumentos.'},
-  fiona:{label:'Neucom · Fiona',mission:'m52',description:'Fiona y Nemo vencen al Night Raven y a Dision con apoyo técnico de Simon. La resolución de la guerra no elimina las pérdidas ni las preguntas que la acompañan.'},
+  upeo:{label:'UPEO · Erich y Rena',mission:'m18',description:'El nombre de Park se apaga en el canal de mando. Rena sigue viva. Erich repite que pueden regresar y, esta vez, nadie le exige que espere una autorización. Nemo conserva su puesto a su lado.'},
+  general:{label:'General Resource · Keith',mission:'m33',description:'Los Geopelia desaparecen del radar. General Resource ya tiene una victoria que anunciar. En la formación de regreso sigue faltando un avión; ninguna felicitación ocupa el canal de Keith.'},
+  dision:{label:'Ouroboros · Dision',mission:'m38',description:'La presencia digital de Dision se borra. Su última llamada ha perdido al interlocutor que la inició. Nemo permanece donde la voz que prometía otro mundo ya no puede pedirle que la siga.'},
+  cynthia:{label:'Ouroboros · Cynthia',mission:'m47',description:'El Night Raven cae. Cynthia ya no habla como si el futuro estuviera esperándola para darle la razón. Simon conserva motivos para quererla de regreso. Nemo guarda la última mirada que ella le ha dirigido antes de cerrar el enlace.'},
+  fiona:{label:'Neucom · Fiona',mission:'m52',description:'El Night Raven y Dision quedan atrás. Simon confirma el resultado; Fiona pide volver. Durante un instante, el canal ya no sirve para perseguir a nadie. Nemo sigue en su ala mientras termina la última llamada.'},
 };
 
 export const routeEdges = {
@@ -25,10 +26,10 @@ const performanceOptions = (mission,id,count,yes,no,yesLabel,noLabel) => [
 ];
 
 export const story = {
-  intro:{kind:'dialogue',tag:'Campaña japonesa · 52 misiones entre rutas',title:'Una guerra que cambia con tus decisiones',
-    body:'Nemo entra en SARF mientras UPEO intenta contener la guerra entre General Resource y Neucom. La campaña conserva las 52 misiones repartidas entre rutas y cinco finales. Los combates y conversaciones son adaptaciones originales en español.',
-    speaker:['Terminal de Nemo','Cada misión guarda sus fuentes. Algunas bifurcaciones dependen de tu respuesta; otras, de objetivos secundarios.'],
-    dialogue:[{speaker:'Terminal de Nemo',text:'Cada misión guarda sus fuentes. Algunas bifurcaciones dependen de tu respuesta; otras, de objetivos secundarios.'},{speaker:'Archivo de campaña',text:'UPEO intenta contener un conflicto que las corporaciones describen según sus propios intereses. Nemo comienza en SARF; los compañeros de cada vuelo también tendrán algo que perder cuando las órdenes cambien.'},{speaker:'Terminal de Nemo',text:'Conserva los informes y escucha antes de elegir. Una campaña recorre una parte de las 52 misiones; volver a empezar permite conocer otras decisiones y otros finales sin borrar el archivo personal.'}],
+  intro:{kind:'dialogue',tag:'Campaña japonesa · 52 misiones entre rutas',title:'Un puesto en la formación',
+    body:'Expo City, 2040. En la terminal de SARF se abre un canal nuevo: NEMO. Fiona se acerca a la cámara. Erich comprueba que está transmitiendo antes de buscar algo que decir. Fuera, la alarma de despegue no espera a las presentaciones.',
+    speaker:['Erich Jager','¿Se recibe? Soy Erich. Era para asegurarme de que... bienvenido.'],
+    dialogue:[['erich','¿Se recibe? Soy Erich. Supongo que ya lo pone ahí. Era para asegurarme de que... bienvenido.'],['fiona','No le hagas caso: ha ensayado una versión mucho peor. Soy Fiona. Si vuelas bien, podemos llevarnos estupendamente.','Le aparta de la cámara sin echarlo del canal.'],['control','SARF, alerta sobre Expo City. Presentaciones durante el regreso.']].map(dialogueLine),
     options:[option('choice-1','Comenzar con SARF','m01Intro')],adaptation:true,confidence:'community-transcript',source:{url:'https://w.atwiki.jp/acacac/pages/4.html',title:'Índice japonés de transcripciones'}},
 };
 for (const mission of Object.values(missions)) {
@@ -57,7 +58,7 @@ for (const mission of Object.values(missions)) {
   if(ending) options=[option('choice-1','Concluir esta ruta','ending-'+ending[0])];
   story[id+'Report']={kind:'dialogue',tag:'Informe de misión · '+name,title:'Consecuencias de la operación',body:mission.report,
     dialogue:mission.reportDialogue,
-    speaker:['Nemo · registro de vuelo','Resultado incorporado al historial. La ruta disponible se calcula con las decisiones y objetivos registrados.'],options,...meta};
+    speaker:[mission.reportDialogue[0].speaker,mission.reportDialogue[0].text],options,...meta};
 }
 for(const [id,ending] of Object.entries(endingData)) story['ending-'+id]={kind:'ending',...ending,
   source:missions[ending.mission].source,confidence:'community-transcript',adaptation:true};

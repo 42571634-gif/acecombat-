@@ -1,6 +1,8 @@
-# Electrosphere 2040 · 52 misiones · v0.3
+# Electrosphere 2040 · 52 misiones · v0.4
 
 Adaptación fan no oficial en español de la campaña japonesa de Ace Combat 3. Incluye **52 misiones distribuidas entre rutas y cinco finales**, con briefing, conversación recreada, objetivo jugable e informe para cada misión. No es una reproducción íntegra del guion ni del simulador de vuelo original.
+
+La v0.4 reescribe las 471 intervenciones como escenas con voces diferenciadas: Fiona competitiva y afectuosa, Erich inseguro que aprende a decidir, Rena reservada, Keith orgulloso y leal, Cynthia brillante y arrogante, Dision seductor y autoritario, Simon clínico. La [biblia de personajes](docs/CHARACTER_BIBLE.md) distingue los perfiles oficiales de las decisiones creativas. Incluye acotaciones, intercambio entre compañeros y grabaciones identificadas; Nemo conserva su silencio. No cambian rutas, guardados ni bullet hell.
 
 Jugar en GitHub Pages: https://42571634-gif.github.io/acecombat-/ (requiere que Pages esté activado sobre `main` / raíz).
 

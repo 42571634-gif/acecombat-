@@ -1,4 +1,4 @@
-import { isTargetLocked } from './combat.js?v=0.3.0';
+import { isTargetLocked } from './combat.js?v=0.4.0';
 export function draw(flight,canvas){
   if(!flight||!canvas)return;
   const ctx=canvas.getContext('2d');

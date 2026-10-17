@@ -1,5 +1,7 @@
 # Personajes, facciones y orden de campaña
 
+La dirección de voz, deseos, miedos, conflictos y evolución por rutas está desarrollada en [CHARACTER_BIBLE.md](CHARACTER_BIBLE.md). Distingue perfiles oficiales comprobados en web de decisiones creativas. La v0.4 reemplaza las conversaciones explicativas por escenas entre personajes y mantiene a Nemo sin voz.
+
 Este registro acompaña las adaptaciones de capítulo. Describe relaciones presentes en las transcripciones enlazadas, no diálogos literales ni biografías exhaustivas.
 
 | Personaje | Papel en esta campaña | Referencias |
