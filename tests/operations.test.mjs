@@ -19,7 +19,7 @@ test('El terreno avanza y un blanco escapado vuelve sin curarse ni duplicar baja
 test('Los blancos conservan su función narrativa: tierra, mar, aire, carga y satélites',()=>{
   assert.ok(flight('m02').targets.filter(t=>t.required).every(t=>t.domain==='ground'&&!t.enemyType));
   assert.ok(flight('m04').targets.filter(t=>t.required).every(t=>t.domain==='sea'&&!t.enemyType));
-  assert.ok(flight('m43').targets.filter(t=>t.required).every(t=>t.domain==='air'&&t.enemyType));
+  assert.ok(flight('m43').targets.some(t=>t.domain==='ground')&&flight('m43').targets.some(t=>t.domain==='air'&&t.enemyType));
   assert.ok(flight('m03').targets.every(t=>t.domain==='cargo'&&!t.enemyType));
   assert.match(flight('m41').targets[0].label,/Satélite/);
   assert.ok(flight('m29').targets.some(t=>t.domain==='air')&&flight('m29').targets.some(t=>t.domain==='sea'));

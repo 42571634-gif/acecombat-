@@ -1,5 +1,5 @@
-import { missions } from './missions.js?v=0.7.1';
-import { dialogueLine } from './characters.js?v=0.7.1';
+import { missions } from './missions.js?v=0.8.0';
+import { dialogueLine } from './characters.js?v=0.8.0';
 
 export const endingData = {
   upeo:{label:'UPEO · Erich y Rena',mission:'m18',description:'Park ha sido derrotado y Rena sigue viva. Erich y Nemo han dejado de obedecer sus órdenes para protegerla. Los tres pueden regresar después del último enfrentamiento.'},

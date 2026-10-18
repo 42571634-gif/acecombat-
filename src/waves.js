@@ -1,4 +1,5 @@
-import { dialogueLine } from './characters.js?v=0.7.1';
+import { dialogueLine } from './characters.js?v=0.8.0';
+import { missionContexts } from './mission-context.js?v=0.8.0';
 // Radio operativa original para las fases del minijuego.
 const waves=(...stages)=>stages.map(([label,character,text])=>({label,message:dialogueLine([character,text]),adaptation:true}));
 export const WAVE_PLANS={
@@ -18,19 +19,40 @@ export const WAVE_PLANS={
   m50:waves(["Defensas del Sphyrna","fiona","Ataca las defensas exteriores del Sphyrna. No podemos permitir otro ataque sobre la ciudad."],["Núcleo del Sphyrna","fiona","El núcleo del Sphyrna está expuesto. Terminemos con el portaaviones."]),
   m52:waves(["Generadores","simon","Primero debemos reducir la ventaja que proporcionan los generadores Aeon al Night Raven."],["Night Raven","fiona","Night Raven vulnerable. Nemo, ataca durante la oportunidad indicada."],["Aurora de Dision","fiona","El Night Raven ha caído. Ahora debemos detener al avión de Dision."]),
 };
+Object.assign(WAVE_PLANS,{
+ m08:waves(['Despejar la trayectoria','erich','Despeja los obstáculos sin dañar el dirigible.'],['Embarcación en fuga','fiona','Una embarcación se ha separado del dirigible. Intercéptala antes de abandonar la zona.']),
+ m13:waves(['Concentraciones de nanobots','erich','Aplica ANB sobre las concentraciones del radar.'],['Rena contaminada','erich','Los nanobots han alcanzado el avión de Rena. Aplica ANB sobre ella para detener la contaminación.']),
+ m26:waves(['Cobertura Antlion','dision','Las unidades Antlion necesitan cobertura durante el asalto.'],['Cohete de Neucom','control','Se detecta el lanzamiento de Neucom. Intercepta el cohete antes de abandonar la operación.']),
+ m27:waves(['Silos del desfiladero','keith','Busca los silos entre las montañas.'],['Misil en vuelo','keith','Un silo ha conseguido lanzar. Yo cubro la zona; intercepta el misil.']),
+ m35:waves(['Fuerzas restantes','dision','Ataca las fuerzas de Neucom junto al Sphyrna.'],['Lanzamiento naval','dision','La flota ha lanzado un misil. Intercéptalo.']),
+ m43:waves(['Base aérea','cynthia','Aproximación baja a la base. Neutraliza primero sus instalaciones.'],['Defensa de General Resource','fiona','Hay aviones defendiendo la base. Mantén cubierta la formación.']),
+ m44:waves(['Acceso a la pista','dision','Despeja las tropas de tierra para permitir el aterrizaje.'],['Zona de extracción','cynthia','La pista debe quedar libre para que puedan recoger a Rena.']),
+ m45:waves(['Intercepción inicial','cynthia','Primero despejemos la aproximación a Megafloat.'],['Sphyrna','cynthia','El Night Raven ha atacado Megafloat. Tenemos que destruir su plataforma.'],['Dision','cynthia','Un avión sale del Sphyrna. Es Dision; no dejes que escape.']),
+});
+WAVE_PLANS.m09[1]=waves(['Radio interferida','control','La radio del transporte está interferida. Mantengan la cobertura por radar y rechacen a los atacantes restantes.'])[0];
 export const isActiveTarget=target=>target.alive&&target.active!==false;
 export function prepareWaves(flight){
   flight.waves=WAVE_PLANS[flight.id]||waves(['Operación','control','Objetivos adquiridos. Mantenga la aproximación y confirme cada contacto.']);
+  if(flight.m.encounter?.waveCount){
+    const first=flight.waves[0];flight.waves=Array.from({length:flight.m.encounter.waveCount},(_,index)=>index?waves(['Intercepción '+(index+1),'control','Nuevo grupo en aproximación. Mantén la cobertura y confirma los blancos de esta pasada.'])[0]:first);
+  }
   if(flight.m.type==='boss'){
     const original=flight.waves,cores=flight.targets.filter(t=>t.role==='boss');
     flight.waves=waves(['Defensas exteriores','control','Ataca los puntos exteriores marcados. Los sistemas internos siguen protegidos.'],['Sistemas internos','control','La primera capa está abierta. Neutraliza los sistemas internos para exponer el núcleo.'],...cores.map(t=>[t.label+' · núcleo','control','Núcleo expuesto. Dispara cuando la compuerta esté abierta; el punto vulnerable es pequeño.']));
     flight.waves[0].message=original[0].message;
   }
+  if(flight.id==='m49')flight.waves=waves(['Defensa del Sphyrna','fiona','Continuemos el ataque al Sphyrna.'],['Escolta de retirada','control','El Sphyrna se retira. Intercepta a su escolta.'],['Cynthia','fiona','¡Cynthia, eres tú! Contesta, por favor. ¿No puedes oírme?']);
+  if(flight.id==='m52'){
+    flight.waves[0].label='Enlaces Aeon';
+    flight.waves[1]=waves(['Interferencia Aeon','simon','La interferencia está activa. Completa la apertura de los enlaces marcados para alcanzar al Night Raven.'])[0];
+  }
+  const context=missionContexts[flight.id];
+  if(context)flight.waves[0]={...flight.waves[0],message:dialogueLine([context.character,context.radio]),source:context.source,confidence:'community-transcript'};
   flight.waveIndex=0;flight.waveTransition=0;flight.waveEvents=[{index:0,...flight.waves[0]}];
   const required=flight.targets.filter(t=>t.required);
   for(const target of flight.targets){
     if(!target.required){target.wave=0;target.active=true;continue;}
-    target.wave=flight.waves.length===1?0:flight.m.type==='boss'?(target.role==='boss'?2+target.sequence-(flight.m.total-(flight.m.bossCount||1)):target.depth):Math.floor(target.sequence*flight.waves.length/required.length);
+    target.wave=flight.waves.length===1?0:flight.id==='m49'?(target.role==='boss'?2:target.sequence===0?0:1):[8,13,26,27,35].includes(flight.m.number)?(target.sequence===required.length-1?1:0):flight.id==='m45'?(target.sequence>=required.length-2?target.sequence-(required.length-2)+1:0):flight.m.type==='boss'?(target.role==='boss'?2+target.sequence-(flight.m.total-(flight.m.bossCount||1)):target.depth):Math.floor(target.sequence*flight.waves.length/required.length);
     target.active=target.wave===0;
   }
 }

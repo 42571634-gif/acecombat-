@@ -1,6 +1,6 @@
-import { validateCampaign } from './engine.js?v=0.7.1';
-import { missions } from './missions.js?v=0.7.1';
-import { endingData } from './story.js?v=0.7.1';
+import { validateCampaign } from './engine.js?v=0.8.0';
+import { missions } from './missions.js?v=0.8.0';
+import { endingData } from './story.js?v=0.8.0';
 export const SAVE_KEY='electrosphere.campaign';
 export const SIMULATOR_KEY='electrosphere.simulator';
 export const PROFILE_KEY='electrosphere.profile';
@@ -15,7 +15,7 @@ export function loadCampaign(storage,{simulator=false}={}){
     if(typeof raw!=='string'||raw.length>500000)throw new Error('Tamaño de partida inválido.');
     const parsed=JSON.parse(raw),state=validateCampaign(parsed);
     if(Boolean(state.simulatorMission)!==simulator)throw new Error('La ranura no corresponde al modo de juego.');
-    return {ok:true,state,...(parsed.version===1?{migrated:true}:{})};
+    return {ok:true,state,...(parsed.version<state.version?{migrated:true}:{})};
   }catch(error){return {ok:false,state:null,message:`No se pudo cargar: ${error.message}`};}
 }
 export function loadProfile(storage){

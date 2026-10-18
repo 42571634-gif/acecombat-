@@ -1,11 +1,14 @@
-import { isTargetLocked } from './combat.js?v=0.7.1';
-import { ENEMY_TYPES,drawEnemy } from './enemy-types.js?v=0.7.1';
-import { isActiveTarget } from './waves.js?v=0.7.1';
-import { coreOpen } from './operations.js?v=0.7.1';
+import { isTargetLocked } from './combat.js?v=0.8.0';
+import { ENEMY_TYPES,drawEnemy } from './enemy-types.js?v=0.8.0';
+import { isActiveTarget } from './waves.js?v=0.8.0';
+import { coreOpen } from './operations.js?v=0.8.0';
+import { drawTerrain,drawOutcome } from './terrain.js?v=0.8.0';
 export function draw(flight,canvas){
   if(!flight||!canvas)return;
   const ctx=canvas.getContext('2d');
+  const presentation=flight.presentation||flight.finalPresentation;
   ctx.clearRect(0,0,720,420);ctx.fillStyle='#071824';ctx.fillRect(0,0,720,420);
+  if(flight.mode==='bullethell')drawTerrain(ctx,flight);
   ctx.strokeStyle='#173744';ctx.lineWidth=1;
   for(let x=0;x<=720;x+=40){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,420);ctx.stroke();}
   for(let y=(flight.scroll||0)%40;y<=420;y+=40){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(720,y);ctx.stroke();}
@@ -24,13 +27,13 @@ export function draw(flight,canvas){
     if(gate){ctx.fillStyle='#16404a';ctx.fillRect(gate.x-65,35,130,345);}
   }
   if(flight.mode==='bullethell'){
-    ctx.fillStyle='#0c2738';ctx.fillRect(0,280,720,140);
+    ctx.fillStyle='rgba(12,39,56,0.26)';ctx.fillRect(0,280,720,140);
     ctx.font='11px monospace';ctx.fillStyle='#77a7b2';ctx.fillText('ZONA DE MANIOBRA · '+flight.config.label.toUpperCase(),14,414);
     for(const bullet of flight.playerBullets){ctx.fillStyle='#aaffed';ctx.fillRect(bullet.x-2,bullet.y-9,4,14);}
     for(const bullet of flight.bullets){ctx.fillStyle=['#ff818f','#ffc76e','#dd9aff'][bullet.kind];ctx.beginPath();ctx.arc(bullet.x,bullet.y,bullet.r,0,Math.PI*2);ctx.fill();}
   }
   if(flight.protected){
-    const unit=flight.protected;ctx.fillStyle='#6ef3b9';ctx.strokeStyle='#6ef3b9';
+    const unit={...flight.protected,y:flight.protected.y-(flight.status==='victory'&&presentation?Math.min(1,presentation.elapsed/presentation.duration)*480:0)};ctx.fillStyle='#6ef3b9';ctx.strokeStyle='#6ef3b9';
     if(unit.mobile){
       if(flight.id==='m08'){ctx.beginPath();ctx.ellipse(unit.x,unit.y,14,25,0,0,Math.PI*2);ctx.stroke();}
       else if(flight.id==='m42'){ctx.beginPath();ctx.moveTo(unit.x,unit.y-20);ctx.lineTo(unit.x-12,unit.y+12);ctx.lineTo(unit.x+12,unit.y+12);ctx.closePath();ctx.fill();}
@@ -39,7 +42,10 @@ export function draw(flight,canvas){
     if(flight.covering){ctx.beginPath();ctx.arc(unit.x,unit.y,31,0,Math.PI*2);ctx.stroke();}
     ctx.font='10px monospace';ctx.fillText('ALIADO '+Math.round(unit.hp)+'%',Math.min(615,Math.max(5,unit.x-35)),unit.y-14);
   }
-  ctx.save();ctx.translate(flight.x,flight.y||365);ctx.fillStyle=flight.invulnerable>0&&Math.floor(flight.invulnerable*12)%2?'#fff':'#67f6e0';ctx.beginPath();ctx.moveTo(0,-19);ctx.lineTo(-12,15);ctx.lineTo(0,8);ctx.lineTo(12,15);ctx.closePath();ctx.fill();
+  const outcomeProgress=presentation?Math.min(1,presentation.elapsed/presentation.duration):0;
+  ctx.save();ctx.translate(flight.x,(flight.y||365)-(flight.status==='victory'?outcomeProgress*480:0));
+  if(flight.status==='defeat'&&flight.hp<=0)ctx.rotate(outcomeProgress*1.4);
+  ctx.fillStyle=flight.status==='defeat'?'#8d7b85':flight.invulnerable>0&&Math.floor(flight.invulnerable*12)%2?'#fff':'#67f6e0';ctx.beginPath();ctx.moveTo(0,-19);ctx.lineTo(-12,15);ctx.lineTo(0,8);ctx.lineTo(12,15);ctx.closePath();ctx.fill();
   if(flight.mode==='bullethell'){ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(0,0,flight.config.radius,0,Math.PI*2);ctx.fill();if(flight.focus){ctx.strokeStyle='#fff';ctx.beginPath();ctx.arc(0,0,12,0,Math.PI*2);ctx.stroke();}}ctx.restore();
   for(const target of flight.targets){
     if(!isActiveTarget(target)||target.inView===false)continue;
@@ -63,4 +69,5 @@ export function draw(flight,canvas){
   for(const effect of flight.effects){ctx.strokeStyle='#ffd475';ctx.beginPath();ctx.arc(effect.x,effect.y,30*(1-effect.life/.6)+10,0,Math.PI*2);ctx.stroke();}
   if(flight.waveTransition>0){ctx.font='18px monospace';ctx.fillStyle='#ffe4a0';ctx.fillText('OLEADA '+(flight.waveIndex+1)+' · EN APROXIMACIÓN',145,235);}
   ctx.fillStyle='#77b9c6';ctx.font='11px monospace';ctx.fillText('NEMO',Math.min(670,flight.x+16),flight.y||365);
+  drawOutcome(ctx,flight);
 }

@@ -87,3 +87,7 @@ npm run check: comprobación sintáctica de los siete módulos y 18 pruebas auto
 Comprobación adicional en navegador real: inicio, decisión, recarga, recuperación de escena, carga de misión pendiente, radar y controles visibles. Consola sin errores JavaScript durante la revisión. Vista móvil de 390 px: paneles apilados y sin desbordamiento horizontal. La comprobación de tacto físico en un dispositivo móvil no se ha realizado.
 
 La versión 0.2 incorpora identificadores de versión en CSS y módulos para evitar reutilizar recursos de la demo desde la caché del navegador.
+
+## 0.8.0 · 2026-10-18
+
+Revisión documentada de las 52 misiones, 8–20 intervenciones totales por recorrido y radio ligada a fases, daño, secundarios y desenlace. Registro IndexedDB independiente con snapshots de último intento/victoria por modo y acceso desde combate, resumen y archivo. Animaciones finales y continuación manual, fondos completos con paralaje y variación moderada de encuentros. Guardado v3 compatible con v1/v2 y validación del plan generado. Se mantienen las cinco rutas y sus umbrales.

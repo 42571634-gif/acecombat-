@@ -1,14 +1,18 @@
-import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.7.1';
-import { prepareWaves,checkNextWave,advanceWaves,isActiveTarget } from './waves.js?v=0.7.1';
-import { moveEnemy } from './enemy-types.js?v=0.7.1';
-import { prepareOperation,advanceOperation,missileHitChance,coreOpen } from './operations.js?v=0.7.1';
-export { missileHitChance } from './operations.js?v=0.7.1';
-export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.7.1';
+import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.8.0';
+import { prepareWaves,checkNextWave,advanceWaves,isActiveTarget } from './waves.js?v=0.8.0';
+import { moveEnemy } from './enemy-types.js?v=0.8.0';
+import { prepareOperation,advanceOperation,missileHitChance,coreOpen } from './operations.js?v=0.8.0';
+import { generateEncounter,stream } from './attempts.js?v=0.8.0';
+import { prepareRadio,syncRadio } from './radio.js?v=0.8.0';
+import { prepareTerrain } from './terrain.js?v=0.8.0';
+export { missileHitChance } from './operations.js?v=0.8.0';
+export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.8.0';
 function seeded(seed) {
   let value=seed>>>0;
   return ()=>{value=(1664525*value+1013904223)>>>0;return value/4294967296;};
 }
 export function createFlight(id,mission,now,random=seeded(mission.seed||1),options={}) {
+  if(options.attempt){mission=generateEncounter(mission,options.attempt);random=stream(options.attempt.seed,'encounters');}
   const type=mission.type;
   const flight={id,m:mission,t:mission.time,last:now,kills:0,completed:0,hp:100,x:360,shots:[],effects:[],cooldown:0,keyL:false,keyR:false,status:'active',
     objectives:mission.secondary?{[mission.secondary.id]:0}:{},protected:type==='escort'?{x:360,y:305,hp:100}:null,targets:[],feedback:'',elapsed:0};
@@ -26,8 +30,10 @@ export function createFlight(id,mission,now,random=seeded(mission.seed||1),optio
     x:80+(i%5)*135,y:235+Math.floor(i/5)*52,vx:0,vy:0,hp:mission.secondary.hp||1,alive:true,
   });
   for(let i=0;i<(mission.civilianCount||0);i++) flight.targets.push({id:'civilian-'+i,label:'Civil · NO DISPARAR',role:'civilian',required:false,x:615,y:300,vx:-5,vy:0,hp:1,alive:true});
-  flight.random=random;
+  flight.attempt=options.attempt||null;
+  flight.random=options.attempt?stream(options.attempt.seed,'missiles'):random;
   if(options.mode==='bullethell'){prepareBulletHell(flight,options.difficulty);prepareOperation(flight);prepareWaves(flight);}
+  prepareTerrain(flight);prepareRadio(flight);
   return flight;
 }
 export function isTargetLocked(flight,target) {
@@ -37,6 +43,9 @@ export function isTargetLocked(flight,target) {
     target.role==='gate' && flight.targets.some(other=>other.alive&&other.role==='gate'&&other.sequence<target.sequence);
 }
 export function advanceFlight(flight,now,keys={}) {
+  try{advanceSimulation(flight,now,keys);}finally{syncRadio(flight);}
+}
+function advanceSimulation(flight,now,keys={}) {
   if(flight.status!=='active')return;
   const dt=Math.max(0,(now-flight.last)/1000);
   flight.last=now;flight.t=Math.max(0,flight.t-dt);flight.elapsed+=dt;
@@ -72,6 +81,9 @@ export function advanceFlight(flight,now,keys={}) {
   if(flight.t<=0||flight.hp<=0){flight.status='defeat';flight.feedback=flight.hp<=0?'La aeronave o zona protegida ha perdido su integridad.':'Se agotó el tiempo de operación.';}
 }
 export function fireMissile(flight,x,y){
+  try{return launchMissile(flight,x,y);}finally{syncRadio(flight);}
+}
+function launchMissile(flight,x,y){
   if(flight.status!=='active')return false;
   if(flight.cooldown>0){flight.feedback='Misil recargando. Puedes seguir moviéndote y disparando con el cañón.';return false;}
   if(flight.protected&&Math.hypot(x-flight.protected.x,y-flight.protected.y)<25){flight.hp=0;flight.status='defeat';flight.feedback='Fuego sobre la unidad protegida: misión fallida.';return false;}

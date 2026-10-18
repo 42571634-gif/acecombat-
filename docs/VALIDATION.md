@@ -1,3 +1,19 @@
+# Verificación v0.8.0
+
+`npm run check`: 27 módulos y 70 pruebas aprobadas. Incluye 468 combates con piloto automático real (52 misiones × 3 dificultades × 3 semillas), además de las 156 combinaciones base, secundarios, escoltas, jefes, cinco rutas y migraciones v1/v2. Los resultados procedurales se validan contra su descriptor.
+
+La auditoría `node scripts/review-missions.mjs` genera 52 fichas y explora 50 semillas por misión con secundarios y avisos de daño realizados/omitidos. Los recorridos de victoria observados suman 11–20 intervenciones; el requisito permite 8–20. También se prueban derrotas tempranas y el regreso anticipado de No Clearance. No se cuentan narraciones ni se acumulan alternativas incompatibles.
+
+Registro probado con transacciones asíncronas: última victoria/intento por modo, snapshots inmutables, almacenamiento bloqueado y transacción abortada. En el navegador real se confirmó IndexedDB disponible y recuperación del registro de derrota tras recargar y abrir el archivo. No aparecen fases no jugadas.
+
+Animación y UI: victoria/derrota, omisión, movimiento reducido, resumen manual, resultado único, cancelación de RAF, pausa al consultar registro y carga con la misma semilla. Ocho escenarios cubren el campo completo y conservan geometría cacheada.
+
+Navegador local a 390×844 y 360×800: campo con terreno visible en la zona inferior, radio legible, modal con fuentes y sin desbordamiento horizontal. A 390 px el scrollWidth fue 375; a 360 px fue 345, ambos inferiores al viewport. Derrota real por proyectiles a los 11 segundos, resumen persistente y registro recuperado después de recargar. Sin errores ni advertencias JavaScript.
+
+El contraste editorial documenta contexto de las 52 páginas, no traducción íntegra o certificación frase por frase. Las diferencias jugables pendientes de equivalencia literal se enumeran en MISSION_REVIEW.md.
+
+## Historial de verificaciones
+
 # Verificación v0.7.1
 
 `npm run check`: 22 módulos y 60 pruebas aprobadas. Se añade una regresión de Awakening para verificar la intervención contra Neucom, la participación de Rena, su mensaje posterior y el aviso de refuerzos. Se mantienen las pruebas de las 52 misiones en tres dificultades. El contraste directo realizado en esta entrega corresponde al capítulo 01; no se declara verificada de nuevo la totalidad del archivo.

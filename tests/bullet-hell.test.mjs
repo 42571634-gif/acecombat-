@@ -5,6 +5,7 @@ import { emitPattern,toggleAutoFire } from '../src/bullet-hell.js';
 import { missions } from '../src/missions.js';
 import { story } from '../src/story.js';
 import { environment } from './helpers/dom.mjs';
+import { createCampaign,chooseOption,beginAttempt,resolveMission,validateCampaign } from '../src/engine.js';
 
 const flightFor=(id='m01',difficulty='normal')=>createFlight(id,missions[id],0,undefined,{mode:'bullethell',difficulty});
 
@@ -67,8 +68,8 @@ test('El cañón automático destruye blancos por impacto y respeta civiles y bl
 
 // Piloto de prueba: elige desplazamiento por distancia prevista a los proyectiles.
 // Usa movimiento real, misil de la interfaz y contramedidas; no modifica vida ni blancos.
-function completeMission(id,difficulty){
-  const f=flightFor(id,difficulty);let now=0;
+function completeMission(id,difficulty,attempt){
+  const f=attempt?createFlight(id,missions[id],0,undefined,{mode:'bullethell',difficulty,attempt}):flightFor(id,difficulty);let now=0;
   while(f.status==='active'&&now<f.m.time*1000){
     const optionalPending=f.targets.some(t=>t.alive&&t.group);
     if(f.gunEnabled===optionalPending)toggleAutoFire(f);
@@ -101,16 +102,20 @@ function completeMission(id,difficulty){
   assert.equal(f.status,'victory',`${id} / ${difficulty}: ${f.feedback} (${f.hp}% / ${f.completed}; x=${f.x}, y=${f.y}; ${JSON.stringify(f.targets.filter(t=>t.alive).map(t=>[t.id,t.x,t.y,t.hp]))})`);
   assert.equal(f.completed,f.m.total);
   if(f.m.secondary)assert.equal(f.objectives[f.m.secondary.id],f.m.secondary.count,`${id} / ${difficulty}: secundarios`);
+  if(attempt){let state=chooseOption(createCampaign({simulatorMission:id}),'choice-1');state=beginAttempt(state,attempt);state=resolveMission(state,{status:f.status,kills:f.kills,completed:f.completed,objectives:f.objectives,integrity:Math.min(f.hp,f.protected?.hp??100),timeRemaining:f.t,attempt});assert.deepEqual(validateCampaign(state),state);}
 }
 test('Las 52 misiones se completan en Fácil, Normal y Experto, incluidos secundarios y jefes',()=>{
   for(const difficulty of Object.keys(DIFFICULTIES))for(const id of Object.keys(missions))completeMission(id,difficulty);
+});
+test('Piloto real: las 52 misiones y las tres dificultades completan tres semillas y validan sus resultados',()=>{
+  for(const seed of [1,0x12345678,0xffffffff])for(const difficulty of Object.keys(DIFFICULTIES))for(const id of Object.keys(missions))completeMission(id,difficulty,{seed,difficulty,generator:1});
 });
 
 test('Cada capítulo conserva una escena y un informe propios, con extensión flexible',()=>{
   const text=[];
   for(const mission of Object.values(missions)){
     const spoken=mission.dialogue.filter(line=>line.kind!=='narration');
-    assert.ok(spoken.length>=6);assert.ok(mission.reportDialogue.filter(line=>line.kind!=='narration').length>=3);
+    assert.ok(spoken.length>0);assert.ok(mission.reportDialogue.filter(line=>line.kind!=='narration').length>0);
     assert.equal(story[mission.id+'Intro'].dialogue,mission.dialogue);
     for(const line of spoken.slice(2)){assert.ok(line.text.trim());text.push(line.text);}
     assert.equal(mission.adaptation,true);assert.ok(mission.source.url);

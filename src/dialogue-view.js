@@ -1,4 +1,4 @@
-import { characters } from './characters.js?v=0.7.1';
+import { characters } from './characters.js?v=0.8.0';
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export function messageMarkup(message){
   if(message.kind==='narration')return `<aside class="scene-narration" aria-label="Narración"><span>${escape(message.label||'Escena')}</span><p>${escape(message.text)}</p></aside>`;

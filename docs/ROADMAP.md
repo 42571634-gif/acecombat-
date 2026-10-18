@@ -71,3 +71,11 @@ Implementado en v0.2: 52 misiones jugables en el grafo, cinco finales y fuentes 
 
 ## Primer prompt sugerido
 "Lee AGENTS.md, README.md y docs/ROADMAP.md. Implementa exclusivamente el Hito 1. Mantén la demo jugable, trabaja incrementalmente, añade pruebas de navegación y de guardado, ejecuta npm run check, y documenta los cambios. No inventes el contenido canónico de Ace Combat 3."
+
+## Ampliación v0.8 completada
+
+- [x] Revisión contextual de las 52 misiones y recuento total de 8–20 intervenciones.
+- [x] Radio aliada/enemiga activada por acontecimientos y registro independiente persistente.
+- [x] Animaciones de victoria/derrota, resumen manual y movimiento reducido.
+- [x] Fondos completos y encuentros variables con condiciones especiales fijas.
+- [x] Guardado v3, migraciones y validación por semilla.

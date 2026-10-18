@@ -4,8 +4,8 @@ import { readFileSync } from 'node:fs';
 const html = readFileSync('index.html','utf8');
 const css = readFileSync('src/styles.css','utf8');
 test('HTML carga el juego y sus estilos', () => {
-  assert.match(html, /src="\.\/src\/game\.js\?v=0\.7\.1"/);
-  assert.match(html, /href="\.\/src\/styles\.css\?v=0\.7\.1"/);
+  assert.match(html, /src="\.\/src\/game\.js\?v=0\.8\.0"/);
+  assert.match(html, /href="\.\/src\/styles\.css\?v=0\.8\.0"/);
   assert.match(html, /id="main"/);
   assert.match(html, /id="reset"/);
   assert.match(html, /type="module"/);

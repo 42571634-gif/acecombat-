@@ -1,421 +1,1372 @@
-// Redacción propia en español claro; contexto y referencias en docs/TEXT_REVIEW.md.
+// Adaptación propia; revisión por misión en docs/MISSION_REVIEW.md.
 export const cinematicScenes=[
-  [ // 01
-    ["control","Neucom ha iniciado una ofensiva contra General Resource. UPEO intervendrá para contenerla."],
-    ["erich","Rena lleva el Flanker. Tiene una buena aeronave para esta salida."],
-    ["fiona","Erich, concéntrate. La operación está comenzando."],
-    ["rena","Estoy preparada para atacar los objetivos de Neucom."],
-    ["fiona","Nemo, coordina tu aproximación con la formación de SARF."],
-    ["erich","Yo también necesito cobertura. No pierdas de vista mi posición."],
+  [
+    [
+      "control",
+      "Neucom ha iniciado una ofensiva contra General Resource. UPEO intervendrá para contenerla."
+    ],
+    [
+      "erich",
+      "Rena lleva el Flanker. Tiene una buena aeronave para esta salida."
+    ],
+    [
+      "fiona",
+      "Erich, concéntrate. La operación está comenzando."
+    ],
+    [
+      "rena",
+      "Estoy preparada para atacar los objetivos de Neucom."
+    ],
+    [
+      "fiona",
+      "Nemo, coordina tu aproximación con la formación de SARF."
+    ],
+    [
+      "erich",
+      "Yo también necesito cobertura. No pierdas de vista mi posición."
+    ]
   ],
-  [ // 02
-    ["park","Destruyan los emisores de Neucom. Su interferencia está bloqueando el corredor aéreo."],
-    ["fiona","Abrir ese corredor también beneficia a General Resource. Pensaba que UPEO debía mantenerse neutral."],
-    ["erich","Las interferencias afectan al tráfico. Eliminar los emisores puede evitar más incidentes."],
-    ["fiona","Lo entiendo. Me preocupa que siempre acabemos ayudando a la misma compañía."],
-    ["park","Fitzgerald, las órdenes están confirmadas. Concéntrese en los objetivos asignados."],
-    ["fiona","Recibido. Nemo, atacaré contigo. Mantén identificadas las instalaciones de Neucom."],
+  [
+    [
+      "park",
+      "Destruyan los emisores de Neucom. Su interferencia está bloqueando el corredor aéreo."
+    ],
+    [
+      "fiona",
+      "Abrir ese corredor también beneficia a General Resource. Pensaba que UPEO debía mantenerse neutral."
+    ],
+    [
+      "erich",
+      "Las interferencias afectan al tráfico. Eliminar los emisores puede evitar más incidentes."
+    ],
+    [
+      "fiona",
+      "Lo entiendo. Me preocupa que siempre acabemos ayudando a la misma compañía."
+    ],
+    [
+      "park",
+      "Fitzgerald, las órdenes están confirmadas. Concéntrese en los objetivos asignados."
+    ],
+    [
+      "fiona",
+      "Recibido. Nemo, atacaré contigo. Mantén identificadas las instalaciones de Neucom."
+    ]
   ],
-  [ // 03
-    ["keith","Así que tú eres Nemo, el nuevo piloto de SARF. Soy Keith. Veremos cómo vuelas."],
-    ["dision","Yo soy Dision. Hoy entrenaremos juntos para comprobar cómo trabajan nuestras formaciones."],
-    ["keith","No te preocupes por impresionarnos en tierra. Lo importante es lo que hagas durante el vuelo."],
-    ["control","Entrenamiento suspendido. Hay contenedores químicos cayendo sobre Chopinburg."],
-    ["keith","Cambio de planes, Nemo. Destruye los contenedores antes de que su carga alcance la ciudad."],
-    ["dision","Intervendremos contigo. Ahora debemos resolver la emergencia; el entrenamiento puede esperar."],
+  [
+    [
+      "keith",
+      "Así que tú eres Nemo, el nuevo piloto de SARF. Soy Keith. Veremos cómo vuelas."
+    ],
+    [
+      "dision",
+      "Yo soy Dision. Hoy entrenaremos juntos para comprobar cómo trabajan nuestras formaciones."
+    ],
+    [
+      "keith",
+      "No te preocupes por impresionarnos en tierra. Lo importante es lo que hagas durante el vuelo."
+    ],
+    [
+      "control",
+      "Entrenamiento suspendido. Hay contenedores químicos cayendo sobre Chopinburg."
+    ],
+    [
+      "keith",
+      "Cambio de planes, Nemo. Destruye los contenedores antes de que su carga alcance la ciudad."
+    ],
+    [
+      "dision",
+      "Intervendremos contigo. Ahora debemos resolver la emergencia; el entrenamiento puede esperar."
+    ]
   ],
-  [ // 04
-    ["dision","Volvemos a colaborar, Nemo. General Resource y SARF atacarán la concentración naval de Neucom."],
-    ["fiona","Dision, hoy Nemo sigue en nuestra formación. Primero ocupémonos de la flota."],
-    ["keith","De acuerdo. Hay buques de Neucom cerca de Megafloat. No perdamos tiempo discutiendo."],
-    ["fiona","También hay embarcaciones civiles. Nemo, confirma cada blanco para no atacarlas."],
-    ["dision","Es una operación conjunta. Coordinemos los ataques y evitemos estorbarnos."],
-    ["fiona","Cubriré tu aproximación, Nemo. Cuando terminemos, podremos hablar de tus planes."],
+  [
+    [
+      "dision",
+      "Volvemos a colaborar, Nemo. General Resource y SARF atacarán la concentración naval de Neucom."
+    ],
+    [
+      "fiona",
+      "Dision, hoy Nemo sigue en nuestra formación. Primero ocupémonos de la flota."
+    ],
+    [
+      "keith",
+      "De acuerdo. Hay buques de Neucom cerca de Megafloat. No perdamos tiempo discutiendo."
+    ],
+    [
+      "fiona",
+      "También hay embarcaciones civiles. Nemo, confirma cada blanco para no atacarlas."
+    ],
+    [
+      "dision",
+      "Es una operación conjunta. Coordinemos los ataques y evitemos estorbarnos."
+    ],
+    [
+      "fiona",
+      "Cubriré tu aproximación, Nemo. Cuando terminemos, podremos hablar de tus planes."
+    ]
   ],
-  [ // 05
-    ["erich","General Resource ha roto el alto el fuego. Nos ordenan defender una base de Neucom."],
-    ["fiona","Así es. Hoy los atacantes son los aviones de General Resource. Debemos detenerlos."],
-    ["erich","Quería confirmar la orden. En la misión anterior estábamos combatiendo contra Neucom."],
-    ["fiona","No importa quién atacara ayer. Ahora esa base necesita protección."],
-    ["erich","Nemo, cubriré el lado izquierdo de la base. Mantén vigilados los contactos que se acerquen."],
-    ["fiona","Yo apoyaré la defensa. Coordina tus ataques con Erich y no dejes sola la base."],
+  [
+    [
+      "erich",
+      "General Resource ha roto el alto el fuego. Nos ordenan defender una base de Neucom."
+    ],
+    [
+      "fiona",
+      "Así es. Hoy los atacantes son los aviones de General Resource. Debemos detenerlos."
+    ],
+    [
+      "erich",
+      "Quería confirmar la orden. En la misión anterior estábamos combatiendo contra Neucom."
+    ],
+    [
+      "fiona",
+      "No importa quién atacara ayer. Ahora esa base necesita protección."
+    ],
+    [
+      "erich",
+      "Nemo, cubriré el lado izquierdo de la base. Mantén vigilados los contactos que se acerquen."
+    ],
+    [
+      "fiona",
+      "Yo apoyaré la defensa. Coordina tus ataques con Erich y no dejes sola la base."
+    ]
   ],
-  [ // 06
-    ["rena","Ese valle me resulta familiar. Quiero revisar las imágenes con más detalle."],
-    ["control","Ruta de reconocimiento confirmada. Registre los puntos marcados con los sensores."],
-    ["rena","Hay cosas de mi pasado que no recuerdo bien. Este lugar podría ayudarme a entenderlas."],
-    ["control","Detectamos una señal adicional. Puede investigarla antes de terminar el reconocimiento."],
-    ["rena","Quiero comprobar de dónde viene esa señal. No voy a ignorarla otra vez."],
-    ["rena","Nemo, acompáñame si decides investigarla. Conserva los datos que encontremos."],
+  [
+    [
+      "rena",
+      "Ese valle me resulta familiar. Quiero revisar las imágenes con más detalle."
+    ],
+    [
+      "control",
+      "Ruta de reconocimiento confirmada. Registre los puntos marcados con los sensores."
+    ],
+    [
+      "rena",
+      "Hay cosas de mi pasado que no recuerdo bien. Este lugar podría ayudarme a entenderlas."
+    ],
+    [
+      "control",
+      "Detectamos una señal adicional. Puede investigarla antes de terminar el reconocimiento."
+    ],
+    [
+      "rena",
+      "Quiero comprobar de dónde viene esa señal. No voy a ignorarla otra vez."
+    ],
+    [
+      "rena",
+      "Nemo, acompáñame si decides investigarla. Conserva los datos que encontremos."
+    ]
   ],
-  [ // 07
-    ["park","Hirose, esta salida no está autorizada. Regrese. Nemo, no continúe con ella."],
-    ["rena","He recibido la orden, pero necesito comprobar lo que encontramos en la instalación."],
-    ["park","No tiene permiso para seguir investigando. Le ordeno volver a la base."],
-    ["rena","Nemo, puedes regresar. No quiero obligarte a desobedecer por mí."],
-    ["rena","Esa instalación parece relacionada con Dision y con mi pasado. Necesito averiguar por qué."],
-    ["rena","Si decides acompañarme, mantente cerca. Encontraremos resistencia al acercarnos a Expo City."],
+  [
+    [
+      "park",
+      "Hirose, esta salida no está autorizada. Regrese. Nemo, no continúe con ella."
+    ],
+    [
+      "rena",
+      "He recibido la orden, pero necesito comprobar lo que encontramos en la instalación."
+    ],
+    [
+      "park",
+      "No tiene permiso para seguir investigando. Le ordeno volver a la base."
+    ],
+    [
+      "rena",
+      "Nemo, puedes regresar. No quiero obligarte a desobedecer por mí."
+    ],
+    [
+      "rena",
+      "Estoy buscando el Night Raven, la aeronave relacionada con aquel lugar. No es una misión aprobada por UPEO."
+    ],
+    [
+      "park",
+      "Hay una emergencia en Axel Bay. Las unidades disponibles deben regresar para atenderla."
+    ],
+    [
+      "rena",
+      "Esa instalación parece relacionada con Dision y con mi pasado. Necesito averiguar por qué."
+    ],
+    [
+      "rena",
+      "Si decides acompañarme, mantente cerca. Encontraremos resistencia al acercarnos a Expo City."
+    ]
   ],
-  [ // 08
-    ["fiona","Hay un dirigible con carga peligrosa descendiendo sobre Axel Bay. Debemos ayudarlo a llegar al agua."],
-    ["erich","Su ruta está bloqueada. Si despejamos los obstáculos, podrá continuar el descenso."],
-    ["fiona","¿Podemos hacerlo sin alcanzar el dirigible ni su carga?"],
-    ["erich","Sí. Atacaremos los obstáculos marcados y mantendremos libre su trayectoria."],
-    ["fiona","Nemo, empieza por los obstáculos. Yo cubriré el descenso del dirigible."],
-    ["fiona","No dispares contra la unidad protegida. Quiero que terminemos con el dirigible y los tres pilotos a salvo."],
+  [
+    [
+      "fiona",
+      "Hay un dirigible con carga peligrosa descendiendo sobre Axel Bay. Debemos ayudarlo a llegar al agua."
+    ],
+    [
+      "erich",
+      "Su ruta está bloqueada. Si despejamos los obstáculos, podrá continuar el descenso."
+    ],
+    [
+      "fiona",
+      "¿Podemos hacerlo sin alcanzar el dirigible ni su carga?"
+    ],
+    [
+      "erich",
+      "Sí. Atacaremos los obstáculos marcados y mantendremos libre su trayectoria."
+    ],
+    [
+      "fiona",
+      "Nemo, empieza por los obstáculos. Yo cubriré el descenso del dirigible."
+    ],
+    [
+      "fiona",
+      "No dispares contra la unidad protegida. Quiero que terminemos con el dirigible y los tres pilotos a salvo."
+    ]
   ],
-  [ // 09
-    ["erich","¿Solo Nemo y yo escoltaremos el transporte de Clarkson? Me preocupa que no haya más cazas."],
-    ["fiona","Yo protejo a Clarkson dentro del avión. Ustedes deben encargarse de los enemigos que se acerquen."],
-    ["control","Se aproximan aviones de General Resource. La misión secreta parece haber quedado al descubierto."],
-    ["erich","Si conocen nuestra ruta, pueden atacar el transporte. Nemo, permanezcamos cerca de él."],
-    ["control","Intercepción autorizada. Mantengan la cobertura del transporte mientras intentamos recuperar su comunicación."],
-    ["erich","Fiona, intenta responder cuando puedas. Nemo, tenemos que proteger ese avión."],
+  [
+    [
+      "erich",
+      "¿Solo Nemo y yo escoltaremos el transporte de Clarkson? Me preocupa que no haya más cazas."
+    ],
+    [
+      "fiona",
+      "Yo protejo a Clarkson dentro del avión. Ustedes deben encargarse de los enemigos que se acerquen."
+    ],
+    [
+      "control",
+      "Se aproximan aviones de General Resource. La misión secreta parece haber quedado al descubierto."
+    ],
+    [
+      "erich",
+      "Si conocen nuestra ruta, pueden atacar el transporte. Nemo, permanezcamos cerca de él."
+    ],
+    [
+      "control",
+      "Intercepción autorizada. Mantengan la cobertura del transporte mientras intentamos recuperar su comunicación."
+    ],
+    [
+      "erich",
+      "Fiona, intenta responder cuando puedas. Nemo, tenemos que proteger ese avión."
+    ]
   ],
-  [ // 10
-    ["park","Hay bombarderos de Neucom sobre White Valley. Intercéptenlos y mantengan la formación."],
-    ["erich","Recibido. Cuesta volver a volar después de lo ocurrido con el transporte de Clarkson."],
-    ["rena","Erich, te estás quedando atrás. Necesitamos que cubras tu posición."],
-    ["erich","Ya voy. Sigo pensando en Fiona, pero no voy a dejarte sin cobertura, Nemo."],
-    ["park","No permitiré que la operación anterior interfiera con esta misión. Cumplan las órdenes."],
-    ["erich","Cubriré tu izquierda, Nemo. Primero detendremos a los bombarderos."],
+  [
+    [
+      "park",
+      "Hay bombarderos de Neucom sobre White Valley. Intercéptenlos y mantengan la formación."
+    ],
+    [
+      "erich",
+      "Recibido. Cuesta volver a volar después de lo ocurrido con el transporte de Clarkson."
+    ],
+    [
+      "rena",
+      "Erich, te estás quedando atrás. Necesitamos que cubras tu posición."
+    ],
+    [
+      "erich",
+      "Ya voy. Sigo pensando en Fiona, pero no voy a dejarte sin cobertura, Nemo."
+    ],
+    [
+      "park",
+      "No permitiré que la operación anterior interfiera con esta misión. Cumplan las órdenes."
+    ],
+    [
+      "erich",
+      "Cubriré tu izquierda, Nemo. Primero detendremos a los bombarderos."
+    ]
   ],
-  [ // 11
-    ["erich","General Resource se acerca al complejo espacial de Neucom. Nos ordenan protegerlo."],
-    ["rena","Los atacantes no deben alcanzar las instalaciones de lanzamiento."],
-    ["erich","Entendido. Comprobaré sus rutas antes de abrir fuego."],
-    ["control","Unidades de asalto en aproximación. SARF, mantengan protegida la base."],
-    ["erich","Nemo, cubriré el acceso al complejo. Necesito que interceptes los contactos restantes."],
-    ["rena","Estoy siguiendo la formación. Erich, conserva tu posición mientras Nemo ataca."],
+  [
+    [
+      "erich",
+      "General Resource se acerca al complejo espacial de Neucom. Nos ordenan protegerlo."
+    ],
+    [
+      "rena",
+      "Los atacantes no deben alcanzar las instalaciones de lanzamiento."
+    ],
+    [
+      "erich",
+      "Entendido. Comprobaré sus rutas antes de abrir fuego."
+    ],
+    [
+      "control",
+      "Unidades de asalto en aproximación. SARF, mantengan protegida la base."
+    ],
+    [
+      "erich",
+      "Nemo, cubriré el acceso al complejo. Necesito que interceptes los contactos restantes."
+    ],
+    [
+      "rena",
+      "Estoy siguiendo la formación. Erich, conserva tu posición mientras Nemo ataca."
+    ]
   ],
-  [ // 12
-    ["erich","Un tren blindado transporta una unidad de investigación robada. Tenemos que detenerlo."],
-    ["control","La unidad viaja desmontada. Ataquen los segmentos señalados del convoy."],
-    ["erich","¿Debemos recuperar también la carga cuando el tren se detenga?"],
-    ["control","Negativo. Un equipo de recuperación se ocupará de la unidad."],
-    ["erich","Entendido. Me gustaría saber más sobre lo que transportan, pero primero detendremos el convoy."],
-    ["erich","Nemo, avancemos por segmentos. Comprueba tu posición antes de atacar el siguiente vagón."],
+  [
+    [
+      "erich",
+      "Un tren blindado transporta una unidad de investigación robada. Tenemos que detenerlo."
+    ],
+    [
+      "control",
+      "La unidad viaja desmontada. Ataquen los segmentos señalados del convoy."
+    ],
+    [
+      "erich",
+      "¿Debemos recuperar también la carga cuando el tren se detenga?"
+    ],
+    [
+      "control",
+      "Negativo. Un equipo de recuperación se ocupará de la unidad."
+    ],
+    [
+      "erich",
+      "Entendido. Me gustaría saber más sobre lo que transportan, pero primero detendremos el convoy."
+    ],
+    [
+      "erich",
+      "Nemo, avancemos por segmentos. Comprueba tu posición antes de atacar el siguiente vagón."
+    ]
   ],
-  [ // 13
-    ["rena","Usa el sensor, Nemo. Las concentraciones de nanobots no se distinguen bien a simple vista."],
-    ["erich","Veo las señales, pero no alcanzo a distinguir las nubes desde la cabina."],
-    ["rena","Por eso debemos seguir las lecturas. No esperes a tenerlas justo delante."],
-    ["control","Pulsos ANB disponibles. Actívenlos sobre cada concentración identificada."],
-    ["erich","Rena, estoy siguiendo tu señal. Avísame si tienes algún problema."],
-    ["rena","Gracias. Si mi señal cambia, necesito que me ayudes a salir de la zona."],
+  [
+    [
+      "rena",
+      "Usa el sensor, Nemo. Las concentraciones de nanobots no se distinguen bien a simple vista."
+    ],
+    [
+      "erich",
+      "Veo las señales, pero no alcanzo a distinguir las nubes desde la cabina."
+    ],
+    [
+      "rena",
+      "Por eso debemos seguir las lecturas. No esperes a tenerlas justo delante."
+    ],
+    [
+      "control",
+      "Pulsos ANB disponibles. Actívenlos sobre cada concentración identificada."
+    ],
+    [
+      "erich",
+      "Rena, estoy siguiendo tu señal. Avísame si tienes algún problema."
+    ],
+    [
+      "rena",
+      "Gracias. Si mi señal cambia, necesito que me ayudes a salir de la zona."
+    ]
   ],
-  [ // 14
-    ["park","Utilicen los aparatos asignados y la cobertura electrónica del Sphyrna. No cambien las identificaciones."],
-    ["erich","Con esas insignias, quienes vean el ataque pueden creer que somos de Neucom."],
-    ["park","La identificación forma parte de la operación. Manténgala como se ha ordenado."],
-    ["erich","Entonces estamos ocultando quién realiza el ataque. Quiero que eso conste."],
-    ["park","Jager, ejecute la misión. Las explicaciones al público no son su responsabilidad."],
-    ["erich","Nemo, conserva los registros del vuelo. Nos están pidiendo atacar con una identidad que no es la nuestra."],
+  [
+    [
+      "park",
+      "Utilicen los aparatos asignados y la cobertura electrónica del Sphyrna. No cambien las identificaciones."
+    ],
+    [
+      "erich",
+      "Con esas insignias, quienes vean el ataque pueden creer que somos de Neucom."
+    ],
+    [
+      "park",
+      "La identificación forma parte de la operación. Manténgala como se ha ordenado."
+    ],
+    [
+      "erich",
+      "Entonces estamos ocultando quién realiza el ataque. Quiero que eso conste."
+    ],
+    [
+      "park",
+      "Jager, ejecute la misión. Las explicaciones al público no son su responsabilidad."
+    ],
+    [
+      "erich",
+      "Nemo, conserva los registros del vuelo. Nos están pidiendo atacar con una identidad que no es la nuestra."
+    ]
   ],
-  [ // 15
-    ["erich","Hay fuerzas de General Resource y Neucom sobre la ciudad. También hay aviones civiles."],
-    ["control","Confirmen la identificación de cada contacto. No disparen contra los civiles."],
-    ["erich","Nemo, si no estás seguro de un blanco, espera. Yo cubriré tu posición."],
-    ["park","Ataquen a las fuerzas de ambas compañías. SARF debe reducir el enfrentamiento."],
-    ["erich","Entendido, señor. Pero los civiles están cruzando la misma zona de combate."],
-    ["park","Eviten a los civiles y cumplan la misión. No retrasen la intervención."],
+  [
+    [
+      "erich",
+      "Hay fuerzas de General Resource y Neucom sobre la ciudad. También hay aviones civiles."
+    ],
+    [
+      "control",
+      "Confirmen la identificación de cada contacto. No disparen contra los civiles."
+    ],
+    [
+      "erich",
+      "Nemo, si no estás seguro de un blanco, espera. Yo cubriré tu posición."
+    ],
+    [
+      "park",
+      "Ataquen a las fuerzas de ambas compañías. SARF debe reducir el enfrentamiento."
+    ],
+    [
+      "erich",
+      "Entendido, señor. Pero los civiles están cruzando la misma zona de combate."
+    ],
+    [
+      "park",
+      "Eviten a los civiles y cumplan la misión. No retrasen la intervención."
+    ]
   ],
-  [ // 16
-    ["erich","Rena está con Dision. Quiero alcanzarla antes de que se aleje en el Night Raven."],
-    ["control","Hay defensas de Ouroboros entre su posición y el Sphyrna."],
-    ["erich","Tendremos que abrir un corredor para llegar hasta la plataforma."],
-    ["erich","Nemo, voy a intentar recuperar a Rena. Necesito que me acompañes."],
-    ["control","Ruta de aproximación identificada. Los interceptores bloquean el acceso."],
-    ["erich","Tengo miedo de llegar tarde, pero voy a intentarlo. Cúbreme mientras avanzamos hacia el Sphyrna."],
+  [
+    [
+      "erich",
+      "Rena está con Dision. Quiero alcanzarla antes de que se aleje en el Night Raven."
+    ],
+    [
+      "control",
+      "Hay defensas de Ouroboros entre su posición y el Sphyrna."
+    ],
+    [
+      "erich",
+      "Tendremos que abrir un corredor para llegar hasta la plataforma."
+    ],
+    [
+      "erich",
+      "Nemo, voy a intentar recuperar a Rena. Necesito que me acompañes."
+    ],
+    [
+      "control",
+      "Ruta de aproximación identificada. Los interceptores bloquean el acceso."
+    ],
+    [
+      "erich",
+      "Tengo miedo de llegar tarde, pero voy a intentarlo. Cúbreme mientras avanzamos hacia el Sphyrna."
+    ]
   ],
-  [ // 17
-    ["erich","El Sphyrna está dañado. Podemos destruir sus defensas y alcanzar el núcleo."],
-    ["control","Los puntos exteriores siguen activos. Los sistemas internos están protegidos."],
-    ["erich","Nemo, ataquemos primero las defensas visibles. Después podremos acercarnos al centro."],
-    ["control","Mantengan distancia de la estructura hasta confirmar que se ha abierto una zona vulnerable."],
-    ["erich","Es un objetivo enorme, pero no tenemos que destruirlo de una sola vez. Iremos por partes."],
-    ["erich","Yo te cubriré durante el ataque. Aprovecha cada oportunidad para dañar el núcleo del Sphyrna."],
+  [
+    [
+      "erich",
+      "El Sphyrna está dañado. Podemos destruir sus defensas y alcanzar el núcleo."
+    ],
+    [
+      "control",
+      "Los puntos exteriores siguen activos. Los sistemas internos están protegidos."
+    ],
+    [
+      "erich",
+      "Nemo, ataquemos primero las defensas visibles. Después podremos acercarnos al centro."
+    ],
+    [
+      "control",
+      "Mantengan distancia de la estructura hasta confirmar que se ha abierto una zona vulnerable."
+    ],
+    [
+      "erich",
+      "Es un objetivo enorme, pero no tenemos que destruirlo de una sola vez. Iremos por partes."
+    ],
+    [
+      "erich",
+      "Yo te cubriré durante el ataque. Aprovecha cada oportunidad para dañar el núcleo del Sphyrna."
+    ]
   ],
-  [ // 18
-    ["park","Jager, abandone el ataque y regrese bajo mi mando. Todavía puede obedecer."],
-    ["erich","No voy a dejar a Rena ni a Nemo para volver a obedecerlo."],
-    ["park","Su desacuerdo no lo autoriza a atacar a su comandante."],
-    ["erich","Usted nos ha utilizado y ha puesto a nuestros compañeros en peligro. No seguiré esas órdenes."],
-    ["park","Nemo, detenga a Jager. Le estoy dando una orden directa."],
-    ["erich","Nemo, continuaré hacia el centro de mando. Esta vez he decidido por mí mismo."],
+  [
+    [
+      "park",
+      "Jager, abandone el ataque y regrese bajo mi mando. Todavía puede obedecer."
+    ],
+    [
+      "erich",
+      "No voy a dejar a Rena ni a Nemo para volver a obedecerlo."
+    ],
+    [
+      "park",
+      "Su desacuerdo no lo autoriza a atacar a su comandante."
+    ],
+    [
+      "erich",
+      "Usted nos ha utilizado y ha puesto a nuestros compañeros en peligro. No seguiré esas órdenes."
+    ],
+    [
+      "park",
+      "Nemo, detenga a Jager. Le estoy dando una orden directa."
+    ],
+    [
+      "erich",
+      "Nemo, continuaré hacia el centro de mando. Esta vez he decidido por mí mismo."
+    ]
   ],
-  [ // 19
-    ["keith","Bienvenido a General Resource, Nemo. Soy tu compañero de vuelo, pero tendrás que seguirme el ritmo."],
-    ["dision","Aquí podremos aprovechar tu capacidad. Hoy atacaremos una base aérea de Neucom."],
-    ["keith","Empieza por las instalaciones marcadas. No te distraigas buscando un combate individual."],
-    ["dision","Puede que reconozcas a pilotos del otro bando. Recuerda cuál es nuestra misión."],
-    ["keith","Si necesitas ayuda, pídela antes de perder el control de la situación."],
-    ["keith","Yo cubriré tu flanco. Demuéstrame que también puedo contar contigo."],
+  [
+    [
+      "keith",
+      "Bienvenido a General Resource, Nemo. Soy tu compañero de vuelo, pero tendrás que seguirme el ritmo."
+    ],
+    [
+      "dision",
+      "Aquí podremos aprovechar tu capacidad. Hoy atacaremos una base aérea de Neucom."
+    ],
+    [
+      "keith",
+      "Empieza por las instalaciones marcadas. No te distraigas buscando un combate individual."
+    ],
+    [
+      "dision",
+      "Puede que reconozcas a pilotos del otro bando. Recuerda cuál es nuestra misión."
+    ],
+    [
+      "keith",
+      "Si necesitas ayuda, pídela antes de perder el control de la situación."
+    ],
+    [
+      "keith",
+      "Yo cubriré tu flanco. Demuéstrame que también puedo contar contigo."
+    ]
   ],
-  [ // 20
-    ["keith","El centro de control de Megafloat está dentro del alcance. Ese es nuestro objetivo principal."],
-    ["dision","También hay una lancha que podría darnos información útil sobre Neucom."],
-    ["keith","¿Quieres que atendamos la lancha antes de terminar el ataque?"],
-    ["dision","Si Nemo decide investigar, tendrá que resolver ese objetivo antes del último blanco principal."],
-    ["keith","Entendido. Nemo, cubro los buques mientras compruebas si puedes llegar a la lancha."],
-    ["dision","La información puede cambiar nuestra siguiente operación. Decide si vale la pena conseguirla."],
+  [
+    [
+      "keith",
+      "El centro de control de Megafloat está dentro del alcance. Ese es nuestro objetivo principal."
+    ],
+    [
+      "dision",
+      "También hay una lancha que podría darnos información útil sobre Neucom."
+    ],
+    [
+      "keith",
+      "¿Quieres que atendamos la lancha antes de terminar el ataque?"
+    ],
+    [
+      "dision",
+      "Si Nemo decide investigar, tendrá que resolver ese objetivo antes del último blanco principal."
+    ],
+    [
+      "keith",
+      "Entendido. Nemo, cubro los buques mientras compruebas si puedes llegar a la lancha."
+    ],
+    [
+      "dision",
+      "La información puede cambiar nuestra siguiente operación. Decide si vale la pena conseguirla."
+    ]
   ],
-  [ // 21
-    ["dision","Nemo, hoy necesitamos reconocer las instalaciones de Neucom, no destruirlas."],
-    ["control","Puntos de observación marcados. Utilice los sensores para registrar los emplazamientos."],
-    ["dision","Hay un hangar que quiero investigar. Podría aclarar la relación entre Rena y un proyecto de General Resource."],
-    ["control","Reconocimiento autorizado. Conserve las imágenes y las lecturas de cada punto."],
-    ["dision","No ataques el hangar antes de comprobar qué contiene. Necesitamos información, no restos."],
-    ["dision","Mantén el enlace conmigo durante la aproximación. Quiero revisar contigo lo que registremos."],
+  [
+    [
+      "dision",
+      "Nemo, buscamos una instalación no oficial de UPEO. Esta salida figura como entrenamiento, pero necesitamos sus datos."
+    ],
+    [
+      "control",
+      "Puntos de observación marcados. Utilice los sensores para registrar los emplazamientos."
+    ],
+    [
+      "dision",
+      "Hay un hangar que quiero investigar. Podría aclarar la relación entre Rena y un proyecto de General Resource."
+    ],
+    [
+      "control",
+      "Puntos de observación marcados para esta simulación. Registra los emplazamientos con los sensores."
+    ],
+    [
+      "dision",
+      "No ataques el hangar antes de comprobar qué contiene. Necesitamos información, no restos."
+    ],
+    [
+      "dision",
+      "Mantén el enlace conmigo durante la aproximación. Quiero revisar contigo lo que registremos."
+    ]
   ],
-  [ // 22
-    ["keith","Nos toca atacar los nodos de energía de Neucom durante una operación nocturna. Mantente cerca."],
-    ["control","Hay interferencias de microondas. Los nodos están señalados por sectores."],
-    ["keith","Si pierdes mi señal, avisa. No sigas volando a ciegas para demostrar que puedes hacerlo solo."],
-    ["control","Formación desplegada. Mantengan coordinación durante el ataque a los nodos."],
-    ["keith","Yo vigilaré tu zona mientras te aproximas. Tú haz lo mismo cuando me toque entrar."],
-    ["keith","Confío en ti, Nemo. Desactivemos la red y regresemos juntos."],
+  [
+    [
+      "keith",
+      "Nos toca atacar los nodos de energía de Neucom durante una operación nocturna. Mantente cerca."
+    ],
+    [
+      "control",
+      "Hay interferencias de microondas. Los nodos están señalados por sectores."
+    ],
+    [
+      "keith",
+      "Si pierdes mi señal, avisa. No sigas volando a ciegas para demostrar que puedes hacerlo solo."
+    ],
+    [
+      "control",
+      "Formación desplegada. Mantengan coordinación durante el ataque a los nodos."
+    ],
+    [
+      "keith",
+      "Yo vigilaré tu zona mientras te aproximas. Tú haz lo mismo cuando me toque entrar."
+    ],
+    [
+      "keith",
+      "Confío en ti, Nemo. Desactivemos la red y regresemos juntos."
+    ]
   ],
-  [ // 23
-    ["control","Transporte de UPEO identificado. Clarkson y Fiona Fitzgerald viajan a bordo. General Resource autoriza la intercepción."],
-    ["keith","Nemo, conoces a quienes van en ese transporte. Esto no va a ser una misión fácil."],
-    ["dision","Ahora vuelas para General Resource. La orden es interceptar el transporte y su escolta."],
-    ["keith","Ya hemos entendido la orden, Dision. No hace falta repetir quiénes son."],
-    ["dision","Quiero asegurarme de que Nemo comprende lo que tendrá que hacer."],
-    ["keith","Mantente conmigo, Nemo. Cubriré la escolta mientras atacas los blancos asignados."],
+  [
+    [
+      "control",
+      "Transporte de UPEO identificado. Clarkson y Fiona Fitzgerald viajan a bordo. General Resource autoriza la intercepción."
+    ],
+    [
+      "keith",
+      "Nemo, conoces a quienes van en ese transporte. Esto no va a ser una misión fácil."
+    ],
+    [
+      "dision",
+      "Ahora vuelas para General Resource. La orden es interceptar el transporte y su escolta."
+    ],
+    [
+      "keith",
+      "Ya hemos entendido la orden, Dision. No hace falta repetir quiénes son."
+    ],
+    [
+      "dision",
+      "Quiero asegurarme de que Nemo comprende lo que tendrá que hacer."
+    ],
+    [
+      "keith",
+      "Mantente conmigo, Nemo. Cubriré la escolta mientras atacas los blancos asignados."
+    ]
   ],
-  [ // 24
-    ["keith","Los bombarderos vuelan sobre nuestra base. Nemo, tú los interceptas mientras yo cubro la zona inferior."],
-    ["dision","Keith, confirma que tu ruta de defensa está despejada."],
-    ["keith","No lo está. Tengo un atacante detrás y no consigo quitármelo de encima."],
-    ["control","Contacto que amenaza a Keith identificado como objetivo secundario."],
-    ["keith","Nemo, si vienes a ayudarme perderás tiempo para alcanzar a los bombarderos."],
-    ["keith","Aun así, necesito apoyo. Derriba al que me persigue si puedes hacerlo."],
+  [
+    [
+      "keith",
+      "Los bombarderos vuelan sobre nuestra base. Nemo, tú los interceptas mientras yo cubro la zona inferior."
+    ],
+    [
+      "dision",
+      "Keith, confirma que tu ruta de defensa está despejada."
+    ],
+    [
+      "keith",
+      "No lo está. Tengo un atacante detrás y no consigo quitármelo de encima."
+    ],
+    [
+      "control",
+      "Contacto que amenaza a Keith identificado como objetivo secundario."
+    ],
+    [
+      "keith",
+      "Nemo, si vienes a ayudarme perderás tiempo para alcanzar a los bombarderos."
+    ],
+    [
+      "keith",
+      "Aun así, necesito apoyo. Derriba al que me persigue si puedes hacerlo."
+    ]
   ],
-  [ // 25
-    ["keith","El transbordador de Neucom está regresando. Debemos impedir que entregue su carga."],
-    ["control","Contactos de escolta identificados. Intercepten el transbordador y las fuerzas de cobertura."],
-    ["keith","Esa carga contiene información de investigación. Por eso General Resource quiere detenerlo."],
-    ["control","Trayectoria de descenso confirmada. El transbordador se aproxima a sus instalaciones."],
-    ["keith","Nemo, encárgate de los blancos asignados. Yo abriré paso entre los aviones de escolta."],
-    ["keith","No prolongues la persecución de un solo enemigo. Lo importante es completar la intercepción."],
+  [
+    [
+      "keith",
+      "El transbordador de Neucom está regresando. Debemos impedir que entregue su carga."
+    ],
+    [
+      "control",
+      "Contactos de escolta identificados. Intercepten el transbordador y las fuerzas de cobertura."
+    ],
+    [
+      "keith",
+      "Esa carga contiene información de investigación. Por eso General Resource quiere detenerlo."
+    ],
+    [
+      "control",
+      "Trayectoria de descenso confirmada. El transbordador se aproxima a sus instalaciones."
+    ],
+    [
+      "keith",
+      "Nemo, encárgate de los blancos asignados. Yo abriré paso entre los aviones de escolta."
+    ],
+    [
+      "keith",
+      "No prolongues la persecución de un solo enemigo. Lo importante es completar la intercepción."
+    ]
   ],
-  [ // 26
-    ["dision","Atacaremos el complejo espacial de Neucom. Nuestras unidades de asalto necesitan protección para avanzar."],
-    ["control","Unidades preparadas. Mantengan despejada la ruta hacia las instalaciones."],
-    ["dision","No basta con tomar el complejo. Neucom todavía puede responder mediante un lanzamiento."],
-    ["control","Detectamos una amenaza para los activos de General Resource en órbita."],
-    ["dision","Nemo, protege primero el avance y después intercepta el lanzamiento señalado."],
-    ["dision","Esta operación puede cambiar nuestra ventaja tecnológica. No la reduzcas a derribar aviones."],
+  [
+    [
+      "dision",
+      "Atacaremos el complejo espacial de Neucom. Nuestras unidades de asalto necesitan protección para avanzar."
+    ],
+    [
+      "control",
+      "Unidades preparadas. Mantengan despejada la ruta hacia las instalaciones."
+    ],
+    [
+      "dision",
+      "No basta con tomar el complejo. Neucom todavía puede responder mediante un lanzamiento."
+    ],
+    [
+      "control",
+      "Detectamos una amenaza para los activos de General Resource en órbita."
+    ],
+    [
+      "dision",
+      "Nemo, protege primero el avance y después intercepta el lanzamiento señalado."
+    ],
+    [
+      "dision",
+      "Esta operación puede cambiar nuestra ventaja tecnológica. No la reduzcas a derribar aviones."
+    ]
   ],
-  [ // 27
-    ["keith","Hay silos de misiles ocultos en el desfiladero. La niebla y las montañas dificultan encontrarlos."],
-    ["control","Inicien la búsqueda por sectores. Los emplazamientos están protegidos por el terreno."],
-    ["keith","Revisa cada sector antes de darlo por despejado. Un silo que no hayas visto todavía puede disparar."],
-    ["control","Relieve elevado a ambos lados de la ruta. Eviten acercarse demasiado a las paredes."],
-    ["keith","Nemo, conserva espacio para maniobrar. No te pegues a mi avión al entrar en el valle."],
-    ["keith","Cuando localices un silo, márcalo y ataca. Yo vigilaré tu salida del desfiladero."],
+  [
+    [
+      "keith",
+      "Hay silos de misiles ocultos en el desfiladero. La niebla y las montañas dificultan encontrarlos."
+    ],
+    [
+      "control",
+      "Inicien la búsqueda por sectores. Los emplazamientos están protegidos por el terreno."
+    ],
+    [
+      "keith",
+      "Revisa cada sector antes de darlo por despejado. Un silo que no hayas visto todavía puede disparar."
+    ],
+    [
+      "control",
+      "Relieve elevado a ambos lados de la ruta. Eviten acercarse demasiado a las paredes."
+    ],
+    [
+      "keith",
+      "Nemo, conserva espacio para maniobrar. No te pegues a mi avión al entrar en el valle."
+    ],
+    [
+      "keith",
+      "Cuando localices un silo, márcalo y ataca. Yo vigilaré tu salida del desfiladero."
+    ]
   ],
-  [ // 28
-    ["dision","Después de atacar los muelles quiero hablar contigo, Nemo. He decidido dejar General Resource."],
-    ["keith","¿Ahora? Estamos entrando en una zona defendida. Primero terminemos la misión."],
-    ["dision","No voy a seguir luchando para que una corporación decida nuestro futuro. Quiero que vengas conmigo."],
-    ["keith","Abandonar la compañía también significa abandonar esta formación. Nemo debe saberlo antes de elegir."],
-    ["dision","Lo sabrá, Keith. Yo le explicaré mi propuesta cuando hayamos destruido los objetivos."],
-    ["keith","Entonces déjalo decidir sin presionarlo. Mientras estemos aquí, Nemo sigue siendo mi compañero."],
+  [
+    [
+      "dision",
+      "Después de atacar los muelles quiero hablar contigo, Nemo. He decidido dejar General Resource."
+    ],
+    [
+      "keith",
+      "¿Ahora? Estamos entrando en una zona defendida. Primero terminemos la misión."
+    ],
+    [
+      "dision",
+      "Mi propuesta va más allá de General Resource. Revisa mi mensaje privado antes de decidir si vienes conmigo."
+    ],
+    [
+      "keith",
+      "Abandonar la compañía también significa abandonar esta formación. Nemo debe saberlo antes de elegir."
+    ],
+    [
+      "dision",
+      "Lo sabrá, Keith. Yo le explicaré mi propuesta cuando hayamos destruido los objetivos."
+    ],
+    [
+      "keith",
+      "Entonces déjalo decidir sin presionarlo. Mientras estemos aquí, Nemo sigue siendo mi compañero."
+    ]
   ],
-  [ // 29
-    ["keith","Dision se ha marchado. Tú decidiste quedarte conmigo en General Resource. Gracias, Nemo."],
-    ["control","Neucom concentra buques y grupos aéreos alrededor de Megafloat."],
-    ["keith","Tenemos que reducir esa fuerza antes de que vuelva a atacar."],
-    ["control","Interdicción autorizada. Confirmen los blancos navales y aéreos."],
-    ["keith","Yo me ocuparé de cubrirte. No voy a dejarte solo porque Dision haya elegido otro bando."],
-    ["keith","Ataquemos juntos y regresemos a la base. Después hablaremos de lo ocurrido con él."],
+  [
+    [
+      "keith",
+      "Dision se ha marchado. Tú decidiste quedarte conmigo en General Resource. Gracias, Nemo."
+    ],
+    [
+      "control",
+      "Neucom concentra buques y grupos aéreos alrededor de Megafloat."
+    ],
+    [
+      "keith",
+      "Tenemos que reducir esa fuerza antes de que vuelva a atacar."
+    ],
+    [
+      "control",
+      "Interdicción autorizada. Confirmen los blancos navales y aéreos."
+    ],
+    [
+      "keith",
+      "Yo me ocuparé de cubrirte. No voy a dejarte solo porque Dision haya elegido otro bando."
+    ],
+    [
+      "keith",
+      "Ataquemos juntos y regresemos a la base. Después hablaremos de lo ocurrido con él."
+    ]
   ],
-  [ // 30
-    ["keith","El Night Raven es peligroso, pero el Sphyrna también lo está protegiendo. Primero ataquemos el portaaviones."],
-    ["control","Sphyrna identificado. Hay una señal secundaria del Night Raven en la zona."],
-    ["keith","Si dañas al Night Raven antes de terminar con el Sphyrna, podremos mantener la persecución."],
-    ["control","El blanco secundario sigue dentro del perímetro de ataque."],
-    ["keith","Nemo, decide si puedes atender al Night Raven sin descuidar los objetivos principales."],
-    ["keith","Yo atacaré las defensas del Sphyrna. Cúbreme mientras intentamos exponer su núcleo."],
+  [
+    [
+      "keith",
+      "El Night Raven es peligroso, pero el Sphyrna también lo está protegiendo. Primero ataquemos el portaaviones."
+    ],
+    [
+      "control",
+      "Sphyrna identificado. Hay una señal secundaria del Night Raven en la zona."
+    ],
+    [
+      "keith",
+      "Si dañas al Night Raven antes de terminar con el Sphyrna, podremos mantener la persecución."
+    ],
+    [
+      "control",
+      "El blanco secundario sigue dentro del perímetro de ataque."
+    ],
+    [
+      "keith",
+      "Nemo, decide si puedes atender al Night Raven sin descuidar los objetivos principales."
+    ],
+    [
+      "keith",
+      "Yo atacaré las defensas del Sphyrna. Cúbreme mientras intentamos exponer su núcleo."
+    ]
   ],
-  [ // 31
-    ["keith","El Night Raven ha entrado en Geofront. Tendremos que seguirlo por el corredor."],
-    ["control","Pasos identificados. Hay soportes estructurales después de las aperturas del túnel."],
-    ["keith","Primero cruza los pasos. Ataca los soportes cuando hayas dejado atrás el tramo que sostienen."],
-    ["control","Alinee la aeronave con la siguiente apertura antes de cruzar."],
-    ["keith","Mira hacia el próximo paso, Nemo. No te quedes observando la pared que acabas de evitar."],
-    ["keith","Mantendré el enlace durante el recorrido. Si pierdes la ruta, sigue las marcas del corredor."],
+  [
+    [
+      "keith",
+      "El Night Raven ha entrado en Geofront. Tendremos que seguirlo por el corredor."
+    ],
+    [
+      "control",
+      "Pasos identificados. Hay soportes estructurales después de las aperturas del túnel."
+    ],
+    [
+      "keith",
+      "Primero cruza los pasos. Ataca los soportes cuando hayas dejado atrás el tramo que sostienen."
+    ],
+    [
+      "control",
+      "Alinee la aeronave con la siguiente apertura antes de cruzar."
+    ],
+    [
+      "keith",
+      "Mira hacia el próximo paso, Nemo. No te quedes observando la pared que acabas de evitar."
+    ],
+    [
+      "keith",
+      "Mantendré el enlace durante el recorrido. Si pierdes la ruta, sigue las marcas del corredor."
+    ]
   ],
-  [ // 32
-    ["keith","El Night Raven está sobre Port Edwards. Tenemos que detenerlo antes de que continúe atacando."],
-    ["control","Night Raven identificado. Sus sistemas defensivos siguen activos."],
-    ["keith","Ya hemos visto cómo maniobra. No entres sin comprobar por dónde puedes salir."],
-    ["control","Coordinen los ataques durante las fases del enfrentamiento."],
-    ["keith","Nemo, si consigues una oportunidad para alcanzarlo, dispara. No esperes mi autorización."],
-    ["keith","Si me aproximo yo, cúbreme. Solo podremos detener al Night Raven si trabajamos juntos."],
+  [
+    [
+      "keith",
+      "El Night Raven está sobre Port Edwards. Tenemos que detenerlo antes de que continúe atacando."
+    ],
+    [
+      "control",
+      "Night Raven identificado. Sus sistemas defensivos siguen activos."
+    ],
+    [
+      "keith",
+      "Ya hemos visto cómo maniobra. No entres sin comprobar por dónde puedes salir."
+    ],
+    [
+      "control",
+      "Coordinen los ataques durante las fases del enfrentamiento."
+    ],
+    [
+      "keith",
+      "Nemo, si consigues una oportunidad para alcanzarlo, dispara. No esperes mi autorización."
+    ],
+    [
+      "keith",
+      "Si me aproximo yo, cúbreme. Solo podremos detener al Night Raven si trabajamos juntos."
+    ]
   ],
-  [ // 33
-    ["control","Ocho aparatos no identificados se acercan a Port Edwards. Su designación es Geopelia."],
-    ["archive","El canal de Keith no responde. Nemo continúa la operación sin su compañero."],
-    ["control","Intercepte los ocho contactos antes de que continúen el ataque sobre la ciudad."],
-    ["archive","Radar actualizado: ocho objetivos principales y ningún avión de apoyo asignado."],
-    ["control","Mantenga identificada cada señal durante la intercepción de los Geopelia."],
-    ["archive","El canal de Keith permanece abierto, pero no se recibe ninguna transmisión."],
+  [
+    [
+      "control",
+      "Ocho aparatos no identificados se acercan a Port Edwards. Su designación es Geopelia."
+    ],
+    [
+      "archive",
+      "El canal de Keith no responde. Nemo continúa la operación sin su compañero."
+    ],
+    [
+      "control",
+      "Intercepte los ocho contactos antes de que continúen el ataque sobre la ciudad."
+    ],
+    [
+      "archive",
+      "Radar actualizado: ocho objetivos principales y ningún avión de apoyo asignado."
+    ],
+    [
+      "control",
+      "Mantenga identificada cada señal durante la intercepción de los Geopelia."
+    ],
+    [
+      "archive",
+      "El canal de Keith permanece abierto, pero no se recibe ninguna transmisión."
+    ]
   ],
-  [ // 34
-    ["dision","Ouroboros atacará las instalaciones de Port Edwards. Nemo, cumple los objetivos asignados."],
-    ["control","Instalaciones marcadas. También se detectan helicópteros que evacúan al personal de Neucom."],
-    ["dision","Esos helicópteros pueden permitir que los mandos de Neucom escapen de la ciudad."],
-    ["control","La evacuación sigue en curso. Los helicópteros están señalados como blancos secundarios."],
-    ["dision","Si decides interceptarlos, hazlo antes de completar el ataque principal."],
-    ["dision","No les des tiempo para reorganizarse. Necesito una confirmación de los blancos que hayas alcanzado."],
+  [
+    [
+      "dision",
+      "Ouroboros atacará las instalaciones de Port Edwards. Nemo, cumple los objetivos asignados."
+    ],
+    [
+      "control",
+      "Instalaciones marcadas. También se detectan helicópteros que evacúan al personal de Neucom."
+    ],
+    [
+      "dision",
+      "Esos helicópteros pueden permitir que los mandos de Neucom escapen de la ciudad."
+    ],
+    [
+      "control",
+      "La evacuación sigue en curso. Los helicópteros están señalados como blancos secundarios."
+    ],
+    [
+      "dision",
+      "Si decides interceptarlos, hazlo antes de completar el ataque principal."
+    ],
+    [
+      "dision",
+      "No les des tiempo para reorganizarse. Necesito una confirmación de los blancos que hayas alcanzado."
+    ]
   ],
-  [ // 35
-    ["dision","Las fuerzas restantes de Neucom preparan un contraataque alrededor de Megafloat. Vamos a detenerlo."],
-    ["control","Contraataque y lanzamiento de misiles confirmados. El Sphyrna proporciona apoyo."],
-    ["dision","Nemo, destruye las unidades que protegen el lanzamiento y atiende la amenaza señalada."],
-    ["control","Contactos de Neucom dentro del alcance de ataque."],
-    ["dision","Mantén coordinada tu aproximación con el apoyo del Sphyrna. No te expongas sin necesidad."],
-    ["dision","Cuando terminemos aquí, dirigiremos la ofensiva contra las fuerzas que aún se opongan a Ouroboros."],
+  [
+    [
+      "dision",
+      "Las fuerzas restantes de Neucom preparan un contraataque alrededor de Megafloat. Vamos a detenerlo."
+    ],
+    [
+      "control",
+      "Contraataque y lanzamiento de misiles confirmados. El Sphyrna proporciona apoyo."
+    ],
+    [
+      "dision",
+      "Nemo, destruye las unidades que protegen el lanzamiento y atiende la amenaza señalada."
+    ],
+    [
+      "control",
+      "Contactos de Neucom dentro del alcance de ataque."
+    ],
+    [
+      "dision",
+      "Mantén coordinada tu aproximación con el apoyo del Sphyrna. No te expongas sin necesidad."
+    ],
+    [
+      "dision",
+      "Cuando terminemos aquí, dirigiremos la ofensiva contra las fuerzas que aún se opongan a Ouroboros."
+    ]
   ],
-  [ // 36
-    ["dision","Ahora atacaremos el mando de UPEO. Park sigue intentando conservar su autoridad."],
-    ["park","Dision, nuestra cooperación no incluía un ataque contra mi centro de mando."],
-    ["dision","La cooperación ha terminado. No voy a dejar que utilices UPEO para detenernos."],
-    ["park","Nemo, yo fui su comandante. Todavía puede regresar y obedecer mis órdenes."],
-    ["dision","Nemo ha elegido seguir a Ouroboros, Park. Tus órdenes ya no lo controlan."],
-    ["dision","Destruye las defensas y avanza hacia el centro de mando. Park no debe escapar de este ataque."],
+  [
+    [
+      "dision",
+      "Ahora atacaremos el mando de UPEO. Park sigue intentando conservar su autoridad."
+    ],
+    [
+      "park",
+      "Dision, nuestra cooperación no incluía un ataque contra mi centro de mando."
+    ],
+    [
+      "dision",
+      "La cooperación ha terminado. No voy a dejar que utilices UPEO para detenernos."
+    ],
+    [
+      "park",
+      "Nemo, yo fui su comandante. Todavía puede regresar y obedecer mis órdenes."
+    ],
+    [
+      "dision",
+      "Nemo ha elegido seguir a Ouroboros, Park. Tus órdenes ya no lo controlan."
+    ],
+    [
+      "dision",
+      "Destruye las defensas y avanza hacia el centro de mando. Park no debe escapar de este ataque."
+    ]
   ],
-  [ // 37
-    ["keith","Nemo, he vuelto para ayudarte. Necesitamos detener al Night Raven y destruir el Sphyrna."],
-    ["dision","Keith, esta operación no te corresponde. Apártate de nuestra formación."],
-    ["keith","No pienso retirarme, Dision. Nemo necesita apoyo y voy a dárselo."],
-    ["rena","Hay algo interfiriendo conmigo. No consigo recuperar el control."],
-    ["dision","Nemo, deja de acercarte a Rena. No permitiré que sigas interfiriendo con ella."],
-    ["keith","Yo intentaré abrir una oportunidad de ataque. Nemo, concéntrate en el Night Raven y cubre mi aproximación."],
+  [
+    [
+      "keith",
+      "Nemo, he vuelto para ayudarte. Necesitamos detener al Night Raven y destruir el Sphyrna."
+    ],
+    [
+      "dision",
+      "Keith, esta operación no te corresponde. Apártate de nuestra formación."
+    ],
+    [
+      "keith",
+      "No pienso retirarme, Dision. Nemo necesita apoyo y voy a dárselo."
+    ],
+    [
+      "rena",
+      "Hay algo interfiriendo conmigo. No consigo recuperar el control."
+    ],
+    [
+      "dision",
+      "Nemo, deja de acercarte a Rena. No permitiré que sigas interfiriendo con ella."
+    ],
+    [
+      "keith",
+      "Yo intentaré abrir una oportunidad de ataque. Nemo, concéntrate en el Night Raven y cubre mi aproximación."
+    ]
   ],
-  [ // 38
-    ["dision","Has conseguido seguirme hasta la Electrosphere. Estamos dentro del espacio digital, no en el cielo de antes."],
-    ["dision","Nunca respondes a mis preguntas. Pensaba que estabas de acuerdo conmigo, pero ya no estoy seguro."],
-    ["dision","Quiero saber quién eres y por qué puedes localizarme incluso en este lugar."],
-    ["dision","No te comportas como un piloto al que yo haya enseñado. Hay algo que no comprendo de ti."],
-    ["dision","¿Quién te ha preparado para perseguirme dentro de la red?"],
-    ["dision","Nemo, responde. Necesito saber por qué estás aquí antes de que destruyas mi presencia digital."],
+  [
+    [
+      "dision",
+      "Has conseguido seguirme hasta la Electrosphere. Estamos dentro del espacio digital, no en el cielo de antes."
+    ],
+    [
+      "dision",
+      "Nunca respondes a mis preguntas. Pensaba que estabas de acuerdo conmigo, pero ya no estoy seguro."
+    ],
+    [
+      "dision",
+      "Quiero saber quién eres y por qué puedes localizarme incluso en este lugar."
+    ],
+    [
+      "dision",
+      "No te comportas como un piloto al que yo haya enseñado. Hay algo que no comprendo de ti."
+    ],
+    [
+      "dision",
+      "¿Quién te ha preparado para perseguirme dentro de la red?"
+    ],
+    [
+      "dision",
+      "Nemo, responde. Necesito saber por qué estás aquí antes de que destruyas mi presencia digital."
+    ]
   ],
-  [ // 39
-    ["cynthia","Bienvenido a Neucom, Nemo. Soy Cynthia, la hermana de Fiona. Ella me ha hablado de ti."],
-    ["fiona","Le dije que podíamos confiar en ti. Espero que mi hermana te dé una bienvenida tranquila."],
-    ["cynthia","Tendrás una nueva aeronave para atacar las instalaciones de General Resource en White Valley."],
-    ["fiona","Nemo, yo volaré contigo. Puedes preguntarme si necesitas conocer nuestra nueva formación."],
-    ["cynthia","También hay siete radares y depósitos secundarios. Destrúyelos antes del último blanco principal si decides completar esa tarea."],
-    ["fiona","Cubriré tu aproximación a la base. Empecemos por identificar bien los objetivos de General Resource."],
+  [
+    [
+      "cynthia",
+      "Bienvenido a Neucom, Nemo. Soy Cynthia, la hermana de Fiona. Ella me ha hablado de ti."
+    ],
+    [
+      "fiona",
+      "Le dije que podíamos confiar en ti. Espero que mi hermana te dé una bienvenida tranquila."
+    ],
+    [
+      "cynthia",
+      "Tendrás una nueva aeronave para atacar las instalaciones de General Resource en White Valley."
+    ],
+    [
+      "fiona",
+      "Nemo, yo volaré contigo. Puedes preguntarme si necesitas conocer nuestra nueva formación."
+    ],
+    [
+      "cynthia",
+      "También hay siete radares y depósitos secundarios. Destrúyelos antes del último blanco principal si decides completar esa tarea."
+    ],
+    [
+      "fiona",
+      "Cubriré tu aproximación a la base. Empecemos por identificar bien los objetivos de General Resource."
+    ]
   ],
-  [ // 40
-    ["cynthia","El transbordador de Neucom está regresando con información de investigación. General Resource quiere interceptarlo."],
-    ["fiona","Hay una tripulación dentro. Nemo, no dejemos que los atacantes alcancen el transbordador."],
-    ["cynthia","Protegeremos a la tripulación y su carga. Para eso tenemos que despejar toda su ruta de descenso."],
-    ["fiona","Yo cubriré el tramo más cercano al transbordador. Necesito que vigiles el resto de los contactos."],
-    ["cynthia","Nemo, intercepta a los atacantes y mantén una distancia que te permita proteger al aliado."],
-    ["fiona","Cuando aterrice habrá tiempo para discutir. Ahora concentrémonos en llevarlo a salvo."],
+  [
+    [
+      "cynthia",
+      "El transbordador de Neucom está regresando con información de investigación. General Resource quiere interceptarlo."
+    ],
+    [
+      "fiona",
+      "Hay una tripulación dentro. Nemo, no dejemos que los atacantes alcancen el transbordador."
+    ],
+    [
+      "cynthia",
+      "Protegeremos a la tripulación y su carga. Para eso tenemos que despejar toda su ruta de descenso."
+    ],
+    [
+      "fiona",
+      "Yo cubriré el tramo más cercano al transbordador. Necesito que vigiles el resto de los contactos."
+    ],
+    [
+      "cynthia",
+      "Nemo, intercepta a los atacantes y mantén una distancia que te permita proteger al aliado."
+    ],
+    [
+      "fiona",
+      "Cuando aterrice habrá tiempo para discutir. Ahora concentrémonos en llevarlo a salvo."
+    ]
   ],
-  [ // 41
-    ["control","Inserción orbital confirmada. Hay cuatro satélites láser de General Resource dentro de su área."],
-    ["control","Revise su ruta antes de acercarse. Cada satélite puede seguir atacando hasta quedar desactivado."],
-    ["archive","Nemo vuela sin acompañantes. La pantalla muestra los cuatro contactos sobre el horizonte terrestre."],
-    ["control","Necesitamos confirmar la desactivación de cada sistema láser, no solo daños en su blindaje."],
-    ["archive","No hay otros aviones en la formación orbital. El apoyo llega por el canal de Neucom Space."],
-    ["control","Tiene autorización para comenzar. Desactive los cuatro satélites y conserve una ruta de regreso."],
+  [
+    [
+      "control",
+      "Inserción orbital confirmada. Hay cuatro satélites láser de General Resource dentro de su área."
+    ],
+    [
+      "control",
+      "Revise su ruta antes de acercarse. Cada satélite puede seguir atacando hasta quedar desactivado."
+    ],
+    [
+      "archive",
+      "Nemo vuela sin acompañantes. La pantalla muestra los cuatro contactos sobre el horizonte terrestre."
+    ],
+    [
+      "control",
+      "Necesitamos confirmar la desactivación de cada sistema láser, no solo daños en su blindaje."
+    ],
+    [
+      "archive",
+      "No hay otros aviones en la formación orbital. El apoyo llega por el canal de Neucom Space."
+    ],
+    [
+      "control",
+      "Tiene autorización para comenzar. Desactive los cuatro satélites y conserve una ruta de regreso."
+    ]
   ],
-  [ // 42
-    ["fiona","Un satélite de reconocimiento de Neucom ha caído al océano. Debemos proteger al equipo que recuperará sus datos."],
-    ["cynthia","General Resource también busca esa información. No podemos dejar que capture al equipo ni la carga."],
-    ["fiona","Nemo, mantente cerca de las unidades de recuperación. Son ellas las que tienen que volver con los datos."],
-    ["cynthia","Yo coordinaré la cobertura. Intercepta a los enemigos antes de que alcancen al equipo."],
-    ["fiona","Cynthia, confirmaré también que la tripulación siga a salvo. La información no es lo único que protegemos."],
-    ["fiona","Vamos, Nemo. Despejemos la zona para que puedan trabajar y regresar."],
+  [
+    [
+      "fiona",
+      "Un satélite de reconocimiento de Neucom ha caído al océano. Debemos proteger al equipo que recuperará sus datos."
+    ],
+    [
+      "cynthia",
+      "General Resource también busca esa información. No podemos dejar que capture al equipo ni la carga."
+    ],
+    [
+      "fiona",
+      "Nemo, mantente cerca de las unidades de recuperación. Son ellas las que tienen que volver con los datos."
+    ],
+    [
+      "cynthia",
+      "Yo coordinaré la cobertura. Intercepta a los enemigos antes de que alcancen al equipo."
+    ],
+    [
+      "fiona",
+      "Cynthia, confirmaré también que la tripulación siga a salvo. La información no es lo único que protegemos."
+    ],
+    [
+      "fiona",
+      "Vamos, Nemo. Despejemos la zona para que puedan trabajar y regresar."
+    ]
   ],
-  [ // 43
-    ["cynthia","Me ofrecí para la sublimación: copiar la conciencia a una red digital. Neucom ha detenido mi participación."],
-    ["fiona","Me preocupa que arriesgues tu cuerpo en un experimento que todavía no es seguro."],
-    ["cynthia","Sí. Quiero descubrir cómo sería vivir sin los límites físicos del cuerpo."],
-    ["fiona","¿Sigues queriendo participar aunque la compañía lo haya detenido?"],
-    ["cynthia","Sí. Neucom me ha pedido reconsiderarlo, pero no quiero renunciar al proyecto."],
-    ["fiona","¿Y si no puedes regresar? Tengo miedo de perderte."],
-    ["cynthia","Lo sé, pero esta decisión sobre mi vida me corresponde."],
-    ["fiona","Terminemos la misión sobre White Valley. Después seguiremos hablando."],
+  [
+    [
+      "cynthia",
+      "Me ofrecí para la sublimación: copiar la conciencia a una red digital. Neucom ha detenido mi participación."
+    ],
+    [
+      "fiona",
+      "Me preocupa que arriesgues tu cuerpo en un experimento que todavía no es seguro."
+    ],
+    [
+      "cynthia",
+      "Sí. Quiero descubrir cómo sería vivir sin los límites físicos del cuerpo."
+    ],
+    [
+      "fiona",
+      "¿Sigues queriendo participar aunque la compañía lo haya detenido?"
+    ],
+    [
+      "cynthia",
+      "Sí. Neucom me ha pedido reconsiderarlo, pero no quiero renunciar al proyecto."
+    ],
+    [
+      "fiona",
+      "¿Y si no puedes regresar? Tengo miedo de perderte."
+    ],
+    [
+      "cynthia",
+      "Lo sé, pero esta decisión sobre mi vida me corresponde."
+    ],
+    [
+      "fiona",
+      "Terminemos la misión sobre White Valley. Después seguiremos hablando."
+    ]
   ],
-  [ // 44
-    ["cynthia","La noticia confirma que Fiona murió en una explosión en una base de Neucom. Mi hermana estaba allí.","Cynthia acaba de leer la noticia sobre su hermana."],
-    ["dision","Cynthia, la ofensiva continúa. Debemos completar la operación de Ouroboros."],
-    ["cynthia","Me uní porque creía en lo que prometías. Ahora Fiona está muerta y necesito entender qué está pasando."],
-    ["dision","Rena debe llegar al Night Raven. Tu misión es abrir el acceso hasta ella."],
-    ["cynthia","Entonces debemos despejar la pista y proteger el avión que transportará a la piloto."],
-    ["dision","Concéntrate en la operación. Intercepta las fuerzas que bloquean el acceso al Night Raven."],
+  [
+    [
+      "cynthia",
+      "La noticia confirma que Fiona murió en una explosión en una base de Neucom. Mi hermana estaba allí.",
+      "Cynthia acaba de leer la noticia sobre su hermana."
+    ],
+    [
+      "dision",
+      "Cynthia, la ofensiva continúa. Debemos completar la operación de Ouroboros."
+    ],
+    [
+      "cynthia",
+      "Me uní porque creía en lo que prometías. Ahora Fiona está muerta y necesito entender qué está pasando."
+    ],
+    [
+      "dision",
+      "Rena debe llegar al Night Raven. Tu misión es abrir el acceso hasta ella."
+    ],
+    [
+      "cynthia",
+      "Entonces debemos despejar la pista y proteger el avión que transportará a la piloto."
+    ],
+    [
+      "dision",
+      "Concéntrate en la operación. Intercepta las fuerzas que bloquean el acceso al Night Raven."
+    ]
   ],
-  [ // 45
-    ["cynthia","He decidido abandonar a Dision. No estoy de acuerdo con que imponga sus planes mediante la guerra."],
-    ["control","Fuerzas de Ouroboros identificadas sobre el océano. Prepare la intercepción."],
-    ["cynthia","Creí que Dision quería mostrar otra forma de vivir en la Electrosphere. Su prioridad es demostrar su poder."],
-    ["control","La formación espera su confirmación para avanzar contra Ouroboros."],
-    ["cynthia","Confirmo. Nemo, voy a perseguir a Dision e intentar detener el Night Raven."],
-    ["cynthia","Te pido que me acompañes, pero quiero que decidas conociendo por qué he cambiado de bando."],
+  [
+    [
+      "cynthia",
+      "He decidido abandonar a Dision. No estoy de acuerdo con que imponga sus planes mediante la guerra."
+    ],
+    [
+      "control",
+      "Fuerzas de Ouroboros identificadas sobre el océano. Prepare la intercepción."
+    ],
+    [
+      "cynthia",
+      "Creí que Dision quería mostrar otra forma de vivir en la Electrosphere. Su prioridad es demostrar su poder."
+    ],
+    [
+      "control",
+      "La formación espera su confirmación para avanzar contra Ouroboros."
+    ],
+    [
+      "cynthia",
+      "Confirmo. Nemo, voy a perseguir a Dision e intentar detener el Night Raven."
+    ],
+    [
+      "cynthia",
+      "Te pido que me acompañes, pero quiero que decidas conociendo por qué he cambiado de bando."
+    ]
   ],
-  [ // 46
-    ["cynthia","El Night Raven ha entrado en Geofront. Vamos a seguirlo por el corredor."],
-    ["control","Ruta de persecución marcada. Hay varias aperturas consecutivas."],
-    ["cynthia","Nemo, comprueba la posición del siguiente paso antes de acelerar. Aquí hay poco espacio para corregir."],
-    ["control","Mantenga la alineación con cada apertura y evite las paredes del túnel."],
-    ["cynthia","Fiona habría protestado por el riesgo de esta persecución. Sigo pensando en ella."],
-    ["cynthia","Ahora necesito concentrarme. Acompáñame hasta la salida para no perder al Night Raven."],
+  [
+    [
+      "cynthia",
+      "El Night Raven ha entrado en Geofront. Vamos a seguirlo por el corredor."
+    ],
+    [
+      "control",
+      "Ruta de persecución marcada. Hay varias aperturas consecutivas."
+    ],
+    [
+      "cynthia",
+      "Nemo, comprueba la posición del siguiente paso antes de acelerar. Aquí hay poco espacio para corregir."
+    ],
+    [
+      "control",
+      "Mantenga la alineación con cada apertura y evite las paredes del túnel."
+    ],
+    [
+      "cynthia",
+      "Fiona habría protestado por el riesgo de esta persecución. Sigo pensando en ella."
+    ],
+    [
+      "cynthia",
+      "Ahora necesito concentrarme. Acompáñame hasta la salida para no perder al Night Raven."
+    ]
   ],
-  [ // 47
-    ["simon","Soy Simon, investigador de Neucom. Puedo ayudarles a reducir la ventaja del Night Raven."],
-    ["cynthia","¿Por qué intervienes ahora, después de que llevamos tanto tiempo persiguiéndolo?"],
-    ["simon","Los generadores Aeon de la ciudad aumentan su capacidad de maniobra. Desactívenlos para poder alcanzarlo."],
-    ["cynthia","Confirmaré los generadores. Nemo, dejemos de perseguirlo hasta reducir esa ventaja."],
-    ["simon","No demoren el ataque. El Night Raven puede volver a escapar mientras los generadores sigan funcionando."],
-    ["cynthia","Entendido. Primero los generadores Aeon; después atacaremos al Night Raven."],
+  [
+    [
+      "simon",
+      "Soy Simon, investigador de Neucom. Puedo ayudarles a reducir la ventaja del Night Raven."
+    ],
+    [
+      "cynthia",
+      "¿Por qué intervienes ahora, después de que llevamos tanto tiempo persiguiéndolo?"
+    ],
+    [
+      "simon",
+      "Los generadores Aeon de la ciudad aumentan su capacidad de maniobra. Desactívenlos para poder alcanzarlo."
+    ],
+    [
+      "cynthia",
+      "Confirmaré los generadores. Nemo, dejemos de perseguirlo hasta reducir esa ventaja."
+    ],
+    [
+      "simon",
+      "No demoren el ataque. El Night Raven puede volver a escapar mientras los generadores sigan funcionando."
+    ],
+    [
+      "cynthia",
+      "Entendido. Primero los generadores Aeon; después atacaremos al Night Raven."
+    ]
   ],
-  [ // 48
-    ["fiona","Quiero alcanzar a Cynthia. Para acercarnos a Ouroboros tendremos que superar a su escolta."],
-    ["control","Interceptores identificados. Hay tres sectores del Sphyrna señalados como objetivos secundarios."],
-    ["fiona","Cynthia, soy Fiona. Si me escuchas, responde. Quiero hablar contigo antes de que esto empeore."],
-    ["control","No recibimos respuesta de Cynthia. La llamada permanece abierta."],
-    ["fiona","Sigue intentando comunicarte con ella. Nemo, ayúdame a despejar la aproximación."],
-    ["fiona","Quiero encontrar a mi hermana, pero no podremos llegar si esos interceptores nos derriban primero."],
+  [
+    [
+      "fiona",
+      "Quiero alcanzar a Cynthia. Para acercarnos a Ouroboros tendremos que superar a su escolta."
+    ],
+    [
+      "control",
+      "Interceptores identificados. Hay tres sectores del Sphyrna señalados como objetivos secundarios."
+    ],
+    [
+      "fiona",
+      "Cynthia, soy Fiona. Si me escuchas, responde. Quiero hablar contigo antes de que esto empeore."
+    ],
+    [
+      "control",
+      "No recibimos respuesta de Cynthia. La llamada permanece abierta."
+    ],
+    [
+      "fiona",
+      "Sigue intentando comunicarte con ella. Nemo, ayúdame a despejar la aproximación."
+    ],
+    [
+      "fiona",
+      "Quiero encontrar a mi hermana, pero no podremos llegar si esos interceptores nos derriban primero."
+    ]
   ],
-  [ // 49
-    ["fiona","El Sphyrna sigue operativo. Tenemos que continuar el ataque contra sus defensas."],
-    ["control","Hay fuerzas de Ouroboros cubriendo la retirada del portaaviones."],
-    ["fiona","Nemo, supera primero esa escolta. Si Cynthia está con ellos, quiero intentar comunicarme con ella."],
-    ["control","No recibimos respuesta de Cynthia en el canal de llamada."],
-    ["fiona","No cierres la llamada. Necesito que mi hermana sepa que sigo intentando encontrarla."],
-    ["fiona","Nemo, quédate conmigo mientras avanzamos. No quiero perderte también durante esta operación."],
+  [
+    [
+      "fiona",
+      "El Sphyrna sigue operativo. Tenemos que continuar el ataque contra sus defensas."
+    ],
+    [
+      "control",
+      "Hay fuerzas de Ouroboros cubriendo la retirada del portaaviones."
+    ],
+    [
+      "fiona",
+      "Nemo, supera primero esa escolta. Si Cynthia está con ellos, quiero intentar comunicarme con ella."
+    ],
+    [
+      "control",
+      "No recibimos respuesta de Cynthia en el canal de llamada."
+    ],
+    [
+      "fiona",
+      "No cierres la llamada. Necesito que mi hermana sepa que sigo intentando encontrarla."
+    ],
+    [
+      "fiona",
+      "Nemo, quédate conmigo mientras avanzamos. No quiero perderte también durante esta operación."
+    ]
   ],
-  [ // 50
-    ["fiona","El ataque ha devastado Megafloat. Tenemos que detener al Sphyrna antes de que vuelva a disparar."],
-    ["control","Daños catastróficos confirmados. Objetivo prioritario: destruir el portaaviones Sphyrna."],
-    ["fiona","Estoy furiosa por lo que han hecho, pero sé que no podemos entrar sin cubrirnos."],
-    ["control","Nemo y Fiona, confirmen una aproximación coordinada."],
-    ["fiona","Confirmo. Atacaremos sus defensas antes de acercarnos a los sistemas internos."],
-    ["fiona","Nemo, avísame si me separo demasiado. Necesito que sigamos trabajando juntos aunque esté enfadada."],
+  [
+    [
+      "fiona",
+      "El ataque ha devastado Megafloat. Tenemos que detener al Sphyrna antes de que vuelva a disparar."
+    ],
+    [
+      "control",
+      "Daños catastróficos confirmados. Objetivo prioritario: destruir el portaaviones Sphyrna."
+    ],
+    [
+      "fiona",
+      "Estoy furiosa por lo que han hecho, pero sé que no podemos entrar sin cubrirnos."
+    ],
+    [
+      "control",
+      "Nemo y Fiona, confirmen una aproximación coordinada."
+    ],
+    [
+      "fiona",
+      "Confirmo. Atacaremos sus defensas antes de acercarnos a los sistemas internos."
+    ],
+    [
+      "fiona",
+      "Nemo, avísame si me separo demasiado. Necesito que sigamos trabajando juntos aunque esté enfadada."
+    ]
   ],
-  [ // 51
-    ["fiona","El Night Raven y el avión de Dision han entrado en Geofront. Seguiremos sus señales."],
-    ["control","Aperturas del corredor identificadas. Mantengan el contacto con los dos fugitivos."],
-    ["fiona","Nemo, no te acerques demasiado a mi avión. Necesitamos espacio para esquivar las paredes."],
-    ["control","Siguiente apertura dentro del alcance. Prepare la alineación."],
-    ["fiona","Quiero que terminemos esta persecución y podamos regresar."],
-    ["fiona","Primero salgamos de este tramo. Mantente visible y sigue las marcas de navegación."],
+  [
+    [
+      "fiona",
+      "El Night Raven y el avión de Dision han entrado en Geofront. Seguiremos sus señales."
+    ],
+    [
+      "control",
+      "Aperturas del corredor identificadas. Mantengan el contacto con los dos fugitivos."
+    ],
+    [
+      "fiona",
+      "Nemo, no te acerques demasiado a mi avión. Necesitamos espacio para esquivar las paredes."
+    ],
+    [
+      "control",
+      "Siguiente apertura dentro del alcance. Prepare la alineación."
+    ],
+    [
+      "fiona",
+      "Quiero que terminemos esta persecución y podamos regresar."
+    ],
+    [
+      "fiona",
+      "Primero salgamos de este tramo. Mantente visible y sigue las marcas de navegación."
+    ]
   ],
-  [ // 52
-    ["fiona","Hemos localizado al Night Raven. Se mueve demasiado rápido para atacarlo de forma segura."],
-    ["control","Simon prepara una intervención en los generadores Aeon para reducir esa ventaja."],
-    ["simon","Estoy listo para interferir con su alimentación. Ataquen cuando el sistema indique que es vulnerable."],
-    ["fiona","Nemo, espera la oportunidad y aproxímate conmigo. No persigamos al avión mientras conserve toda su ventaja."],
-    ["simon","Después tendremos que impedir que Dision escape a la Electrosphere. Mantengan vigilado su aparato."],
-    ["fiona","Primero el Night Raven y después Dision. Yo cubriré a Nemo durante las dos intercepciones."],
-  ],
+  [
+    [
+      "fiona",
+      "Hemos localizado al Night Raven. Se mueve demasiado rápido para atacarlo de forma segura."
+    ],
+    [
+      "control",
+      "Simon prepara una intervención en los generadores Aeon para reducir esa ventaja."
+    ],
+    [
+      "simon",
+      "Estoy listo para interferir con su alimentación. Ataquen cuando el sistema indique que es vulnerable."
+    ],
+    [
+      "fiona",
+      "Nemo, espera la oportunidad y aproxímate conmigo. No persigamos al avión mientras conserve toda su ventaja."
+    ],
+    [
+      "simon",
+      "Después tendremos que impedir que Dision escape a la Electrosphere. Mantengan vigilado su aparato."
+    ],
+    [
+      "fiona",
+      "Primero el Night Raven y después Dision. Yo cubriré a Nemo durante las dos intercepciones."
+    ]
+  ]
 ];

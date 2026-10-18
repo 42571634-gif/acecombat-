@@ -1,4 +1,4 @@
-import { chapterList } from './campaign-data.js?v=0.7.1';
+import { chapterList } from './campaign-data.js?v=0.8.0';
 
 export const TYPE_RULES = {
   intercept:{label:'Intercepción',verb:'Destruir',hint:'Intercepta los contactos aéreos. Si escapan de pantalla volverán en otra pasada con el daño recibido; el tiempo de misión sigue contando.'},
@@ -32,10 +32,10 @@ export const missions = Object.fromEntries(chapterList.map(chapter => {
   return [id,{
     ...chapter, title:`${String(number).padStart(2,'0')} · ${chapter.name.toUpperCase()}`,
     total, time:type==='boss' ? 150 : secondary[id] ? 110 : 90,
-    targetDomain:number===43?'air':null,
+    targetDomain:null,
     secondary:secondary[id] || null, civilianCount:hasCivilians?1:0,
     supportCount:number===31?2:0, bossCount:bossNames[id]?.length||1, bossNames:bossNames[id]||[], seed:number*7919,
-    rules:TYPE_RULES[number===43?'intercept':type],
+    rules:TYPE_RULES[type],
     adaptationNote:'Objetivos, tiempos y radar simplificados para esta adaptación. La fuente enlazada documenta la misión original.',
   }];
 }));

@@ -1,4 +1,8 @@
-# Electrosphere 2040 · 52 misiones · v0.7.1
+# Electrosphere 2040 · 52 misiones · v0.8.0
+
+La v0.8 revisa el contexto de las 52 misiones y valida **8–20 intervenciones por misión en total**: conversación previa, radio activada y cierre, sin narración. Incluye radio enemiga documentada, registro consultable desde pausa/resultados/archivo, última victoria y último intento por misión y modo, animaciones de desenlace y resumen con continuación manual. Los fondos cubren todo el campo; los encuentros ordinarios varían con semillas reproducibles y las condiciones especiales se mantienen fijas. [Auditoría de las 52 misiones](docs/MISSION_REVIEW.md).
+
+El guardado v3 migra partidas v1/v2. IndexedDB conserva el registro de radio por separado; si está bloqueado, el juego avisa y permite consultar los mensajes durante la sesión. No requiere instalar dependencias. `npm run check` ejecuta sintaxis y pruebas; `node scripts/review-missions.mjs` regenera las fichas y valida los recuentos.
 
 La v0.7.1 contrasta Awakening directamente con su transcripción: incluye a Rena, sitúa la ofensiva de Neucom y corrige los mensajes de la operación. El archivo de transcripciones de ese sitio es la base por capítulo; el [registro de revisión](docs/TEXT_REVIEW.md) distingue los apartados contrastados de las simplificaciones jugables.
 

@@ -1,4 +1,4 @@
-# Modelo narrativo y persistencia · versión 2
+# Modelo narrativo y persistencia · versión 3
 
 ## Campañas
 
@@ -16,17 +16,18 @@ validateGraph comprueba destinos, tipos, misiones, opciones únicas, condiciones
 
 ## campaignState
 
-- version: 2.
+- version: 3.
 - campaignId: jp52 o demo-v1.
 - simulatorMission: null o identificador de la misión de simulador.
 - node, faction: posición y alianza actuales.
 - decisions: nodo, opción y facción antes/después.
 - results: misión, victoria/derrota, bajas, objetivos principales completados, objetivos secundarios, integridad y tiempo restante. La campaña demo conserva su formato histórico de resultados.
-- history: decisiones y resultados reproducibles.
+- pendingAttempt: null o {seed, difficulty, generator}; conserva el plan de una misión pendiente.
+- history: decisiones, inicios de intento, reintentos y resultados reproducibles. Los resultados procedurales incluyen su descriptor de intento.
 
 Los contadores se calculan desde victorias. Reconocimiento, contención ANB y pasos de navegación completan objetivos sin producir bajas. Los dos soportes de Geofront Attack se destruyen después de cruzar el corredor y sí cuentan como blancos destruidos. Los grupos secundarios guardan conteos con máximos definidos por misión; las bajas deben ser compatibles con el tipo y los objetivos.
 
-validateCampaign reconstruye el estado desde su inicio y compara todos sus campos con el candidato. La versión 1 se valida primero con el motor histórico y se migra a versión 2 con campaignId demo-v1. Versiones desconocidas, historiales incoherentes y resultados imposibles se rechazan.
+validateCampaign reconstruye el estado desde su inicio y compara todos sus campos con el candidato. La versión 1 se valida primero con el motor histórico y se migra a versión 3 con campaignId demo-v1. La versión 2 se reproduce con cantidades fijas y se migra sin cambiar decisiones ni resultados. Versiones desconocidas, historiales incoherentes y resultados imposibles se rechazan.
 
 ## Ranuras
 
@@ -34,7 +35,7 @@ validateCampaign reconstruye el estado desde su inicio y compara todos sus campo
 - electrosphere.simulator: una simulación independiente; solo permite su briefing, combate y cierre, sin tomar salidas de campaña.
 - electrosphere.profile: misiones únicas y finales del archivo personal. Se conservan al iniciar otra campaña. Las simulaciones no suman finales.
 
-Guardar durante combate conserva el punto de inicio de la misión; una carga reinicia el intento. Tras victoria se guarda de inmediato el informe siguiente. Un intervalo o callback de transición antiguo no puede afectar una misión nueva.
+Guardar durante combate conserva el punto de inicio de la misión; una carga reinicia el combate con su misma semilla y dificultad. Cada reintento voluntario genera otra semilla. Tras victoria se guarda de inmediato el informe siguiente. Un intervalo o callback de transición antiguo no puede afectar una misión nueva.
 
 ## Reloj y controles
 
@@ -43,3 +44,9 @@ La simulación usa tiempo transcurrido real. Pausa manual, pestaña oculta y arc
 
 Los arrays dialogue y reportDialogue admiten bloques `{kind:'narration',label,text,adaptation:true}` entre intervenciones. Son puentes editoriales sin personaje, speaker, retrato ni voz atribuida a Nemo. La interfaz los presenta como un aside etiquetado Narración. Se usan para cambios de escenario, canal o tiempo; no fijan duraciones no documentadas. Los consumidores que necesiten un interlocutor deben seleccionar una intervención con kind distinto de narration.
 
+
+## Registro separado (v0.8)
+
+IndexedDB electrosphere.radio, versión 1, almacén records con clave key. Dos snapshots por misión y modo: campaign/simulator, attempt/victory. Cada snapshot conserva nombre, inicio, duración, descriptor, interlocutores y mensajes activados con id, orden, tiempo simulado, canal, texto, trigger, source, confidence y adaptation. El registro no participa en decisiones ni validación de campaña. La transacción de registro puede fallar sin impedir guardar campaña; se avisa y se mantiene copia de sesión.
+
+beginAttempt valida semilla entera sin signo, dificultad y versión del generador. resolveMission regenera cantidades y tiempo desde el descriptor guardado; exige el mismo descriptor en el resultado. Los resultados históricos sin descriptor mantienen las reglas fijas. retryMission solo permite volver al combate inmediatamente anterior desde su informe o cierre de simulador.

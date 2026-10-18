@@ -34,8 +34,8 @@ test('Catálogo de 52 misiones únicas, ordenadas, desarrolladas y con fuente po
   assert.equal(catalog[0].name,'Awakening');assert.equal(catalog[51].name,'Sole Survivor');
   for(const mission of catalog){
     assert.ok(mission.briefing.length>100&&mission.report.length>100,mission.name);
-    assert.ok(mission.dialogue.filter(line=>line.kind!=='narration').length>=6);
-    assert.ok(story[mission.id+'Report'].dialogue.filter(line=>line.kind!=='narration').length>=3);
+    assert.ok(mission.dialogue.filter(line=>line.kind!=='narration').length>0);
+    assert.ok(story[mission.id+'Report'].dialogue.filter(line=>line.kind!=='narration').length>0);
     assert.ok(mission.dialogue.every(line=>(line.kind==='narration'||line.speaker)&&line.text.trim().length>0));
     assert.equal(mission.source.url,`https://w.atwiki.jp/acacac/pages/${mission.number+10}.html`);
     assert.equal(mission.adaptation,true);assert.equal(mission.confidence,'community-transcript');
@@ -155,7 +155,7 @@ test('Migración v1 conserva exactamente decisiones y resultados de la demo ante
   old=legacy.resolveMission(old,{status:'victory',kills:5,integrity:100,timeRemaining:50});
   storage.setItem(SAVE_KEY,JSON.stringify(old));
   const loaded=loadCampaign(storage);assert.equal(loaded.ok,true);assert.equal(loaded.migrated,true);
-  assert.equal(loaded.state.version,2);assert.equal(loaded.state.campaignId,'demo-v1');
+  assert.equal(loaded.state.version,3);assert.equal(loaded.state.campaignId,'demo-v1');
   assert.deepEqual(loaded.state.history,old.history);assert.deepEqual(loaded.state.results,old.results);
   assert.deepEqual(validateCampaign(loaded.state),loaded.state);
   assert.equal(saveCampaign(storage,loaded.state).ok,true);

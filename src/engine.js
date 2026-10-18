@@ -1,10 +1,11 @@
-import { story } from './story.js?v=0.7.1';
-import { missions } from './missions.js?v=0.7.1';
-import * as legacy from './legacy/engine.js?v=0.7.1';
-import { story as legacyStory } from './legacy/story.js?v=0.7.1';
-import { missions as legacyMissions } from './legacy/missions.js?v=0.7.1';
+import { story } from './story.js?v=0.8.0';
+import { missions } from './missions.js?v=0.8.0';
+import * as legacy from './legacy/engine.js?v=0.8.0';
+import { story as legacyStory } from './legacy/story.js?v=0.8.0';
+import { missions as legacyMissions } from './legacy/missions.js?v=0.8.0';
+import { generateEncounter,validAttempt } from './attempts.js?v=0.8.0';
 
-export const SAVE_VERSION = 2;
+export const SAVE_VERSION = 3;
 export const FACTIONS = ['UPEO','GR','NEUCOM','OUROBOROS'];
 const graphs={jp52:{story,missions},'demo-v1':{story:legacyStory,missions:legacyMissions}};
 const own=(object,key)=>Object.hasOwn(object,key);
@@ -68,7 +69,7 @@ export function createCampaign({campaignId='jp52',simulatorMission=null}={}){
   if(!own(graphs,campaignId)) throw new Error('Campaña desconocida.');
   if(simulatorMission!==null && (campaignId!=='jp52'||!own(missions,simulatorMission))) throw new Error('Misión de simulador inexistente.');
   const base=legacy.createCampaign();
-  return {...base,version:SAVE_VERSION,campaignId,simulatorMission,
+  return {...base,version:SAVE_VERSION,campaignId,simulatorMission,pendingAttempt:null,
     node:simulatorMission?simulatorMission+'Intro':'intro',faction:simulatorMission?missions[simulatorMission].faction:'UPEO'};
 }
 export function missionById(state,id){
@@ -109,7 +110,10 @@ export function resolveMission(state,outcome){
   if(state.campaignId==='demo-v1')return legacy.resolveMission(state,outcome);
   const node=currentNode(state);
   if(node.kind!=='mission')throw new Error('No hay una misión en curso.');
-  const mission=missionById(state,node.mission),maxKills=mission.total+(mission.secondary?.kind==='scan'?0:mission.secondary?.count||0);
+  const base=missionById(state,node.mission),attempt=state.pendingAttempt;
+  if(attempt&&stable(outcome?.attempt)!==stable(attempt))throw new Error('El resultado no corresponde al intento guardado.');
+  if(!attempt&&outcome?.attempt)throw new Error('Intento no iniciado.');
+  const mission=attempt?generateEncounter(base,attempt):base,maxKills=mission.total+(mission.secondary?.kind==='scan'?0:mission.secondary?.count||0);
   const completed=outcome?.completed,objectives=outcome?.objectives;
   const validObjectives=objectives && typeof objectives==='object' && !Array.isArray(objectives) && Object.keys(objectives).every(id=>id===mission.secondary?.id) &&
     (!mission.secondary || Number.isInteger(objectives[mission.secondary.id]) && objectives[mission.secondary.id]>=0 && objectives[mission.secondary.id]<=mission.secondary.count);
@@ -122,17 +126,27 @@ export function resolveMission(state,outcome){
   const expectedKills=['recon','containment'].includes(mission.type)?0:mission.type==='tunnel'?Math.max(0,completed-(mission.total-(mission.supportCount||0))):completed;
   const optionalKills=mission.secondary&&mission.secondary.kind!=='scan'?objectives[mission.secondary.id]:0;
   if(outcome.kills!==expectedKills+optionalKills)throw new Error('Bajas incompatibles con los objetivos registrados.');
-  const result={mission:node.mission,status:outcome.status,kills:outcome.kills,completed,objectives:{...objectives},integrity:outcome.integrity,timeRemaining:outcome.timeRemaining};
-  return {...state,node:outcome.status==='victory'?(state.simulatorMission?'simulatorComplete':node.next):state.node,
+  const result={mission:node.mission,status:outcome.status,kills:outcome.kills,completed,objectives:{...objectives},integrity:outcome.integrity,timeRemaining:outcome.timeRemaining,...(attempt?{attempt:{...attempt}}:{})};
+  return {...state,pendingAttempt:null,node:outcome.status==='victory'?(state.simulatorMission?'simulatorComplete':node.next):state.node,
     results:[...state.results,result],history:[...state.history,{type:'mission',node:state.node,result}]};
+}
+export function beginAttempt(state,attempt){
+  if(state.campaignId!=='jp52'||currentNode(state).kind!=='mission'||!validAttempt(attempt))throw new Error('No se puede iniciar este intento.');
+  return {...state,pendingAttempt:{...attempt},history:[...state.history,{type:'attempt',node:state.node,attempt:{...attempt}}]};
+}
+export function retryMission(state){
+  const last=state.results.at(-1);
+  if(state.campaignId!=='jp52'||last?.status!=='victory'||![last.mission+'Report','simulatorComplete'].includes(state.node))throw new Error('No hay una misión terminada para reintentar.');
+  return {...state,node:last.mission+'Combat',pendingAttempt:null,history:[...state.history,{type:'retry',node:state.node}]};
 }
 export function campaignSummary(state){return legacy.campaignSummary(state);}
 const stable=value=>JSON.stringify(value,function(key,item){return item&&typeof item==='object'&&!Array.isArray(item)?Object.fromEntries(Object.keys(item).sort().map(name=>[name,item[name]])):item;});
 export function validateCampaign(candidate){
   if(candidate?.version===1){
     const old=legacy.validateCampaign(candidate);
-    return {...old,version:SAVE_VERSION,campaignId:'demo-v1',simulatorMission:null};
+    return {...old,version:SAVE_VERSION,campaignId:'demo-v1',simulatorMission:null,pendingAttempt:null};
   }
+  if(candidate?.version===2)candidate={...candidate,version:SAVE_VERSION,pendingAttempt:null};
   if(!candidate||candidate.version!==SAVE_VERSION)throw new Error('Versión de partida no compatible.');
   if(!Array.isArray(candidate.history)||candidate.history.length>1000)throw new Error('Historial inválido.');
   let replay=createCampaign({campaignId:candidate.campaignId,simulatorMission:candidate.simulatorMission});
@@ -140,6 +154,8 @@ export function validateCampaign(candidate){
     if(!event||event.node!==replay.node)throw new Error('El historial no corresponde a la ruta.');
     if(event.type==='choice')replay=chooseOption(replay,event.option);
     else if(event.type==='mission')replay=resolveMission(replay,event.result);
+    else if(event.type==='attempt')replay=beginAttempt(replay,event.attempt);
+    else if(event.type==='retry')replay=retryMission(replay);
     else throw new Error('Evento de historial desconocido.');
   }
   if(stable(replay)!==stable(candidate))throw new Error('La partida contiene datos incoherentes.');

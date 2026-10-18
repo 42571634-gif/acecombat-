@@ -1,20 +1,24 @@
-import { missions } from './missions.js?v=0.7.1';
-import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.7.1';
-import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.7.1';
-import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.7.1';
-import { draw } from './draw.js?v=0.7.1';
-import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.7.1';
-import { ENEMY_TYPES } from './enemy-types.js?v=0.7.1';
-import { isActiveTarget } from './waves.js?v=0.7.1';
-import { missileHitChance,coreOpen } from './operations.js?v=0.7.1';
-import { toggleAutoFire } from './bullet-hell.js?v=0.7.1';
+import { missions } from './missions.js?v=0.8.0';
+import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById,beginAttempt,retryMission } from './engine.js?v=0.8.0';
+import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.8.0';
+import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.8.0';
+import { draw } from './draw.js?v=0.8.0';
+import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.8.0';
+import { ENEMY_TYPES } from './enemy-types.js?v=0.8.0';
+import { isActiveTarget } from './waves.js?v=0.8.0';
+import { missileHitChance,coreOpen } from './operations.js?v=0.8.0';
+import { toggleAutoFire } from './bullet-hell.js?v=0.8.0';
+import { newAttempt,generateEncounter } from './attempts.js?v=0.8.0';
+import { createMissionLog } from './mission-log.js?v=0.8.0';
 
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-export function createApp({document,window,storage,campaignId='jp52',battleMode='bullethell',now=()=>performance.now(),repeat=setInterval,stopRepeat=clearInterval,delay=setTimeout,stopDelay=clearTimeout,requestFrame=window.requestAnimationFrame?.bind(window),cancelFrame=window.cancelAnimationFrame?.bind(window)}){
+export function createApp({document,window,storage,campaignId='jp52',battleMode='bullethell',attemptFactory=newAttempt,now=()=>performance.now(),repeat=setInterval,stopRepeat=clearInterval,delay=setTimeout,stopDelay=clearTimeout,requestFrame=window.requestAnimationFrame?.bind(window),cancelFrame=window.cancelAnimationFrame?.bind(window)}){
   const errors=validateGraph();if(errors.length)throw new Error(errors.join('\n'));
   const $=id=>document.getElementById(id);
   let campaignState=createCampaign({campaignId}),flight=null,ticker=null,transition=null,savedAvailable=false;
-  let hidden=Boolean(document.hidden),manualPause=false,archiveOpen=false,radioCount=0,sideSignature='';
+  let hidden=Boolean(document.hidden),manualPause=false,archiveOpen=false,logOpen=false,radioCount=0,sideSignature='',logView=0;
+  let radioDatabase;try{radioDatabase=window.indexedDB;}catch{}
+  const logs=createMissionLog(radioDatabase);
   const keys={},profile=loadProfile(storage),targetButtons=new Map();
   function setText(id,value){const element=$(id);if(element&&element.textContent!==value)element.textContent=value;}
   function stopTicker(){if(ticker!==null){if(requestFrame)cancelFrame?.(ticker);else stopRepeat(ticker);ticker=null;}}
@@ -28,11 +32,11 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
       if(flight?.status==='defeat')startMission(flight.id);
     };
   }
-  const isPaused=()=>hidden||manualPause||archiveOpen;
+  const isPaused=()=>hidden||manualPause||archiveOpen||logOpen;
   function clearKeys(){for(const key of Object.keys(keys))delete keys[key];if(flight){flight.keyL=false;flight.keyR=false;flight.keyU=false;flight.keyD=false;flight.drag=null;}}
   function cleanup(){
     stopTicker();if(transition!==null)stopDelay(transition);
-    transition=null;flight=null;manualPause=false;radioCount=0;sideSignature='';targetButtons.clear();clearKeys();if($('difficulty'))$('difficulty').disabled=false;
+    transition=null;flight=null;manualPause=false;logOpen=false;logView++;radioCount=0;sideSignature='';targetButtons.clear();clearKeys();if($('difficulty'))$('difficulty').disabled=false;
   }
   function persist(){
     const result=saveCampaign(storage,campaignState);
@@ -64,7 +68,7 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
     const result=loadCampaign(storage);
     if(!result.ok||!result.state){$('saveStatus').textContent=result.message||'Todavía no hay una partida guardada.';return;}
     closeArchive();cleanup();campaignState=result.state;render();
-    $('saveStatus').textContent=result.migrated?'Partida anterior recuperada: continúa su demo original. Nueva campaña inicia las 52 misiones.':currentNode(campaignState).kind==='mission'?'Partida cargada. La misión pendiente comienza de nuevo.':'Partida cargada.';
+    $('saveStatus').textContent=result.migrated?(campaignState.campaignId==='demo-v1'?'Demo anterior recuperada con sus decisiones y resultados.':'Partida actualizada conservando decisiones y resultados.'):currentNode(campaignState).kind==='mission'?'Partida cargada. La misión pendiente comienza de nuevo.':'Partida cargada.';
   }
   function sourceMarkup(node){
     const source=node.source;if(!source?.url)return '';
@@ -80,7 +84,8 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
       $('main').innerHTML=`<div class="tag">FIN DE RUTA · ${escapeHtml(node.label)}</div><h2>${node.simulator?'Simulación completada':'Una de cinco posibilidades'}</h2><p>${escapeHtml(node.description)}</p>${sourceMarkup(node)}<div class="buttons"><button class="primary" id="anotherRoute">${node.simulator?'Volver a la campaña':'↻ Explorar otra ruta'}</button></div>`;
       $('anotherRoute').onclick=node.simulator?returnCampaign:restart;updateSide();return;
     }
-    const dialogue=node.dialogue||[{speaker:node.speaker[0],text:node.speaker[1]}];
+    let dialogue=node.dialogue||[{speaker:node.speaker[0],text:node.speaker[1]}];
+    if(node.missionId==='m51'&&campaignState.node.endsWith('Intro')&&!campaignState.results.some(result=>result.mission==='m49'&&result.status==='victory'))dialogue=[...dialogue.slice(0,1),{kind:'narration',label:'Tras la caída del Sphyrna',text:'Cynthia no ha salido del portaaviones. Fiona no recibió una respuesta de su hermana antes de que la plataforma cayera.',adaptation:true},...dialogue.slice(1)];
     const result=campaignState.results.at(-1);
     const resultMarkup=campaignState.node.endsWith('Report')&&result?`<div class="debrief">${result.completed??result.kills} objetivos principales · ${Math.round(result.integrity)}% integridad · ${Math.ceil(result.timeRemaining)}s restantes${Object.entries(result.objectives||{}).map(([id,count])=>` · ${escapeHtml(id)}: ${count}`).join('')}</div>`:'';
     $('main').innerHTML=`<div class="tag">${escapeHtml(node.tag)}</div><h2>${escapeHtml(node.title)}</h2><p>${escapeHtml(node.body)}</p>${resultMarkup}${dialogue.map(messageMarkup).join('')}${sourceMarkup(node)}<div class="buttons" id="actions"></div>`;
@@ -121,10 +126,28 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
     if(flight.protected)setText('escortStatus',`${flight.protected.label}: ${Math.ceil(flight.protected.hp)}% · Cobertura ${Math.floor(flight.coverEnergy)}% · ${flight.protected.mobile?'Te sigue':'Posición fija'}`);
     if($('cover')){$('cover').textContent=flight.coverEscort?'Desactivar cobertura':'Activar cobertura';$('cover').setAttribute?.('aria-pressed',String(flight.coverEscort));}
     if($('gun')){$('gun').textContent=flight.gunEnabled?'Cañón: automático':'Cañón: en espera';$('gun').setAttribute?.('aria-pressed',String(flight.gunEnabled));}
-    while(radioCount<flight.waveEvents.length){
-      const event=flight.waveEvents[radioCount++],entry=document.createElement('div');
-      entry.innerHTML=messageMarkup(event.message);$('radioMessages').appendChild(entry);bindPortraits(entry);
+    if(radioCount!==flight.radio.length){
+      radioCount=flight.radio.length;
+      $('radioMessages').innerHTML=flight.radio.slice(-2).map(event=>`<p class="fine">${Math.floor(event.time)}s · ${escapeHtml(event.channel==='enemy'?'Enemigo':event.channel==='allied'?'Aliado':'Control')}</p>${messageMarkup(event.message)}`).join('');
+      bindPortraits($('radioMessages'));saveRadio(flight);
     }
+  }
+  function radioRecord(owner){return {mission:owner.id,name:owner.m.name||owner.m.title,mode:owner.logMode,result:owner.status,startedAt:owner.startedAt,duration:owner.elapsed,attempt:owner.attempt,participants:[...new Set(owner.radio.map(event=>event.message.speaker))],messages:structuredClone(owner.radio)};}
+  function saveRadio(owner){
+    logs.save(radioRecord(owner)).then(saved=>{if(flight===owner&&$('logStatus'))$('logStatus').textContent=saved?'Registro guardado en este dispositivo.':'Registro disponible en esta sesión; no se pudo guardar en el dispositivo.';});
+  }
+  async function showLog(id=flight?.id){
+    const returnFocus=document.activeElement;
+    if(!isPaused())step();logOpen=true;clearKeys();const view=++logView;
+    let panel=$('missionLogPanel');if(!panel){const wrapper=document.createElement('div');wrapper.innerHTML='<section id="missionLogPanel" class="mission-log-panel" role="dialog" aria-modal="true" aria-label="Registro de misión"></section>';$('main').appendChild(wrapper);panel=$('missionLogPanel');}
+    panel.hidden=false;panel.innerHTML='<h3>Registro de misión</h3><p>Cargando mensajes…</p><button id="closeMissionLog">Cerrar registro</button>';
+    const close=()=>{logView++;logOpen=false;panel.hidden=true;if(flight)flight.last=now();returnFocus?.focus?.();updateSide();};
+    $('closeMissionLog').onclick=close;$('closeMissionLog').focus?.();
+    const records=await logs.list(id);
+    if(view!==logView)return;
+    if(flight?.id===id){const live=radioRecord(flight);records.unshift({...live,key:'current'});}
+    panel.innerHTML=`<h3>Registro de misión</h3><p class="fine">${logs.persistent?'Historial local del dispositivo.':'Almacenamiento no disponible: solo se conserva esta sesión.'}</p>${records.length?records.map(record=>`<details ${record.key==='current'?'open':''}><summary>${escapeHtml(record.name)} · ${record.mode==='simulator'?'Simulador':'Campaña'} · ${record.key==='current'?'Actual':record.key.endsWith('victory')?'Última victoria':'Último intento'} · ${escapeHtml({active:"En curso",victory:"Victoria",defeat:"Derrota"}[record.result]||record.result)} · ${Math.floor(record.duration)}s</summary><p class="fine">${escapeHtml(record.participants.join(', '))}</p>${record.messages.map(event=>`<p class="fine">${Math.floor(event.time)}s · ${escapeHtml(event.channel==='enemy'?'Enemigo':event.channel==='allied'?'Aliado':'Control')}</p>${messageMarkup(event.message)}<p class="fine">${event.confidence==='operational-adaptation'?'Aviso operativo adaptado':'Adaptación de la comunicación documentada'}${event.source?.url?` · <a href="${escapeHtml(event.source.url)}" target="_blank" rel="noopener noreferrer">Fuente ↗</a>`:''}</p>`).join('')}</details>`).join(''):'<p>Aún no hay mensajes registrados para esta misión.</p>'}<button id="closeMissionLog">Cerrar registro</button>`;
+    $('closeMissionLog').onclick=close;$('closeMissionLog').focus?.();bindPortraits(panel);updateSide();
   }
   function nudge(key){
     if(flight?.mode!=='bullethell'||flight.status!=='active'||isPaused())return;
@@ -132,9 +155,17 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
     flight.x=Math.max(15,Math.min(705,flight.x+dx));flight.y=Math.max(285,Math.min(403,flight.y+dy));draw(flight,$('radar'));
   }
   function startMission(id){
-    cleanup();const mission=missionById(campaignState,id);
+    cleanup();const base=missionById(campaignState,id);
+    const procedural=battleMode==='bullethell'&&campaignState.campaignId==='jp52';
+    if(procedural&&!campaignState.pendingAttempt){campaignState=beginAttempt(campaignState,attemptFactory(difficulty));persist();}
+    const attempt=procedural?campaignState.pendingAttempt:null;
+    if(attempt){difficulty=attempt.difficulty;if($('difficulty'))$('difficulty').value=difficulty;}
+    const mission=attempt?generateEncounter(base,attempt):base;
     $('main').innerHTML=`<div class="tag">${escapeHtml(mission.arc||'Simulador táctico de vuelo')} · ${escapeHtml(mission.place)}</div><h2>${escapeHtml(mission.title)}</h2><p class="fine">${escapeHtml(mission.goal)}</p><p class="fine">${escapeHtml(mission.rules?.hint||'Apunta y dispara sobre los blancos.')} Disparo automático en bullet hell. Flechas/WASD para moverte; Shift reduce la velocidad; X activa una contramedida. En celular, arrastra dentro del campo o usa los botones. Toca blancos o usa la lista para misiles y sensores. Puedes pausar.</p><div class="hud"><span id="hudTarget">OBJETIVOS 0/${mission.total}</span><span id="hudLife">INTEGRIDAD 100%</span><span id="hudTime">TIEMPO ${mission.time}s</span></div>${mission.secondary?`<p class="secondary-goal" id="secondaryProgress">◇ ${escapeHtml(mission.secondary.label)}: 0/${mission.secondary.count} · Opcional: cambia la ruta</p>`:''}<canvas id="radar" width="720" height="420" aria-label="Radar táctico jugable"></canvas><div class="controls"><button id="left">◀ VIRAR</button><button id="pause">Pausar</button><button id="right">VIRAR ▶</button></div><p class="fine" id="combatHint">${escapeHtml(mission.rules?.label||'Radar táctico')} · Misil 0,45 s · Alcance 500 · 3 contramedidas por intento</p><details class="target-list"><summary>Objetivos accesibles · teclado o toque</summary><div class="buttons" id="targetActions"></div></details><div class="buttons"><button id="retry">Reiniciar misión</button></div>${sourceMarkup(mission)}`;
-    flight=createFlight(id,mission,now(),undefined,{mode:battleMode,difficulty});const currentFlight=flight,canvas=$('radar');
+    flight=createFlight(id,base,now(),undefined,{mode:battleMode,difficulty,attempt});const currentFlight=flight,canvas=$('radar');
+    flight.startedAt=Date.now();flight.logMode=campaignState.simulatorMission?'simulator':'campaign';
+    const logControls=document.createElement('div');logControls.innerHTML='<button id="viewMissionLog">Registro de misión</button><p class="fine" id="logStatus"></p><div id="resultSummary" hidden></div>';$('main').appendChild(logControls);
+    $('viewMissionLog').onclick=()=>showLog(id);
     function bindDirection(id,key){
       const button=$(id);let pointer=null;
       button.onpointerdown=event=>{
@@ -185,13 +216,24 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
       if(!manualPause)step();manualPause=!manualPause;clearKeys();if(flight)flight.last=now();
       $('pause').textContent=manualPause?'Reanudar':'Pausar';updateSide();
     };
-    $('retry').onclick=()=>{if(flight===currentFlight&&flight.status!=='victory')startMission(id);};
-    if(requestFrame){const frame=()=>{if(flight!==currentFlight)return;ticker=null;step();if(flight===currentFlight&&!currentFlight.settled)ticker=requestFrame(frame);};ticker=requestFrame(frame);}
+    $('retry').onclick=()=>{
+      if(flight!==currentFlight)return;
+      if(flight.status==='victory'&&campaignState.campaignId==='jp52')campaignState=retryMission(campaignState);
+      if(campaignState.pendingAttempt)campaignState=beginAttempt(campaignState,attemptFactory(difficulty));
+      startMission(id);
+    };
+    if(requestFrame){const frame=()=>{if(flight!==currentFlight)return;ticker=null;step();if(flight===currentFlight&&(!currentFlight.settled||currentFlight.presentation))ticker=requestFrame(frame);};ticker=requestFrame(frame);}
     else ticker=repeat(step,16);
     draw(flight,canvas);updateTargets();updateBattleRadio();updateSide();
   }
   function step(){
-    const currentFlight=flight;if(!currentFlight||currentFlight.settled||isPaused())return;
+    const currentFlight=flight;if(!currentFlight||isPaused())return;
+    if(currentFlight.presentation){
+      const presentation=currentFlight.presentation;presentation.elapsed+=Math.max(0,(now()-currentFlight.last)/1000);currentFlight.last=now();
+      if(presentation.elapsed>=presentation.duration){finishPresentation(currentFlight);return;}
+      draw(currentFlight,$('radar'));return;
+    }
+    if(currentFlight.settled)return;
     advanceFlight(currentFlight,now(),keys);
     setText('hudTarget',`OBJETIVOS ${currentFlight.completed}/${currentFlight.m.total}`);
     setText('hudLife',`INTEGRIDAD ${Math.round(currentFlight.hp)}%`);setText('hudTime',`TIEMPO ${Math.ceil(currentFlight.t)}s`);
@@ -200,18 +242,34 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
     if(currentFlight.feedback)setText('combatHint',currentFlight.feedback);
     if($('bomb')){$('bomb').textContent=`Contramedida (${currentFlight.bombs})`;$('bomb').disabled=currentFlight.bombs<=0||currentFlight.status!=='active';}
     if(currentFlight.status!=='active'){
-      currentFlight.settled=true;stopTicker();
+      currentFlight.settled=true;
       for(const id of ['pause','left','right','up','down','cover','gun'])if($(id))$(id).disabled=true;
       if($('difficulty'))$('difficulty').disabled=false;
       campaignState=resolveMission(campaignState,{status:currentFlight.status,kills:currentFlight.kills,integrity:Math.min(currentFlight.hp,currentFlight.protected?.hp??100),timeRemaining:currentFlight.t,
-        ...(campaignState.campaignId==='jp52'?{completed:currentFlight.completed,objectives:currentFlight.objectives}:{})});
+        ...(campaignState.campaignId==='jp52'?{completed:currentFlight.completed,objectives:currentFlight.objectives,...(currentFlight.attempt?{attempt:currentFlight.attempt}:{})}:{})});
       if(currentFlight.status==='victory'&&campaignState.campaignId==='jp52'&&!profile.missions.includes(currentFlight.id)){profile.missions.push(currentFlight.id);saveProfile(storage,profile);}
-      persist();clearKeys();
-      if(currentFlight.status==='victory'){
+      persist();clearKeys();saveRadio(currentFlight);
+      if(campaignState.campaignId==='jp52'){
+        currentFlight.presentation={elapsed:0,duration:currentFlight.status==='victory'?1.8:2};currentFlight.last=now();
+        $('retry').disabled=true;
+        $('resultSummary').hidden=false;$('resultSummary').innerHTML='<button id="skipOutcome">Omitir animación</button>';
+        $('skipOutcome').onclick=()=>finishPresentation(currentFlight);
+        if(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)finishPresentation(currentFlight);
+      }else if(currentFlight.status==='victory'){
+        stopTicker();
         $('retry').disabled=true;transition=delay(()=>{if(flight===currentFlight)render();},650);
-      }else $('combatHint').textContent='MISIÓN FALLIDA. '+currentFlight.feedback+' Reinicia para continuar.';
+      }else {stopTicker();$('combatHint').textContent='MISIÓN FALLIDA. '+currentFlight.feedback+' Reinicia para continuar.';}
     }
     updateSide();
+  }
+  function finishPresentation(owner){
+    if(flight!==owner||!owner.presentation)return;
+    owner.finalPresentation={...owner.presentation,elapsed:owner.presentation.duration};owner.presentation=null;stopTicker();$('retry').disabled=false;
+    const victory=owner.status==='victory';
+    $('resultSummary').hidden=false;$('resultSummary').innerHTML=`<h3>${victory?'Misión completada':'Misión fallida'}</h3><p>${owner.completed}/${owner.m.total} objetivos · ${Math.round(Math.min(owner.hp,owner.protected?.hp??100))}% integridad · ${Math.ceil(owner.t)}s restantes</p><p>${escapeHtml(owner.feedback)}</p>${victory?'<button id="continueOutcome" class="primary">Continuar al informe</button>':''}`;
+    if(victory)$('continueOutcome').onclick=()=>{if(flight===owner)render();};
+    setText('combatHint',victory?'Operación completada. Consulta el registro o continúa al informe.':'MISIÓN FALLIDA. '+owner.feedback+' Puedes consultar el registro y reintentar.');
+    draw(owner,$('radar'));updateSide();
   }
   function openArchive(){
     if(!isPaused())step();archiveOpen=true;clearKeys();
@@ -227,6 +285,7 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
       const card=document.createElement('article');card.className='mission-card';
       card.innerHTML=`<div class="tag">${mission.number}/52 · ${escapeHtml(mission.arc)}</div><h3>${escapeHtml(mission.name)} ${profile.missions.includes(mission.id)?'✓':''}</h3><p>${escapeHtml(mission.place)} · ${escapeHtml(mission.rules.label)}</p><p class="fine">${escapeHtml(mission.goal)}</p><button id="simulate-${mission.id}">Probar misión ${mission.number}</button> <a href="${escapeHtml(mission.source.url)}" target="_blank" rel="noopener noreferrer">Fuente ↗</a>`;
       $('archiveList').appendChild(card);$('simulate-'+mission.id).onclick=()=>simulate(mission.id);
+      const logButton=document.createElement('button');logButton.textContent='Ver registros';logButton.onclick=()=>showLog(mission.id);card.appendChild(logButton);
     }
   }
   function simulate(id){
@@ -242,6 +301,7 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
   if($('returnCampaign'))$('returnCampaign').onclick=returnCampaign;
   if($('continueSimulation'))$('continueSimulation').onclick=()=>{const result=loadCampaign(storage,{simulator:true});if(result.ok&&result.state){closeArchive();cleanup();campaignState=result.state;render();}else $('saveStatus').textContent=result.message||'No hay una simulación guardada.';};
   document.addEventListener('keydown',event=>{
+    if(logOpen){if(event.code==='Escape'){$('closeMissionLog')?.onclick?.();event.preventDefault();}else if(event.code==='Tab'){const focusable=$('missionLogPanel')?.querySelectorAll?.('button, a, summary');if(focusable?.length){const first=focusable[0],last=focusable[focusable.length-1];if(event.shiftKey&&document.activeElement===first){last.focus();event.preventDefault();}else if(!event.shiftKey&&document.activeElement===last){first.focus();event.preventDefault();}}}return;}
     if(!flight||flight.status!=='active'||isPaused()||['INPUT','SELECT','TEXTAREA'].includes(event.target?.tagName))return;
     const direction={ArrowLeft:'keyL',KeyA:'keyL',ArrowRight:'keyR',KeyD:'keyR',ArrowUp:'keyU',KeyW:'keyU',ArrowDown:'keyD',KeyS:'keyD'}[event.code];
     if(direction){event.preventDefault();step();if(!keys[event.code])nudge(direction);}

@@ -1,4 +1,5 @@
 // Puentes editoriales originales: no fijan horas, destinos o desplazamientos no documentados.
+import { missionContexts } from './mission-context.js?v=0.8.0';
 export const narration = (text,label='Escena') => ({kind:'narration',label,text,adaptation:true});
 const bridges={
   1:[[0,'Nemo, Erich, Fiona y Rena participan en la intervención sobre Expo City.','Formación de SARF']],
@@ -20,7 +21,13 @@ const bridges={
   51:[[0,'Después del combate contra el Sphyrna, la persecución continúa en los corredores de Geofront. Fiona y Nemo siguen enlazados por radio.','Cambio de escenario · Geofront']],
   52:[[0,'Al final de la persecución por Geofront, Simon entra en el enlace de Fiona y Nemo. La operación exige neutralizar los generadores y después los dos aparatos.','Continuación de la persecución']],
 };
-export function situateScene(number,lines){
-  const additions=bridges[number]||[];
+export function situateScene(number,lines,place){
+  const context=missionContexts['m'+String(number).padStart(2,'0')];
+  const additions=bridges[number]||(place&&context?[[0,context.situation,'Nueva operación · '+place]]:[]);
   return [...lines.flatMap((line,index)=>[...additions.filter(([before])=>before===index).map(([,text,label])=>narration(text,label)),line]),...additions.filter(([before])=>before===lines.length).map(([,text,label])=>narration(text,label))];
+}
+export function situateReport(number,lines){
+  const before={13:'La aplicación de ANB ha terminado. Rena vuelve a comunicarse con Nemo y Erich desde su aeronave.',16:'La intercepción permite acercarse al Sphyrna. Rena despega en el Night Raven y el combate continúa en el mismo canal.',44:'La extracción ha concluido. De vuelta en el Sphyrna, Cynthia discute con Dision sobre el propósito de su revolución.'};
+  const at={18:[1,'Más tarde, los aviones de Nemo y Erich pasan sobre la costa. Rena aparece junto al Night Raven que ha llegado a la orilla.'],52:[3,'Después del último combate y de la decisión de Fiona, una comunicación digital de Cynthia entra en el enlace.']};
+  return [narration(before[number]||'El combate de esta salida ha terminado. Los mensajes siguientes pertenecen a sus consecuencias y a la preparación del siguiente paso.','Después de la operación'),...lines.flatMap((line,index)=>[...(at[number]?.[0]===index?[narration(at[number][1],'Cambio de momento y canal')]:[]),line])];
 }

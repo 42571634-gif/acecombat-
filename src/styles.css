@@ -53,6 +53,7 @@ a{color:var(--a)}
 h2{margin-top:12px}
 button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 [hidden]{display:none!important}
+.mission-log-panel{position:fixed;inset:5vh max(12px,calc((100vw - 800px)/2));z-index:30;overflow:auto;padding:20px;background:#0b1825;border:2px solid #6ef3df;border-radius:10px;box-shadow:0 0 0 100vmax #020810dd;overscroll-behavior:contain;overflow-wrap:anywhere}.mission-log-panel details{border-top:1px solid var(--edge);margin:16px 0;padding-top:12px}.mission-log-panel summary{line-height:1.7}.mission-log-panel #closeMissionLog{position:sticky;bottom:0;background:#16474e}.mission-log-panel .speaker p{font-size:14px}#resultSummary{margin:16px 0;padding:16px;border:1px solid var(--a);border-radius:8px;background:#112a38}.battle-radio{max-height:270px;overflow:auto;overflow-anchor:none}.mission-card button{margin:4px 0}.speaker p{overflow-wrap:anywhere}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 .campaign-nav{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
 .source-note{font-size:11px;color:var(--muted);line-height:1.6;border-top:1px solid var(--edge);padding-top:12px}
 .debrief,.secondary-goal{padding:12px;background:#123347;border-left:3px solid #85aaff;color:#d6e5ff;font-size:12px;line-height:1.6}

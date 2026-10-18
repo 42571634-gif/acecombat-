@@ -1,5 +1,5 @@
-import { assignEnemyTypes,ENEMY_TYPES } from './enemy-types.js?v=0.7.1';
-import { coreOpen,hitProtected } from './operations.js?v=0.7.1';
+import { assignEnemyTypes,ENEMY_TYPES } from './enemy-types.js?v=0.8.0';
+import { coreOpen,hitProtected } from './operations.js?v=0.8.0';
 // Patrones originales. Coordenadas lógicas independientes del tamaño de pantalla.
 export const DIFFICULTIES = Object.freeze({
   easy: {label:'Fácil', interval:1.5, speed:85, fan:3, damage:10, radius:4, invulnerability:1.6, armor:0.8},

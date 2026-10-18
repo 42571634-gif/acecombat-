@@ -105,3 +105,7 @@ Cada misión tiene briefing, dos intervenciones de conversación adaptada, comba
 
 Se han añadido 208 intervenciones de briefing y 104 de informe, además de dos en la introducción. Las 471 intervenciones actuales triplican las 157 anteriores. Los archivos `dialogue-expansion.js` y `report-dialogue.js` contienen escritura original en español específica por capítulo: contexto, tensiones entre compañeros, objetivos y consecuencias ya documentados. No son traducciones, transcripciones adicionales ni prueba de hechos nuevos. Se conservan `source`, `confidence: community-transcript` y `adaptation: true`. Los registros de Nemo son un recurso narrativo propio de la adaptación, no afirmaciones sobre sus líneas en el guion original. El bullet hell es una reinterpretación jugable de las mismas operaciones.
 
+
+## Revisión v0.8 (2026-10-18)
+
+Se consultaron las 52 páginas individuales (11–62) del archivo japonés suministrado por el usuario. La matriz de situación, condición y consecuencias está en MISSION_REVIEW.md y src/mission-context.js. Se contrastaron perfiles oficiales Namco y el mapa de misiones de Acepedia. Algunas páginas complementarias no estuvieron accesibles; para sus acontecimientos se mantuvo la transcripción individual como base. La fuente advierte que la radio sin subtítulos fue transcrita de oído. Los avisos de HUD no se atribuyen automáticamente a personas.

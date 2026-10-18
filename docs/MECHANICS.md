@@ -59,3 +59,15 @@ Todas usan el radar 720×420 escalado a la pantalla. Apuntar: clic/toque o lista
 Los contactos civiles verdes pueden aparecer en 04, 15 y 20. El contacto protegido de escolta se representa de forma separada de los blancos; dispararle causa derrota. En Fragile Cargo los obstáculos son estacionarios. Los objetivos que atraviesan el corredor reducen la integridad y reaparecen, para permitir recuperar un intento que todavía tenga margen.
 
 Los objetivos secundarios se ofrecen desde el inicio, incluso cuando el evento equivalente era una fase posterior del original. Completa los secundarios antes del último principal. Al ganar se termina la misión y se fija el resultado; no puedes seguir acumulándolos desde el informe.
+
+## v0.8 · Radio, desenlace y encuentros
+
+Registro de misión abre un panel que pausa combate y animación. Solo muestra comunicaciones activadas; el archivo ofrece última victoria y último intento por campaña/simulador. Cerrar el panel restablece el reloj. La radio visible conserva dos avisos recientes y el registro conserva todo el intento. Advertencias únicas de integridad: 50 % y 25 %.
+
+Victoria: salida animada de 1,8 s y explosiones en estructuras; derrota: humo/daño durante 2 s. Controles y daño se detienen al resolver; el renderizado continúa. Omitir animación y movimiento reducido llevan al resumen. Continuar al informe requiere pulsación; Reiniciar misión genera un intento nuevo. La demo histórica conserva su transición original.
+
+Los encuentros ordinarios pueden variar ±1 enemigo, mínimo 3, y 1–3 oleadas con al menos dos por oleada. Se añade 15 s por enemigo adicional y 8 s por oleada adicional, con techo de 25 % sobre la base. Reconocimiento, contención, escoltas, orbitales, túneles y jefes conservan sus condiciones; las operaciones con blancos narrativos específicos también fijan sus fases. Secundarios, civiles y secuencia de jefes no varían. Cada semilla tiene flujos separados de terreno, encuentros y misiles.
+
+Los fondos originales de Canvas se generan una vez por intento y cubren también la franja inferior. Ciudad, montaña, costa, instalaciones, órbita, túnel y red digital son decorativos: los objetos de colisión siguen siendo los contactos marcados.
+
+Se añaden fases específicas: embarcación de Fragile Cargo, ANB sobre Rena en Bug Hunt, cohete en Technology Transfer, misil de Claustrophobia y Liquidation, base/defensa aérea en Utopian Dreams y extracción terrestre en Reality Distortion. Counterrevolution encadena aproximación, Sphyrna y Dision. Radio Silence reserva Cynthia para la última fase. Los enlaces Aeon de Sole Survivor representan interferencia. Ver MISSION_REVIEW.md para diferencias respecto del original.

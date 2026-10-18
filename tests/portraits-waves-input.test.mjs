@@ -75,7 +75,7 @@ test('Las oleadas ocultan futuros contactos y esperan hasta el último grupo par
   advanceFlight(f,900);assert.equal(required.filter(isActiveTarget).length,2);
   for(const t of required.filter(isActiveTarget))damageTarget(f,t,t.hp);
   assert.equal(f.status,'victory');assert.equal(f.completed,missions.m01.total);assert.equal(f.kills,missions.m01.total);
-  assert.equal(Object.keys(WAVE_PLANS).length,15);
+  assert.ok(Object.keys(WAVE_PLANS).length>=15);
   for(const [id,plan] of Object.entries(WAVE_PLANS))for(const phase of plan){assert.ok(missions[id]&&characters[phase.message.character]);assert.equal(phase.adaptation,true);}
 });
 

@@ -22,6 +22,12 @@ export function prepareOperation(f){
     if(f.id==='m25'&&t.required&&t.sequence===0)t.label='Transbordador de Neucom';
     if(f.id==='m29'&&t.required&&t.sequence%2===1){t.role='hostile';t.domain='air';t.enemyType='dart';t.homeX=t.x;t.label='Grupo aéreo '+(t.sequence+1);}
     if(f.id==='m35'&&t.required&&t.sequence===f.m.total-1){t.domain='cargo';t.label='Misil en lanzamiento';}
+    if(f.id==='m27'&&t.required&&t.sequence===f.m.total-1){t.domain='cargo';t.role='hostile';delete t.enemyType;t.label='Misil lanzado desde el silo';}
+    if(f.id==='m26'&&t.required&&t.sequence===f.m.total-1){t.domain='cargo';t.role='hostile';delete t.enemyType;t.label='Cohete de Neucom';}
+    if(f.id==='m08'&&t.required&&t.sequence===f.m.total-1){t.domain='sea';t.role='hostile';delete t.enemyType;t.label='Embarcación que escapa del dirigible';}
+    if(f.id==='m13'&&t.required&&t.sequence===f.m.total-1)t.label='Rena · aplicar ANB';
+    if(f.id==='m43'&&t.required&&t.sequence>=Math.ceil(f.m.total/2)){t.role='hostile';t.domain='air';t.enemyType='dart';t.homeX=t.x;t.label='Defensa aérea de General Resource';}
+    if(f.id==='m45'&&t.required&&t.sequence>=f.m.total-2){t.domain='structure';t.label=t.sequence===f.m.total-2?'Sphyrna':'Avión de Dision';delete t.enemyType;}
     if(t.domain==='sea'){delete t.enemyType;t.vx=0;}
     if(t.group==='sphyrna'){t.domain='structure';delete t.enemyType;}
   }
@@ -29,6 +35,7 @@ export function prepareOperation(f){
     const parts=f.targets.filter(t=>t.role==='generator'),split=Math.ceil(parts.length/2);
     parts.forEach((t,i)=>{t.depth=i<split?0:1;t.label=(f.id==='m47'?'Generador Aeon · ':'')+(t.depth?'Sistema interno ':'Defensa exterior ')+(i+1);t.x=t.depth?290+(i-split)*140:180+i*360;t.y=t.depth?170:120;});
     for(const t of f.targets.filter(t=>t.role==='boss')){t.depth=2;t.hitRadius=9;t.homeX=360;t.x=360;t.y=125;}
+    if(f.id==='m52')for(const t of parts)t.label='Enlace Aeon · interferir '+(t.sequence+1);
   }
 }
 export function advanceOperation(f,dt){
