@@ -1,3 +1,10 @@
+# v0.7.1 — contraste directo de Awakening
+
+- Corregida la primera misión contra la página indicada por el usuario: Rena participa y Neucom realiza la ofensiva.
+- Sustituidos los transportes intrusos añadidos por contactos de Neucom; radio de refuerzos y cierre con mensajes de Fiona y Rena.
+- Documentada la diferencia entre la condición temporal del original y las dos oleadas obligatorias del minijuego. Referencia al índice de 52 capítulos del mismo archivo.
+- Conservados combate, rutas y guardados. 60 pruebas aprobadas.
+
 # v0.7 — español claro y continuidad
 
 - Reescritas las 52 escenas y sus informes, introducción, cierres y radio de combate con nombres, acciones y motivos explícitos.

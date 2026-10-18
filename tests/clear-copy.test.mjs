@@ -3,6 +3,17 @@ import assert from 'node:assert/strict';
 import { missions } from '../src/missions.js';
 import { story } from '../src/story.js';
 import { environment } from './helpers/dom.mjs';
+import { WAVE_PLANS } from '../src/waves.js';
+
+test('Awakening usa el contenido de su página: Neucom, Rena y aviso de refuerzos',()=>{
+  const mission=missions.m01;
+  assert.equal(mission.source.url,'https://w.atwiki.jp/acacac/pages/11.html');
+  assert.match(mission.briefing,/Neucom.*ofensiva/);assert.match(mission.briefing,/Rena/);
+  assert.ok(mission.dialogue.some(line=>line.character==='rena'));
+  assert.deepEqual(mission.reportDialogue.filter(line=>line.kind!=='narration').map(line=>line.character),['control','fiona','rena']);
+  assert.match(WAVE_PLANS.m01[1].label,/Refuerzos/);
+  assert.doesNotMatch(mission.goal,/transportes|espacio restringido/);
+});
 
 test('La escolta explica el destino, las interferencias y la orden posterior sin anticiparla',()=>{
   assert.match(missions.m09.briefing,/cabo Rainy/);

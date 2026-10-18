@@ -1,9 +1,9 @@
 // Redacción propia en español claro; contexto y referencias en docs/TEXT_REVIEW.md.
 export const cinematicReports=[
   [ // 01
-    ["fiona","Buen vuelo, Nemo. Ahora entiendo por qué te eligieron para SARF."],
-    ["erich","Los transportes identificados han sido neutralizados y el corredor está despejado."],
-    ["fiona","Regresemos juntos. Ya habrá tiempo para competir en un entrenamiento."],
+    ["control","La intervención ha cumplido su objetivo. La formación puede regresar."],
+    ["fiona","Hoy has volado de otra manera, Nemo. Has respondido bien al combate."],
+    ["rena","Te escribiré por nuestro enlace. Es probable que volvamos a volar juntos."],
   ],
   [ // 02
     ["fiona","Los emisores han quedado fuera de servicio. General Resource podrá utilizar de nuevo el corredor."],

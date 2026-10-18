@@ -1,13 +1,13 @@
-import { missions } from './missions.js?v=0.7.0';
-import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.7.0';
-import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.7.0';
-import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.7.0';
-import { draw } from './draw.js?v=0.7.0';
-import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.7.0';
-import { ENEMY_TYPES } from './enemy-types.js?v=0.7.0';
-import { isActiveTarget } from './waves.js?v=0.7.0';
-import { missileHitChance,coreOpen } from './operations.js?v=0.7.0';
-import { toggleAutoFire } from './bullet-hell.js?v=0.7.0';
+import { missions } from './missions.js?v=0.7.1';
+import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById } from './engine.js?v=0.7.1';
+import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.7.1';
+import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.7.1';
+import { draw } from './draw.js?v=0.7.1';
+import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.7.1';
+import { ENEMY_TYPES } from './enemy-types.js?v=0.7.1';
+import { isActiveTarget } from './waves.js?v=0.7.1';
+import { missileHitChance,coreOpen } from './operations.js?v=0.7.1';
+import { toggleAutoFire } from './bullet-hell.js?v=0.7.1';
 
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export function createApp({document,window,storage,campaignId='jp52',battleMode='bullethell',now=()=>performance.now(),repeat=setInterval,stopRepeat=clearInterval,delay=setTimeout,stopDelay=clearTimeout,requestFrame=window.requestAnimationFrame?.bind(window),cancelFrame=window.cancelAnimationFrame?.bind(window)}){

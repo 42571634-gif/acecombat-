@@ -1,4 +1,6 @@
-# Electrosphere 2040 · 52 misiones · v0.7
+# Electrosphere 2040 · 52 misiones · v0.7.1
+
+La v0.7.1 contrasta Awakening directamente con su transcripción: incluye a Rena, sitúa la ofensiva de Neucom y corrige los mensajes de la operación. El archivo de transcripciones de ese sitio es la base por capítulo; el [registro de revisión](docs/TEXT_REVIEW.md) distingue los apartados contrastados de las simplificaciones jugables.
 
 La v0.7 reescribe los diálogos y los informes en español más directo. Explica los términos antes de usarlos, concreta quién participa y amplía las escenas que necesitan contexto. Incluye 477 intervenciones, narraciones intercaladas, referencias por misión y dos citas breves traducidas. [Criterios, contraste y alcance de la revisión](docs/TEXT_REVIEW.md). El combate y los guardados se conservan.
 

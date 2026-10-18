@@ -1,4 +1,8 @@
-# Verificación v0.7
+# Verificación v0.7.1
+
+`npm run check`: 22 módulos y 60 pruebas aprobadas. Se añade una regresión de Awakening para verificar la intervención contra Neucom, la participación de Rena, su mensaje posterior y el aviso de refuerzos. Se mantienen las pruebas de las 52 misiones en tres dificultades. El contraste directo realizado en esta entrega corresponde al capítulo 01; no se declara verificada de nuevo la totalidad del archivo.
+
+## Registro de verificación v0.7
 
 `npm run check`: 22 módulos con sintaxis válida y 59 pruebas aprobadas. Se mantienen las regresiones de combate, guardados y las 156 combinaciones de misión/dificultad. Las 477 intervenciones tienen un interlocutor registrado; no hay voz inventada para Nemo y las grabaciones de fallecidos conservan su identificación.
 

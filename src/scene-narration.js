@@ -1,7 +1,7 @@
 // Puentes editoriales originales: no fijan horas, destinos o desplazamientos no documentados.
 export const narration = (text,label='Escena') => ({kind:'narration',label,text,adaptation:true});
 const bridges={
-  1:[[4,'Fiona cambia del canal de SARF a un enlace privado con Nemo. Erich sigue conectado al canal del escuadrón.','Canal privado']],
+  1:[[0,'Nemo, Erich, Fiona y Rena participan en la intervención sobre Expo City.','Formación de SARF']],
   3:[[3,'La alerta interrumpe el entrenamiento conjunto. Los canales de los pilotos pasan a coordinar la emergencia sobre Chopinburg.','Cambio de operación']],
   5:[[4,'La conversación da paso a la coordinación de vuelo: Erich anuncia a Nemo el lado que va a cubrir.','Formación de escolta']],
   6:[[0,'En el enlace de reconocimiento, Rena observa las imágenes del valle de Hatties Range junto a la información que recibe Nemo.','Reconocimiento']],

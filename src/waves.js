@@ -1,8 +1,8 @@
-import { dialogueLine } from './characters.js?v=0.7.0';
+import { dialogueLine } from './characters.js?v=0.7.1';
 // Radio operativa original para las fases del minijuego.
 const waves=(...stages)=>stages.map(([label,character,text])=>({label,message:dialogueLine([character,text]),adaptation:true}));
 export const WAVE_PLANS={
-  m01:waves(["Primera intercepción","fiona","Intercepta el primer grupo de transportes. Erich y yo te cubrimos."],["Contactos restantes","erich","Se aproxima otro grupo de transportes. Continúa la intercepción."]),
+  m01:waves(["Intervención de UPEO","rena","Atacaremos los objetivos de Neucom."],["Refuerzos de Neucom","control","Se detectan refuerzos. Preparen una nueva intercepción."]),
   m03:waves(["Contenedores cercanos","keith","Destruye los contenedores del primer grupo antes de que alcancen la ciudad."],["Segundo grupo","dision","Hay otro grupo de contenedores en descenso. La emergencia todavía no ha terminado."]),
   m09:waves(["Cobertura del transporte","erich","Mantente cerca del transporte. Tenemos que interceptar a los aviones de General Resource."],["Cerrar la intercepción","fiona","Quedan atacantes en aproximación al transporte. Intercéptalos para completar la escolta."]),
   m15:waves(["Sector oeste","erich","Comprueba la identificación de cada contacto. Hay civiles dentro de la zona de combate."],["Sector este","park","Quedan fuerzas de ambas compañías en el sector este. Continúen la intervención."]),

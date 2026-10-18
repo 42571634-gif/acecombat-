@@ -1,12 +1,12 @@
 // Redacción propia en español claro; contexto y referencias en docs/TEXT_REVIEW.md.
 export const cinematicScenes=[
   [ // 01
-    ["fiona","Soy Fiona, de SARF. Bienvenido, Nemo. Nos han enviado a interceptar unos transportes sobre Expo City.","Fiona se presenta por el canal de SARF."],
-    ["erich","Soy Erich. Hay aviones dentro del espacio aéreo restringido. Debemos detenerlos antes de que avance el conflicto."],
-    ["fiona","Erich y yo volaremos contigo. Comprueba los blancos antes de disparar."],
-    ["control","SARF, tienen autorización para interceptar los transportes identificados. Eviten daños a la ciudad."],
-    ["fiona","Dicen que pilotas muy bien. Quiero comprobarlo, pero primero terminemos esta misión."],
-    ["erich","Nemo, cubriré tu otro flanco. Avísame si necesitas apoyo."],
+    ["control","Neucom ha iniciado una ofensiva contra General Resource. UPEO intervendrá para contenerla."],
+    ["erich","Rena lleva el Flanker. Tiene una buena aeronave para esta salida."],
+    ["fiona","Erich, concéntrate. La operación está comenzando."],
+    ["rena","Estoy preparada para atacar los objetivos de Neucom."],
+    ["fiona","Nemo, coordina tu aproximación con la formación de SARF."],
+    ["erich","Yo también necesito cobertura. No pierdas de vista mi posición."],
   ],
   [ // 02
     ["park","Destruyan los emisores de Neucom. Su interferencia está bloqueando el corredor aéreo."],

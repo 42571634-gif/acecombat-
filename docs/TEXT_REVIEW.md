@@ -1,5 +1,11 @@
 # Revisión de textos v0.7
 
+## Base por capítulo · v0.7.1
+
+La página [Awakening](https://w.atwiki.jp/acacac/pages/11.html), indicada por el usuario, se volvió a leer el 18 de octubre de 2026. Se corrige su contenido: participación de Rena, ofensiva de Neucom, aviso de refuerzos y comunicaciones posteriores. Se retira la identificación añadida de todos los blancos como transportes intrusos. La partida conserva dos oleadas obligatorias; en el original los refuerzos dependen del tiempo de la primera fase. No se presenta esa simplificación del minijuego como una regla original.
+
+El [índice del mismo archivo](https://w.atwiki.jp/acacac/pages/4.html) contiene los 52 capítulos. Para revisar una misión se debe contrastar su propia página, separando noticias y mensajes previos, briefing, radio en vuelo, condiciones de objetivos, debriefing y mensajes posteriores. Añadir un enlace no equivale a haber revisado todos esos apartados. El índice advierte que algunas comunicaciones sin subtítulos fueron transcritas de oído por su autor. Esta entrega ajusta directamente Awakening; el alcance del contraste anterior se detalla más abajo.
+
 El objetivo de esta versión es que una persona que no conoce Ace Combat 3 pueda seguir la prueba de concepto. El informe académico sobre el proceso es un documento separado del juego. Esta revisión no convierte la prueba en una edición autorizada ni en una traducción completa del guion.
 
 ## Alcance editorial

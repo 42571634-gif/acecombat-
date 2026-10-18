@@ -2,7 +2,7 @@
 const mobileEscorts={8:'Dirigible',9:'Transporte de Clarkson y Fiona',26:'Unidades de asalto',40:'Transbordador',42:'Equipo de recuperación'};
 const fixedEscorts={5:'Base de Neucom',11:'Complejo espacial'};
 const groundNames={2:'Emisor de interferencias',8:'Obstáculo del descenso',14:'Instalación designada',19:'Instalación de la base aérea',22:'Nodo de energía',27:'Silo de misiles',34:'Objetivo de Ouroboros',39:'Instalación de General Resource'};
-const airNames={1:'Transporte intruso',7:'Interceptor',10:'Bombardero',15:'Avión combatiente',16:'Interceptor del corredor',23:'Transporte y escolta',24:'Bombardero',25:'Escolta del transbordador',33:'Geopelia',43:'Avión de General Resource',44:'Interceptor',48:'Escolta de Ouroboros'};
+const airNames={1:'Contacto de Neucom',7:'Interceptor',10:'Bombardero',15:'Avión combatiente',16:'Interceptor del corredor',23:'Transporte y escolta',24:'Bombardero',25:'Escolta del transbordador',33:'Geopelia',43:'Avión de General Resource',44:'Interceptor',48:'Escolta de Ouroboros'};
 export function prepareOperation(f){
   f.scroll=0;f.passes=0;f.coverEscort=false;f.coverEnergy=100;
   f.terrain=f.m.type==='naval'||f.id==='m42'?'sea':f.m.type==='orbital'||f.id==='m38'?'space':f.m.type==='tunnel'?'tunnel':'land';
