@@ -50,3 +50,10 @@ Los arrays dialogue y reportDialogue admiten bloques `{kind:'narration',label,te
 IndexedDB electrosphere.radio, versión 1, almacén records con clave key. Dos snapshots por misión y modo: campaign/simulator, attempt/victory. Cada snapshot conserva nombre, inicio, duración, descriptor, interlocutores y mensajes activados con id, orden, tiempo simulado, canal, texto, trigger, source, confidence y adaptation. El registro no participa en decisiones ni validación de campaña. La transacción de registro puede fallar sin impedir guardar campaña; se avisa y se mantiene copia de sesión.
 
 beginAttempt valida semilla entera sin signo, dificultad y versión del generador. resolveMission regenera cantidades y tiempo desde el descriptor guardado; exige el mismo descriptor en el resultado. Los resultados históricos sin descriptor mantienen las reglas fijas. retryMission solo permite volver al combate inmediatamente anterior desde su informe o cierre de simulador.
+
+
+## Categorías editoriales v0.8.1
+
+Los eventos nuevos incluyen category: character, command o system; el canal allied/enemy/control es independiente. Los mensajes también conservan category para renderizado. character corresponde a voz identificada, command a órdenes argumentales documentadas o introducción adaptada, system a avisos técnicos. La narración queda fuera del recuento. Los snapshots nuevos usan formatVersion:2; no cambia la versión de IndexedDB ni la campaña v3.
+
+Al abrir registros antiguos se infiere la categoría sin escribir: personajes nombrados como character, Control con confidence community-transcript como command, avisos operativos de Control y archivo como system. Es una compatibilidad editorial aproximada; conserva palabra por palabra el texto histórico. Los eventos recuperados tienen fuente por misión, trigger y adaptación; no se ejecuta una migración que sustituya sus textos. editorial-policy.js expresa las excepciones de recuento para la auditoría, sin intervenir en las decisiones de campaña.

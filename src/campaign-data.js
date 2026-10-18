@@ -1,8 +1,9 @@
-import { expandedDialogue } from './dialogue-expansion.js?v=0.8.0';
-import { reportDialogue } from './report-dialogue.js?v=0.8.0';
-import { dialogueLine } from './characters.js?v=0.8.0';
-import { situateScene,situateReport,narration } from './scene-narration.js?v=0.8.0';
-import { missionContexts } from './mission-context.js?v=0.8.0';
+import { expandedDialogue } from './dialogue-expansion.js?v=0.8.1';
+import { reportDialogue } from './report-dialogue.js?v=0.8.1';
+import { dialogueLine } from './characters.js?v=0.8.1';
+import { situateScene,situateReport,narration } from './scene-narration.js?v=0.8.1';
+import { missionContexts } from './mission-context.js?v=0.8.1';
+import { classifyScene } from './communications.js?v=0.8.1';
 // Adaptaciones originales en español. Referencias y límites en docs/RESEARCH.md.
 // [número, título, lugar, mecánica, objetivo, contexto, interlocutor, diálogo recreado, informe]
 const chapters = [
@@ -65,8 +66,8 @@ const factionFor = n => n<=18 ? 'UPEO' : n<=33 ? 'GR' : n<=38 ? 'OUROBOROS' : n<
 export const chapterList = chapters.map(([number,name,place,type,goal,briefing,speaker,line,report]) => ({
   id: 'm'+String(number).padStart(2,'0'), number, name, place, type:number===44?'ground':type, goal, briefing,
   research:missionContexts['m'+String(number).padStart(2,'0')],
-  dialogue: situateScene(number,expandedDialogue[number-1].map(dialogueLine),place), report,
-  reportDialogue: number===9?[narration('La primera intercepción ha terminado. El transporte sigue en vuelo, pero las interferencias bloquean su radio. Rena llega al área y recibe una nueva orden de Park.','Tras la intercepción · Orden de Park'),...reportDialogue[number-1].map(dialogueLine)]:situateReport(number,reportDialogue[number-1].map(dialogueLine)),
+  dialogue: situateScene(number,classifyScene(number,'pre',expandedDialogue[number-1].map(dialogueLine)),place), report,
+  reportDialogue: number===9?[narration('La primera intercepción ha terminado. El transporte sigue en vuelo, pero las interferencias bloquean su radio. Rena llega al área y recibe una nueva orden de Park.','Tras la intercepción · Orden de Park'),...classifyScene(number,'post',reportDialogue[number-1].map(dialogueLine))]:situateReport(number,classifyScene(number,'post',reportDialogue[number-1].map(dialogueLine))),
   faction:factionFor(number), arc:arcFor(number),
   source:{url:`https://w.atwiki.jp/acacac/pages/${number+10}.html`,title:`AC3 台詞集 · Mission ${number}`,accessed:'2026-10-18'},
   confidence:'community-transcript', adaptation:true,

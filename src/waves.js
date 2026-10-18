@@ -1,5 +1,6 @@
-import { dialogueLine } from './characters.js?v=0.8.0';
-import { missionContexts } from './mission-context.js?v=0.8.0';
+import { dialogueLine } from './characters.js?v=0.8.1';
+import { missionContexts } from './mission-context.js?v=0.8.1';
+import { phaseConversations,sourceForRadio } from './character-radio.js?v=0.8.1';
 // Radio operativa original para las fases del minijuego.
 const waves=(...stages)=>stages.map(([label,character,text])=>({label,message:dialogueLine([character,text]),adaptation:true}));
 export const WAVE_PLANS={
@@ -32,7 +33,7 @@ Object.assign(WAVE_PLANS,{
 WAVE_PLANS.m09[1]=waves(['Radio interferida','control','La radio del transporte está interferida. Mantengan la cobertura por radar y rechacen a los atacantes restantes.'])[0];
 export const isActiveTarget=target=>target.alive&&target.active!==false;
 export function prepareWaves(flight){
-  flight.waves=WAVE_PLANS[flight.id]||waves(['Operación','control','Objetivos adquiridos. Mantenga la aproximación y confirme cada contacto.']);
+  flight.waves=(WAVE_PLANS[flight.id]||waves(['Operación','control','Objetivos adquiridos. Mantenga la aproximación y confirme cada contacto.'])).map(wave=>({...wave}));
   if(flight.m.encounter?.waveCount){
     const first=flight.waves[0];flight.waves=Array.from({length:flight.m.encounter.waveCount},(_,index)=>index?waves(['Intercepción '+(index+1),'control','Nuevo grupo en aproximación. Mantén la cobertura y confirma los blancos de esta pasada.'])[0]:first);
   }
@@ -48,6 +49,16 @@ export function prepareWaves(flight){
   }
   const context=missionContexts[flight.id];
   if(context)flight.waves[0]={...flight.waves[0],message:dialogueLine([context.character,context.radio]),source:context.source,confidence:'community-transcript'};
+  flight.waves=flight.waves.map((phase,index)=>{
+    const recovered=phaseConversations[flight.id]?.[index];
+    const source=sourceForRadio(flight.id);
+    const command=['m01','m09','m26','m49'].includes(flight.id)&&index===1||index===0&&phase.message.character==='control';
+    const original={...phase.message,category:phase.message.character==='control'?(command?'command':'system'):phase.message.character==='archive'?'system':'character'};
+    const messages=recovered?recovered.map(message=>({...message,category:message.character==='control'?'command':'character'})):flight.m.type==='boss'&&index>0&&flight.id!=='m49'?[]:original.category==='system'?[]:[original];
+    return {...phase,source,confidence:recovered?'community-transcript':phase.confidence||'operational-adaptation',messages,
+      message:messages[0]||{...phase.message,category:'system'},
+      systemMessage:{...dialogueLine(['control',flight.m.type==='boss'&&index>0?phase.label+': '+(index===1?'neutraliza los sistemas internos marcados.':'ataca el núcleo durante la apertura de su compuerta.'):'Fase '+(index+1)+' · '+phase.label]),category:'system'}};
+  });
   flight.waveIndex=0;flight.waveTransition=0;flight.waveEvents=[{index:0,...flight.waves[0]}];
   const required=flight.targets.filter(t=>t.required);
   for(const target of flight.targets){

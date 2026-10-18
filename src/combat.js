@@ -1,12 +1,12 @@
-import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.8.0';
-import { prepareWaves,checkNextWave,advanceWaves,isActiveTarget } from './waves.js?v=0.8.0';
-import { moveEnemy } from './enemy-types.js?v=0.8.0';
-import { prepareOperation,advanceOperation,missileHitChance,coreOpen } from './operations.js?v=0.8.0';
-import { generateEncounter,stream } from './attempts.js?v=0.8.0';
-import { prepareRadio,syncRadio } from './radio.js?v=0.8.0';
-import { prepareTerrain } from './terrain.js?v=0.8.0';
-export { missileHitChance } from './operations.js?v=0.8.0';
-export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.8.0';
+import { prepareBulletHell, advanceBulletHell } from './bullet-hell.js?v=0.8.1';
+import { prepareWaves,checkNextWave,advanceWaves,isActiveTarget } from './waves.js?v=0.8.1';
+import { moveEnemy } from './enemy-types.js?v=0.8.1';
+import { prepareOperation,advanceOperation,missileHitChance,coreOpen } from './operations.js?v=0.8.1';
+import { generateEncounter,stream } from './attempts.js?v=0.8.1';
+import { prepareRadio,syncRadio } from './radio.js?v=0.8.1';
+import { prepareTerrain } from './terrain.js?v=0.8.1';
+export { missileHitChance } from './operations.js?v=0.8.1';
+export { useBomb, DIFFICULTIES } from './bullet-hell.js?v=0.8.1';
 function seeded(seed) {
   let value=seed>>>0;
   return ()=>{value=(1664525*value+1013904223)>>>0;return value/4294967296;};

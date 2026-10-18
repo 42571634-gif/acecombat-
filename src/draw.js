@@ -1,8 +1,8 @@
-import { isTargetLocked } from './combat.js?v=0.8.0';
-import { ENEMY_TYPES,drawEnemy } from './enemy-types.js?v=0.8.0';
-import { isActiveTarget } from './waves.js?v=0.8.0';
-import { coreOpen } from './operations.js?v=0.8.0';
-import { drawTerrain,drawOutcome } from './terrain.js?v=0.8.0';
+import { isTargetLocked } from './combat.js?v=0.8.1';
+import { ENEMY_TYPES,drawEnemy } from './enemy-types.js?v=0.8.1';
+import { isActiveTarget } from './waves.js?v=0.8.1';
+import { coreOpen } from './operations.js?v=0.8.1';
+import { drawTerrain,drawOutcome } from './terrain.js?v=0.8.1';
 export function draw(flight,canvas){
   if(!flight||!canvas)return;
   const ctx=canvas.getContext('2d');

@@ -1,4 +1,4 @@
-import { stream } from './attempts.js?v=0.8.0';
+import { stream } from './attempts.js?v=0.8.1';
 export function prepareTerrain(f){
   const n=f.m.number;
   f.biome=n===38?'digital':f.m.type==='orbital'?'orbit':/Geofront/.test(f.m.place)?'tunnel':/Desert/.test(f.m.place)?'desert':/Mountains|Range|Valley|Plateau/.test(f.m.place)?'mountains':[8,11,25,26,40,44].includes(n)?'facility':/Ocean|Gulf|Coast|Island|Bay/.test(f.m.place)?'coast':'city';

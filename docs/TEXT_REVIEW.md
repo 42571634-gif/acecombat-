@@ -47,3 +47,10 @@ Las pruebas comprueban interlocutores, continuidad por rutas, grabaciones, narra
 La revisión puntual de v0.7 queda ampliada por las fichas individuales de [MISSION_REVIEW.md](MISSION_REVIEW.md). Se han consultado las páginas de las 52 misiones para situación, interlocutores, objetivos, cambios de combate y consecuencias, contrastando perfiles oficiales y mapa comunitario. Sigue sin afirmarse traducción íntegra o equivalencia frase por frase. El rango pasa a 8–20 intervenciones totales por recorrido; la narración no cuenta.
 
 Correcciones: instalación de UPEO en Target Acquisition; ANB sobre Rena en Bug Hunt; derribo de Rena al final de Broken Wings; aparición en la costa al terminar A Canopy of Stars; copia digital y propósito de Dision antes de elegir en Dilemma; motivo de la ruptura de Cynthia en Reality Distortion; comunicación digital final de Cynthia en Sole Survivor. Los mensajes de combate de las 52 misiones se vinculan a sus acontecimientos. Las comunicaciones enemigas tienen su canal indicado. No se han agregado nuevas citas literales extensas: se mantienen las dos citas breves anteriores.
+
+
+## v0.8.1 · Voces frente a avisos técnicos
+
+La regla rígida de v0.8 queda sustituida por una guía editorial. Solo cuentan personajes y órdenes con significado argumental. Las 52 fichas se han recalculado: 6–19 intervenciones, con excepciones motivadas por misión en [VOICE_REVIEW.md](VOICE_REVIEW.md). Se exploran tanto avances inmediatos como progresivos para no perder intercambios condicionales en el análisis. Las derrotas tempranas no tienen mínimo. Una ampliación a 21–30 exigiría una justificación explícita por misión; actualmente ninguna la necesita.
+
+Se restauran intercambios en fases antes ocupadas por Control y se separan avisos del minijuego. El nuevo contraste de fuentes y sus límites se detallan en VOICE_REVIEW.md. Se mantienen dos citas breves traducidas; las nuevas réplicas son recreaciones propias. La revisión no equivale a una traducción completa.

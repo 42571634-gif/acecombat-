@@ -1,4 +1,4 @@
-// Adaptación propia; revisión por misión en docs/MISSION_REVIEW.md.
+// Redacción propia; revisión de voces y fuentes en docs/VOICE_REVIEW.md.
 export const cinematicScenes=[
   [
     [
@@ -19,7 +19,7 @@ export const cinematicScenes=[
     ],
     [
       "fiona",
-      "Nemo, coordina tu aproximación con la formación de SARF."
+      "Nemo, entra conmigo. Erich y Rena cubrirán el otro lado."
     ],
     [
       "erich",
@@ -59,7 +59,7 @@ export const cinematicScenes=[
     ],
     [
       "dision",
-      "Yo soy Dision. Hoy entrenaremos juntos para comprobar cómo trabajan nuestras formaciones."
+      "Soy Dision. Hoy veremos cómo respondes cuando tengas que seguir a otro piloto."
     ],
     [
       "keith",
@@ -85,7 +85,7 @@ export const cinematicScenes=[
     ],
     [
       "fiona",
-      "Dision, hoy Nemo sigue en nuestra formación. Primero ocupémonos de la flota."
+      "Dision, Nemo todavía vuela con nosotros. Si quieres hablar con él, espera a que terminemos con la flota."
     ],
     [
       "keith",
@@ -517,7 +517,7 @@ export const cinematicScenes=[
     ],
     [
       "dision",
-      "Si Nemo decide investigar, tendrá que resolver ese objetivo antes del último blanco principal."
+      "Si vas a investigar la lancha, hazlo mientras mantenemos ocupado al resto. Después tendremos que retirarnos."
     ],
     [
       "keith",
@@ -540,10 +540,6 @@ export const cinematicScenes=[
     [
       "dision",
       "Hay un hangar que quiero investigar. Podría aclarar la relación entre Rena y un proyecto de General Resource."
-    ],
-    [
-      "control",
-      "Puntos de observación marcados para esta simulación. Registra los emplazamientos con los sensores."
     ],
     [
       "dision",
@@ -725,7 +721,7 @@ export const cinematicScenes=[
     ],
     [
       "keith",
-      "Abandonar la compañía también significa abandonar esta formación. Nemo debe saberlo antes de elegir."
+      "Si te marchas, este equipo se acaba, Dision. No le vendas a Nemo la idea de que todo seguirá igual."
     ],
     [
       "dision",
@@ -951,7 +947,7 @@ export const cinematicScenes=[
     ],
     [
       "dision",
-      "Keith, esta operación no te corresponde. Apártate de nuestra formación."
+      "Keith, nadie te ha llamado. Apártate antes de obligarme a hacerlo yo."
     ],
     [
       "keith",
@@ -1011,7 +1007,7 @@ export const cinematicScenes=[
     ],
     [
       "fiona",
-      "Nemo, yo volaré contigo. Puedes preguntarme si necesitas conocer nuestra nueva formación."
+      "Seguiremos volando juntos, Nemo. Ya lo verás: mi hermana tiene una manera muy suya de dar la bienvenida."
     ],
     [
       "cynthia",
@@ -1050,28 +1046,17 @@ export const cinematicScenes=[
   ],
   [
     [
-      "control",
-      "Inserción orbital confirmada. Hay cuatro satélites láser de General Resource dentro de su área."
+      "simon",
+      "Soy Simon, de Neucom. He estado observando tus resultados, Nemo. Incluso a mí me has sorprendido.",
+      "Mensaje privado recibido antes del lanzamiento."
+    ],
+    [
+      "simon",
+      "No necesitas responder. Sigue trabajando sin llamar la atención; es mejor que los demás no se hagan demasiadas preguntas."
     ],
     [
       "control",
-      "Revise su ruta antes de acercarse. Cada satélite puede seguir atacando hasta quedar desactivado."
-    ],
-    [
-      "archive",
-      "Nemo vuela sin acompañantes. La pantalla muestra los cuatro contactos sobre el horizonte terrestre."
-    ],
-    [
-      "control",
-      "Necesitamos confirmar la desactivación de cada sistema láser, no solo daños en su blindaje."
-    ],
-    [
-      "archive",
-      "No hay otros aviones en la formación orbital. El apoyo llega por el canal de Neucom Space."
-    ],
-    [
-      "control",
-      "Tiene autorización para comenzar. Desactive los cuatro satélites y conserve una ruta de regreso."
+      "La salida será en solitario. Desactive los cuatro satélites láser y conserve una ruta de regreso."
     ]
   ],
   [
@@ -1198,7 +1183,7 @@ export const cinematicScenes=[
     ],
     [
       "cynthia",
-      "Nemo, comprueba la posición del siguiente paso antes de acelerar. Aquí hay poco espacio para corregir."
+      "No lo pierdas entre las estructuras, Nemo. Si vuelve a acelerar, tendremos que encontrar por dónde ha salido."
     ],
     [
       "control",
@@ -1215,28 +1200,20 @@ export const cinematicScenes=[
   ],
   [
     [
-      "simon",
-      "Soy Simon, investigador de Neucom. Puedo ayudarles a reducir la ventaja del Night Raven."
-    ],
-    [
       "cynthia",
-      "¿Por qué intervienes ahora, después de que llevamos tanto tiempo persiguiéndolo?"
+      "¡Lo he encontrado! Nemo, seguimos detrás del Night Raven."
     ],
     [
       "simon",
-      "Los generadores Aeon de la ciudad aumentan su capacidad de maniobra. Desactívenlos para poder alcanzarlo."
+      "Cynthia, soy Simon, de Neucom. Si de verdad quieres detener ese avión, contéstame."
     ],
     [
       "cynthia",
-      "Confirmaré los generadores. Nemo, dejemos de perseguirlo hasta reducir esa ventaja."
+      "¿Vienes a ayudar ahora? ¿Dónde estabas durante todo lo anterior?"
     ],
     [
       "simon",
-      "No demoren el ataque. El Night Raven puede volver a escapar mientras los generadores sigan funcionando."
-    ],
-    [
-      "cynthia",
-      "Entendido. Primero los generadores Aeon; después atacaremos al Night Raven."
+      "También tengo responsabilidad en lo que está pasando. Puedo darles la información que necesitan."
     ]
   ],
   [

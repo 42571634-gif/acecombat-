@@ -1,3 +1,11 @@
+# v0.8.1 · Voces y registro
+
+- Personajes y órdenes argumentales separados de instrucciones automáticas; los avisos técnicos usan formato compacto sin retrato.
+- Intercambios de personajes recuperados para fases de combate; despedida de Keith identificada como última transmisión y canal privado de Simon antes/después de la misión orbital.
+- Guía de 8–20 intervenciones narrativas, excepciones individuales documentadas y posibilidad editorial de 21–30 con justificación; no se necesitan misiones ampliadas en esta entrega.
+- Registro con filtros Conversaciones/Sistema/Todo, compatible con snapshots anteriores sin reescribirlos. Guardado de campaña v3 y esquema IndexedDB sin cambios.
+- Se conserva terminología militar con referentes concretos; se retiran réplicas que explicaban contadores y compuertas como si fueran voz del personaje.
+
 # v0.7.1 — contraste directo de Awakening
 
 - Corregida la primera misión contra la página indicada por el usuario: Rena participa y Neucom realiza la ofensiva.

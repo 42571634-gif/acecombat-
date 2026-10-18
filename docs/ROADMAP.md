@@ -79,3 +79,12 @@ Implementado en v0.2: 52 misiones jugables en el grafo, cinco finales y fuentes 
 - [x] Animaciones de victoria/derrota, resumen manual y movimiento reducido.
 - [x] Fondos completos y encuentros variables con condiciones especiales fijas.
 - [x] Guardado v3, migraciones y validación por semilla.
+
+
+## Ampliación v0.8.1 completada
+
+- [x] Prioridad de personajes y separación de avisos técnicos sin retratos.
+- [x] Registro filtrable, compatibilidad de snapshots y pausa conservada.
+- [x] Recuento editorial de las 52 misiones; excepciones justificadas al rango orientativo.
+- [x] Intercambios de fases, revisión de voces militares y continuidad del canal privado orbital.
+- [x] Regresiones de combate, rutas, guardado y nuevos controles editoriales.

@@ -1,5 +1,5 @@
 // Puentes editoriales originales: no fijan horas, destinos o desplazamientos no documentados.
-import { missionContexts } from './mission-context.js?v=0.8.0';
+import { missionContexts } from './mission-context.js?v=0.8.1';
 export const narration = (text,label='Escena') => ({kind:'narration',label,text,adaptation:true});
 const bridges={
   1:[[0,'Nemo, Erich, Fiona y Rena participan en la intervención sobre Expo City.','Formación de SARF']],
@@ -12,7 +12,7 @@ const bridges={
   19:[[0,'Tras aceptar la oferta de Dision, Nemo se incorpora a una operación de General Resource. Dision y Keith son ahora sus compañeros de formación.','Nueva organización · General Resource']],
   34:[[0,'Nemo ha elegido seguir a Dision. El siguiente enlace operativo ya pertenece a Ouroboros.','Cambio de lealtad']],
   39:[[0,'Después de proteger el transporte y romper con Park, Nemo y Fiona se incorporan a Neucom. Cynthia coordina su nueva operación.','Más adelante · Neucom']],
-  41:[[0,'La operación se traslada fuera de la atmósfera. Nemo recibe instrucciones por el enlace de Neucom Space para atacar los satélites.','Cambio de escenario · Órbita']],
+  41:[[0,'Antes del lanzamiento, Simon abre un enlace privado con Nemo.','Canal privado · Antes del lanzamiento'],[2,'La operación se traslada fuera de la atmósfera. Nemo recibe instrucciones por el enlace de Neucom Space para atacar los satélites.','Cambio de escenario · Órbita']],
   43:[[0,'Las hermanas utilizan un canal compartido con Nemo antes de entrar en combate.','Antes de la salida'],[8,'La conversación termina por ahora. La formación se prepara para atacar las fuerzas de General Resource en White Valley.','Comienzo de la operación']],
   44:[[0,'Tras seguir a Cynthia, Nemo participa en una operación de Ouroboros sobre Expo City. Dision dirige la captura de Rena.','Nueva operación · Expo City']],
   46:[[0,'La persecución del Night Raven entra en Geofront. Cynthia y Nemo mantienen el contacto por radio dentro del corredor.','Cambio de escenario · Geofront']],

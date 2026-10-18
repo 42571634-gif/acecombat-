@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { missions } from '../src/missions.js';
 import { story } from '../src/story.js';
 import { environment } from './helpers/dom.mjs';
+import { phaseConversations } from '../src/character-radio.js';
 import { WAVE_PLANS } from '../src/waves.js';
 
 test('Awakening usa el contenido de su página: Neucom, Rena y aviso de refuerzos',()=>{
@@ -28,7 +29,8 @@ test('Los términos y las decisiones se explican en las escenas relevantes',()=>
   assert.equal(missions.m43.dialogue.at(-1).kind,'narration');
   const rupture=missions.m43.reportDialogue.map(line=>line.text).join(' ');
   assert.match(rupture,/golpe militar/);assert.match(rupture,/unirme a ellos/);assert.match(rupture,/volveré a Neucom/);
-  assert.match(missions.m47.dialogue.map(line=>line.text).join(' '),/generadores Aeon de la ciudad/);
+  assert.match(phaseConversations.m47[1].map(line=>line.text).join(' '),/generadores Aeon de la ciudad/);
+  assert.doesNotMatch(missions.m47.dialogue.map(line=>line.text).join(' '),/generadores Aeon/);
   assert.match(story['ending-fiona'].description,/abandonar Neucom/);
 });
 test('Las referencias siguen visibles y ampliar una escena no añade decisiones ni cambia la partida',()=>{

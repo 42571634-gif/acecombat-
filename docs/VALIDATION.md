@@ -1,3 +1,15 @@
+# Verificación v0.8.1
+
+`npm run check`: **30 módulos con sintaxis válida y 75 pruebas aprobadas**. Se mantienen 468 combates con piloto real (52 misiones × 3 dificultades × 3 semillas), las 156 combinaciones base, cinco rutas, secundarios, jefes, escoltas y migraciones. Las nuevas pruebas distinguen categorías, órdenes argumentales, advertencias únicas, sincronización de conversaciones, agradecimiento opcional, despedida grabada, canales enemigos, compatibilidad histórica y filtros sin cambiar el estado de campaña.
+
+`node scripts/review-missions.mjs` explora 50 semillas por misión, secundarios y advertencias realizados/omitidos y eliminación inmediata/progresiva. Los recuentos narrativos observados son **6–19**. Sistema y narración no consumen el rango orientativo; las excepciones por debajo de ocho están justificadas en VOICE_REVIEW.md. Ninguna misión necesita ampliarse a 21–30. No se rellenan derrotas tempranas ni se suman alternativas incompatibles. Las pruebas también recorren avances progresivos para comprobar eventos que una eliminación instantánea puede omitir.
+
+Navegador real a 390×844 y 360×800: filtros Conversaciones/Sistema/Todo, selección accesible, conservación del panel desplegado y del reloj en pausa. Anchos de contenido/scroll: 375/375 y 345/345 respectivamente, sin desbordamiento horizontal. Conversaciones conserva los retratos; Sistema muestra cero tarjetas de personajes. Tras una derrota real por proyectiles, se recargó y recuperó desde el archivo el intento de Self Awareness guardado en IndexedDB: conversación inicial, avisos únicos del 50 % y 25 % y desenlace; no aparece la explicación de Simon correspondiente a una fase no alcanzada. Sin errores ni advertencias JavaScript durante esa revisión.
+
+Los textos nuevos son recreaciones propias de comunicaciones documentadas, con tiempos condensados. La auditoría numérica no certifica calidad literaria ni traducción íntegra. Las decisiones editoriales y los capítulos contrastados se detallan en VOICE_REVIEW.md; las diferencias jugables permanecen en MISSION_REVIEW.md. La revisión móvil utiliza viewport de navegador y no sustituye una prueba física en un teléfono.
+
+## Historial de verificaciones
+
 # Verificación v0.8.0
 
 `npm run check`: 27 módulos y 70 pruebas aprobadas. Incluye 468 combates con piloto automático real (52 misiones × 3 dificultades × 3 semillas), además de las 156 combinaciones base, secundarios, escoltas, jefes, cinco rutas y migraciones v1/v2. Los resultados procedurales se validan contra su descriptor.

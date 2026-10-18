@@ -1,4 +1,4 @@
-import { chapterList } from './campaign-data.js?v=0.8.0';
+import { chapterList } from './campaign-data.js?v=0.8.1';
 
 export const TYPE_RULES = {
   intercept:{label:'Intercepción',verb:'Destruir',hint:'Intercepta los contactos aéreos. Si escapan de pantalla volverán en otra pasada con el daño recibido; el tiempo de misión sigue contando.'},

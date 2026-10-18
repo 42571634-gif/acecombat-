@@ -1,15 +1,16 @@
-import { missions } from './missions.js?v=0.8.0';
-import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById,beginAttempt,retryMission } from './engine.js?v=0.8.0';
-import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.8.0';
-import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.8.0';
-import { draw } from './draw.js?v=0.8.0';
-import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.8.0';
-import { ENEMY_TYPES } from './enemy-types.js?v=0.8.0';
-import { isActiveTarget } from './waves.js?v=0.8.0';
-import { missileHitChance,coreOpen } from './operations.js?v=0.8.0';
-import { toggleAutoFire } from './bullet-hell.js?v=0.8.0';
-import { newAttempt,generateEncounter } from './attempts.js?v=0.8.0';
-import { createMissionLog } from './mission-log.js?v=0.8.0';
+import { missions } from './missions.js?v=0.8.1';
+import { createCampaign,currentNode,chooseOption,resolveMission,campaignSummary,canChoose,validateGraph,missionById,beginAttempt,retryMission } from './engine.js?v=0.8.1';
+import { saveCampaign,loadCampaign,loadProfile,saveProfile } from './storage.js?v=0.8.1';
+import { createFlight,advanceFlight,fireMissile,isTargetLocked,useBomb,DIFFICULTIES } from './combat.js?v=0.8.1';
+import { draw } from './draw.js?v=0.8.1';
+import { messageMarkup,bindPortraits } from './dialogue-view.js?v=0.8.1';
+import { ENEMY_TYPES } from './enemy-types.js?v=0.8.1';
+import { isActiveTarget } from './waves.js?v=0.8.1';
+import { missileHitChance,coreOpen } from './operations.js?v=0.8.1';
+import { toggleAutoFire } from './bullet-hell.js?v=0.8.1';
+import { newAttempt,generateEncounter } from './attempts.js?v=0.8.1';
+import { createMissionLog } from './mission-log.js?v=0.8.1';
+import { communicationCategory,filterCommunications } from './communications.js?v=0.8.1';
 
 const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 export function createApp({document,window,storage,campaignId='jp52',battleMode='bullethell',attemptFactory=newAttempt,now=()=>performance.now(),repeat=setInterval,stopRepeat=clearInterval,delay=setTimeout,stopDelay=clearTimeout,requestFrame=window.requestAnimationFrame?.bind(window),cancelFrame=window.cancelAnimationFrame?.bind(window)}){
@@ -128,11 +129,14 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
     if($('gun')){$('gun').textContent=flight.gunEnabled?'Cañón: automático':'Cañón: en espera';$('gun').setAttribute?.('aria-pressed',String(flight.gunEnabled));}
     if(radioCount!==flight.radio.length){
       radioCount=flight.radio.length;
-      $('radioMessages').innerHTML=flight.radio.slice(-2).map(event=>`<p class="fine">${Math.floor(event.time)}s · ${escapeHtml(event.channel==='enemy'?'Enemigo':event.channel==='allied'?'Aliado':'Control')}</p>${messageMarkup(event.message)}`).join('');
+      const conversation=filterCommunications(flight.radio).slice(-2);
+      $('radioMessages').innerHTML=conversation.length?conversation.map(event=>`<p class="fine">${Math.floor(event.time)}s · ${escapeHtml(event.channel==='enemy'?'Enemigo':communicationCategory(event)==='command'?'Mando':'Aliado')}</p>${messageMarkup({...event.message,category:communicationCategory(event)})}`).join(''):'<p class="fine">Sin nuevas comunicaciones de personajes o mando.</p>';
+      const alerts=filterCommunications(flight.radio,'system').filter(event=>!event.id.startsWith('phase-system-')).slice(-2);
+      setText('radioSystemStatus',alerts.map(event=>event.message.text).join(' · '));
       bindPortraits($('radioMessages'));saveRadio(flight);
     }
   }
-  function radioRecord(owner){return {mission:owner.id,name:owner.m.name||owner.m.title,mode:owner.logMode,result:owner.status,startedAt:owner.startedAt,duration:owner.elapsed,attempt:owner.attempt,participants:[...new Set(owner.radio.map(event=>event.message.speaker))],messages:structuredClone(owner.radio)};}
+  function radioRecord(owner){return {formatVersion:2,mission:owner.id,name:owner.m.name||owner.m.title,mode:owner.logMode,result:owner.status,startedAt:owner.startedAt,duration:owner.elapsed,attempt:owner.attempt,participants:[...new Set(filterCommunications(owner.radio).map(event=>event.message.speaker))],messages:structuredClone(owner.radio)};}
   function saveRadio(owner){
     logs.save(radioRecord(owner)).then(saved=>{if(flight===owner&&$('logStatus'))$('logStatus').textContent=saved?'Registro guardado en este dispositivo.':'Registro disponible en esta sesión; no se pudo guardar en el dispositivo.';});
   }
@@ -146,8 +150,16 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
     const records=await logs.list(id);
     if(view!==logView)return;
     if(flight?.id===id){const live=radioRecord(flight);records.unshift({...live,key:'current'});}
-    panel.innerHTML=`<h3>Registro de misión</h3><p class="fine">${logs.persistent?'Historial local del dispositivo.':'Almacenamiento no disponible: solo se conserva esta sesión.'}</p>${records.length?records.map(record=>`<details ${record.key==='current'?'open':''}><summary>${escapeHtml(record.name)} · ${record.mode==='simulator'?'Simulador':'Campaña'} · ${record.key==='current'?'Actual':record.key.endsWith('victory')?'Última victoria':'Último intento'} · ${escapeHtml({active:"En curso",victory:"Victoria",defeat:"Derrota"}[record.result]||record.result)} · ${Math.floor(record.duration)}s</summary><p class="fine">${escapeHtml(record.participants.join(', '))}</p>${record.messages.map(event=>`<p class="fine">${Math.floor(event.time)}s · ${escapeHtml(event.channel==='enemy'?'Enemigo':event.channel==='allied'?'Aliado':'Control')}</p>${messageMarkup(event.message)}<p class="fine">${event.confidence==='operational-adaptation'?'Aviso operativo adaptado':'Adaptación de la comunicación documentada'}${event.source?.url?` · <a href="${escapeHtml(event.source.url)}" target="_blank" rel="noopener noreferrer">Fuente ↗</a>`:''}</p>`).join('')}</details>`).join(''):'<p>Aún no hay mensajes registrados para esta misión.</p>'}<button id="closeMissionLog">Cerrar registro</button>`;
-    $('closeMissionLog').onclick=close;$('closeMissionLog').focus?.();bindPortraits(panel);updateSide();
+    let selected='conversations';const expanded=new Set(records.filter(record=>record.key==='current').map(record=>record.key));
+    const refresh=()=>{
+      panel.innerHTML=`<h3>Registro de misión</h3><p class="fine">${logs.persistent?'Historial local del dispositivo.':'Almacenamiento no disponible: solo se conserva esta sesión.'}</p><div class="log-filters" role="group" aria-label="Filtrar registro"><button id="filterConversations" aria-pressed="${selected==='conversations'}">Conversaciones</button><button id="filterSystem" aria-pressed="${selected==='system'}">Sistema</button><button id="filterAll" aria-pressed="${selected==='all'}">Todo</button></div>${records.length?records.map((record,index)=>{
+        const messages=filterCommunications(record.messages,selected);
+        return `<details id="logRecord-${index}" ${expanded.has(record.key)?'open':''}><summary>${escapeHtml(record.name)} · ${record.mode==='simulator'?'Simulador':'Campaña'} · ${record.key==='current'?'Actual':record.key.endsWith('victory')?'Última victoria':'Último intento'} · ${escapeHtml({active:'En curso',victory:'Victoria',defeat:'Derrota'}[record.result]||record.result)} · ${Math.floor(record.duration)}s</summary><p class="fine">${escapeHtml(record.participants.join(', '))}</p>${messages.length?messages.map(event=>`<p class="fine">${Math.floor(event.time)}s · ${escapeHtml(communicationCategory(event)==='system'?'Sistema':event.channel==='enemy'?'Enemigo':communicationCategory(event)==='command'?'Mando':'Aliado')}</p>${messageMarkup({...event.message,category:communicationCategory(event)})}${communicationCategory(event)==='system'?'':`<p class="fine">${event.confidence==='operational-adaptation'?'Comunicación recreada para la adaptación':'Adaptación de la comunicación documentada'}${event.source?.url?` · <a href="${escapeHtml(event.source.url)}" target="_blank" rel="noopener noreferrer">Fuente ↗</a>`:''}</p>`}`).join(''):'<p class="fine">No hay mensajes de esta categoría en este intento.</p>'}</details>`;
+      }).join(''):'<p>Aún no hay mensajes registrados para esta misión.</p>'}<button id="closeMissionLog">Cerrar registro</button>`;
+      for(const [button,filter] of [['filterConversations','conversations'],['filterSystem','system'],['filterAll','all']])$(button).onclick=()=>{for(const [index,record] of records.entries())if($('logRecord-'+index)?.open)expanded.add(record.key);else expanded.delete(record.key);selected=filter;refresh();$(button).focus?.();};
+      $('closeMissionLog').onclick=close;bindPortraits(panel);
+    };
+    refresh();$('closeMissionLog').focus?.();updateSide();
   }
   function nudge(key){
     if(flight?.mode!=='bullethell'||flight.status!=='active'||isPaused())return;
@@ -189,7 +201,7 @@ export function createApp({document,window,storage,campaignId='jp52',battleMode=
       $('gun').onclick=()=>{if(flight!==currentFlight||isPaused())return;step();toggleAutoFire(flight);updateBattleRadio();};
       if(flight.protected){const escort=document.createElement('div');escort.innerHTML='<p class="phase-status" id="escortStatus" role="status"></p><button id="cover" aria-pressed="false">Activar cobertura</button>';$('main').insertBefore(escort,$('combatHint'));$('cover').onclick=()=>{if(flight!==currentFlight||isPaused())return;step();flight.coverEscort=!flight.coverEscort;updateBattleRadio();};}
       const radio=document.createElement('div');
-      radio.innerHTML='<p class="phase-status" id="waveStatus"></p><div class="enemy-key" aria-label="Tipos de enemigo"><span>▲ Dardo · ágil / dirigido</span><span>◀▶ Manta · blindado / cortina</span><span>⬡ Lince · dron / anillos</span></div><section class="battle-radio" aria-label="Radio de combate"><h3>Radio de combate</h3><div id="radioMessages" role="log" aria-live="polite" aria-relevant="additions"></div></section>';
+      radio.innerHTML='<p class="phase-status" id="waveStatus"></p><div class="enemy-key" aria-label="Tipos de enemigo"><span>▲ Dardo · ágil / dirigido</span><span>◀▶ Manta · blindado / cortina</span><span>⬡ Lince · dron / anillos</span></div><section class="battle-radio" aria-label="Radio de combate"><h3>Radio de combate</h3><div id="radioMessages" role="log" aria-live="polite" aria-relevant="additions"></div><p id="radioSystemStatus" class="system-message" role="status" aria-live="polite"></p></section>';
       $('main').insertBefore(radio,$('combatHint'));
       $('bomb').onclick=()=>{if(!isPaused()&&flight===currentFlight){step();if(useBomb(flight))$('combatHint').textContent=flight.feedback;step();}};
       for(const [button,key] of [['up','keyU'],['down','keyD']])bindDirection(button,key);

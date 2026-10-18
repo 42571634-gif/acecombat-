@@ -71,3 +71,10 @@ Los encuentros ordinarios pueden variar ±1 enemigo, mínimo 3, y 1–3 oleadas 
 Los fondos originales de Canvas se generan una vez por intento y cubren también la franja inferior. Ciudad, montaña, costa, instalaciones, órbita, túnel y red digital son decorativos: los objetos de colisión siguen siendo los contactos marcados.
 
 Se añaden fases específicas: embarcación de Fragile Cargo, ANB sobre Rena en Bug Hunt, cohete en Technology Transfer, misil de Claustrophobia y Liquidation, base/defensa aérea en Utopian Dreams y extracción terrestre en Reality Distortion. Counterrevolution encadena aproximación, Sphyrna y Dision. Radio Silence reserva Cynthia para la última fase. Los enlaces Aeon de Sole Survivor representan interferencia. Ver MISSION_REVIEW.md para diferencias respecto del original.
+
+
+## v0.8.1 · Prioridad de comunicaciones
+
+Bajo el campo aparecen las dos últimas intervenciones de personajes o mando argumental. Los cambios procedurales se muestran en el indicador de fase; integridad y confirmaciones ocupan una franja compacta separada. Estos avisos no expulsan a los personajes del panel ni usan retratos. Se mantiene formación, cobertura, objetivo e intercepción cuando ayudan a dar una orden concreta.
+
+Registro de misión ofrece Conversaciones (personajes y mando), Sistema y Todo. Cambiar filtro conserva pausa y paneles desplegados. El orden y el tiempo son los del intento; ningún filtro activa mensajes nuevos. Los snapshots antiguos se clasifican al consultar, sin modificar el texto guardado. No se cambian controles, condiciones de victoria/derrota ni bifurcaciones.

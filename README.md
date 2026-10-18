@@ -1,6 +1,6 @@
-# Electrosphere 2040 · 52 misiones · v0.8.0
+# Electrosphere 2040 · 52 misiones · v0.8.1
 
-La v0.8 revisa el contexto de las 52 misiones y valida **8–20 intervenciones por misión en total**: conversación previa, radio activada y cierre, sin narración. Incluye radio enemiga documentada, registro consultable desde pausa/resultados/archivo, última victoria y último intento por misión y modo, animaciones de desenlace y resumen con continuación manual. Los fondos cubren todo el campo; los encuentros ordinarios varían con semillas reproducibles y las condiciones especiales se mantienen fijas. [Auditoría de las 52 misiones](docs/MISSION_REVIEW.md).
+La v0.8.1 da prioridad a las voces de los personajes: separa conversaciones, órdenes argumentales y avisos del sistema. El registro permite filtrar Conversaciones, Sistema o Todo sin modificar los textos históricos. La guía de **8–20 intervenciones narrativas** admite excepciones justificadas, sin contar narración ni avisos técnicos; se observan 6–19 según misión y recorrido. [Revisión editorial y fuentes](docs/VOICE_REVIEW.md). Se conservan el guardado v3, los encuentros reproducibles, las animaciones y las rutas de v0.8.
 
 El guardado v3 migra partidas v1/v2. IndexedDB conserva el registro de radio por separado; si está bloqueado, el juego avisa y permite consultar los mensajes durante la sesión. No requiere instalar dependencias. `npm run check` ejecuta sintaxis y pruebas; `node scripts/review-missions.mjs` regenera las fichas y valida los recuentos.
 

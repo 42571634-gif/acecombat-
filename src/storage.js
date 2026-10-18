@@ -1,6 +1,6 @@
-import { validateCampaign } from './engine.js?v=0.8.0';
-import { missions } from './missions.js?v=0.8.0';
-import { endingData } from './story.js?v=0.8.0';
+import { validateCampaign } from './engine.js?v=0.8.1';
+import { missions } from './missions.js?v=0.8.1';
+import { endingData } from './story.js?v=0.8.1';
 export const SAVE_KEY='electrosphere.campaign';
 export const SIMULATOR_KEY='electrosphere.simulator';
 export const PROFILE_KEY='electrosphere.profile';

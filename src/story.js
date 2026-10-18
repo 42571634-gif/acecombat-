@@ -1,5 +1,5 @@
-import { missions } from './missions.js?v=0.8.0';
-import { dialogueLine } from './characters.js?v=0.8.0';
+import { missions } from './missions.js?v=0.8.1';
+import { dialogueLine } from './characters.js?v=0.8.1';
 
 export const endingData = {
   upeo:{label:'UPEO · Erich y Rena',mission:'m18',description:'Park ha sido derrotado y Rena sigue viva. Erich y Nemo han dejado de obedecer sus órdenes para protegerla. Los tres pueden regresar después del último enfrentamiento.'},
@@ -29,7 +29,7 @@ export const story = {
   intro:{kind:'dialogue',tag:'Campaña japonesa · 52 misiones entre rutas',title:'Un puesto en la formación',
     body:'Expo City, año 2040. Eres Nemo, piloto de SARF, una unidad de UPEO. La tensión entre General Resource y Neucom amenaza con convertirse en una guerra. En esta introducción conocerás a tus compañeros antes de tomar el control de la primera misión.',
     speaker:['Erich Jager','¿Se recibe? Soy Erich. Era para asegurarme de que... bienvenido.'],
-    dialogue:[['erich','Soy Erich, piloto de SARF. Bienvenido, Nemo. Volaremos juntos en la próxima misión.'],['fiona','Yo soy Fiona. Cubriremos tu formación mientras te acostumbras al escuadrón.','Fiona abre su enlace con Nemo.'],['control','SARF, hay una alerta sobre Expo City. Prepárense para la intercepción.']].map(dialogueLine),
+    dialogue:[['erich','Soy Erich, piloto de SARF. Bienvenido, Nemo. Volaremos juntos en la próxima misión.'],['fiona','Yo soy Fiona. Mantente entre Erich y yo; cubriremos tus flancos mientras te adaptas al escuadrón.','Fiona abre su enlace con Nemo.'],['control','SARF, hay una alerta sobre Expo City. Prepárense para la intercepción.']].map(tuple=>({...dialogueLine(tuple),category:tuple[0]==='control'?'command':'character'})),
     options:[option('choice-1','Comenzar con SARF','m01Intro')],adaptation:true,confidence:'community-transcript',source:{url:'https://w.atwiki.jp/acacac/pages/4.html',title:'Índice japonés de transcripciones'}},
 };
 for (const mission of Object.values(missions)) {

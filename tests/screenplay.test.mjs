@@ -33,7 +33,7 @@ test('La continuidad evita interlocutores de otras rutas y distingue las grabaci
   }
   assert.ok(missions.m33.dialogue.every(d=>d.character!=='keith'));
   // Simon interviene solo en las operaciones donde su apoyo está documentado.
-  for(const m of Object.values(missions))if(m.number!==47&&m.number!==52)assert.ok([...m.dialogue,...m.reportDialogue].every(d=>d.character!=='simon'));
+  for(const m of Object.values(missions))if(![41,47,52].includes(m.number))assert.ok([...m.dialogue,...m.reportDialogue].every(d=>d.character!=='simon'));
 });
 
 test('La interfaz presenta voces, iniciales y acotaciones sin cambiar decisiones ni simulaciones',()=>{

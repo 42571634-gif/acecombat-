@@ -1,9 +1,9 @@
-import { story } from './story.js?v=0.8.0';
-import { missions } from './missions.js?v=0.8.0';
-import * as legacy from './legacy/engine.js?v=0.8.0';
-import { story as legacyStory } from './legacy/story.js?v=0.8.0';
-import { missions as legacyMissions } from './legacy/missions.js?v=0.8.0';
-import { generateEncounter,validAttempt } from './attempts.js?v=0.8.0';
+import { story } from './story.js?v=0.8.1';
+import { missions } from './missions.js?v=0.8.1';
+import * as legacy from './legacy/engine.js?v=0.8.1';
+import { story as legacyStory } from './legacy/story.js?v=0.8.1';
+import { missions as legacyMissions } from './legacy/missions.js?v=0.8.1';
+import { generateEncounter,validAttempt } from './attempts.js?v=0.8.1';
 
 export const SAVE_VERSION = 3;
 export const FACTIONS = ['UPEO','GR','NEUCOM','OUROBOROS'];

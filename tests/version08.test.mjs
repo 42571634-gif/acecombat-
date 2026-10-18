@@ -10,33 +10,35 @@ import { advanceWaves } from '../src/waves.js';
 import { createMissionLog } from '../src/mission-log.js';
 import { environment } from './helpers/dom.mjs';
 import { draw } from '../src/draw.js';
+import { narrativeCounts } from '../src/communications.js';
+import { assessNarrative } from '../src/editorial-policy.js';
 const descriptor=(seed=1,difficulty='normal')=>({seed,difficulty,generator:1});
 const spoken=lines=>lines.filter(line=>line.kind!=='narration').length;
-function finish(f,optional=false){
+function finish(f,optional=false,paced=false){
   if(optional)for(const target of f.targets.filter(t=>t.group))damageTarget(f,target,target.hp);
   while(f.status==='active'){
     const targets=f.targets.filter(t=>t.required&&t.alive&&t.active!==false);
     assert.ok(targets.length);
-    for(const target of targets)damageTarget(f,target,target.hp);
+    for(const target of targets){damageTarget(f,target,target.hp);if(paced)syncRadio(f);}
     advanceWaves(f,1);syncRadio(f);
   }
   return {status:f.status,kills:f.kills,completed:f.completed,objectives:f.objectives,integrity:Math.min(f.hp,f.protected?.hp??100),timeRemaining:f.t,attempt:f.attempt};
 }
-test('52 fichas documentales y 8–20 intervenciones por recorrido, sin contar narración ni alternativas juntas',()=>{
+test('52 fichas documentales: guía editorial por recorrido, sin sistema, narración ni alternativas juntas',()=>{
   assert.equal(Object.keys(missionContexts).length,52);
   for(const mission of Object.values(missions)){
     const context=mission.research;
     assert.equal(context.reviewed,'2026-10-18');assert.equal(context.source.url,mission.source.url);
     for(const key of ['situation','condition','consequence','radio'])assert.ok(context[key].length>15,mission.id+' '+key);
-    for(const seed of [0,1,19,999,0xffffffff])for(const optional of [false,true])for(const warned of [false,true]){
+    for(const seed of [0,1,19,999,0xffffffff])for(const optional of [false,true])for(const warned of [false,true])for(const paced of [false,true]){
       const f=createFlight(mission.id,mission,0,undefined,{mode:'bullethell',attempt:descriptor(seed)});
-      if(warned){f.hp=24;syncRadio(f);}finish(f,optional);
-      const total=spoken(mission.dialogue)+f.radio.length+spoken(mission.reportDialogue);
-      assert.ok(total>=8&&total<=20,`${mission.id}: ${total}`);
+      if(warned){f.hp=24;syncRadio(f);}finish(f,optional,paced);
+      const total=narrativeCounts([...mission.dialogue,...f.radio,...mission.reportDialogue]).total;
+      assert.ok(assessNarrative(mission.id,total).valid,`${mission.id}: ${total}`);
       assert.equal(new Set(f.radio.map(event=>event.id)).size,f.radio.length);
       const loss=createFlight(mission.id,mission,0,undefined,{mode:'bullethell',attempt:descriptor(seed)});loss.t=0;advanceFlight(loss,0);
       const failed=spoken(mission.dialogue)+loss.radio.length;
-      assert.ok(failed>=8&&failed<=20,`${mission.id} derrota: ${failed}`);
+      assert.ok(assessNarrative(mission.id,failed,{defeat:true}).valid);
     }
   }
   assert.ok(spoken(missions.m07.dialogue)>=8,'La salida de regreso anticipado también satisface el mínimo.');

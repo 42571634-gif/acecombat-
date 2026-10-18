@@ -1,4 +1,4 @@
-// Adaptación propia, con citas breves identificadas en docs/TEXT_REVIEW.md.
+// Redacción propia; revisión de voces y fuentes en docs/VOICE_REVIEW.md.
 export const cinematicReports=[
   [
     [
@@ -145,7 +145,7 @@ export const cinematicReports=[
     ],
     [
       "erich",
-      "Sí. Sigo afectado por lo del transporte, pero puedo mantener la formación hasta la base."
+      "Puedo volver. Lo que no puedo es dejar de pensar en quién viajaba en ese transporte."
     ]
   ],
   [
@@ -265,7 +265,7 @@ export const cinematicReports=[
   [
     [
       "keith",
-      "Has mantenido la formación durante el ataque. Puedo contar contigo, Nemo."
+      "No has perdido de vista mi flanco, Nemo. Empiezo a creer que voy a poder contar contigo."
     ],
     [
       "dision",
@@ -343,7 +343,7 @@ export const cinematicReports=[
     ],
     [
       "keith",
-      "Seguiré la formación. Revisaremos lo ocurrido cuando estemos de vuelta."
+      "Todavía puedo llevar este avión a casa. Lo demás lo hablaremos cuando haya aterrizado."
     ]
   ],
   [
@@ -403,7 +403,7 @@ export const cinematicReports=[
     ],
     [
       "keith",
-      "¿De verdad vas a arrastrarnos a una revolución? Yo no voy a abandonar mi formación por esa promesa."
+      "¿Una revolución? Yo no voy a dejar mi puesto para perseguir esa promesa. Nemo decidirá por sí mismo."
     ],
     [
       "keith",
@@ -591,15 +591,16 @@ export const cinematicReports=[
   [
     [
       "control",
-      "Los cuatro sistemas láser han quedado desactivados. Puede abandonar el área orbital."
+      "Los satélites han dejado de responder. Estabilice la aeronave para la reentrada."
     ],
     [
-      "archive",
-      "Ya no se detectan satélites hostiles activos en la zona de operación."
+      "simon",
+      "He revisado el resultado. Puede que lo que esperaba encontrar no estuviera aquí.",
+      "Más tarde: mensaje privado de Simon, después de la reentrada."
     ],
     [
-      "control",
-      "Nemo, confirme la ruta de regreso. Neucom Space mantendrá el enlace durante el retorno."
+      "simon",
+      "No hace falta que me expliques nada. Si vuelves a necesitar mi ayuda, ya hablaremos."
     ]
   ],
   [
